@@ -57,10 +57,10 @@ sed -i "s|<!-- NIGHTLY_SYNC_TIMESTAMP -->.*<!-- /NIGHTLY_SYNC_TIMESTAMP -->|<!--
 # --- Commit and push ---
 git add -A
 if git diff --cached --quiet; then
-    echo "[$(date)] No changes to commit."
+    # Silent exit — nothing changed, no notification
     exit 0
 fi
 
 git commit -m "nightly: state snapshot $TIMESTAMP"
 git push origin main
-echo "[$(date)] Nightly sync pushed."
+echo "Hermes nightly sync pushed — $TIMESTAMP"
