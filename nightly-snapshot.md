@@ -1,17 +1,17 @@
-# Hermes Nightly State — 2026-05-13 07:07 UTC
+# Hermes Nightly State — 2026-05-13 08:00 UTC
 
 ## Version
 Hermes Agent v0.13.0 (2026.5.7)
 Project: /usr/local/lib/hermes-agent
 Python: 3.11.15
 OpenAI SDK: 2.24.0
-Update available: 1 commit behind — run 'hermes update'
+Up to date
 
 ## Skills
 - Count: 79
 
 ## Sessions
-- Count: 4
+- Count: 6
 
 ## Config (secrets redacted)
 model:
@@ -411,6 +411,8 @@ approvals:
   mcp_reload_confirm: true
   destructive_slash_confirm: true
 command_allowlist:
+- stop/restart hermes gateway (kills running agents)
+- overwrite system file via redirection
 - script execution via -e/-c flag
 quick_commands: {}
 hooks: {}
@@ -521,11 +523,33 @@ known_plugin_toolsets:
   cli:
   - spotify
 
+# ── Fallback Model ────────────────────────────────────────────────────
+# Automatic provider failover when primary is unavailable.
+# Uncomment and configure to enable. Triggers on rate limits (429),
+# overload (529), service errors (503), or connection failures.
+#
+# Supported providers:
+#   openrouter   (OPENROUTER_API_KEY)  — routes to any model
+#   openai-codex (OAuth — hermes auth) — OpenAI Codex
+#   nous         (OAuth — hermes auth) — Nous Portal
+#   zai          (ZAI_API_KEY)         — Z.AI / GLM
+#   kimi-coding  (KIMI_API_KEY)        — Kimi / Moonshot
+#   kimi-coding-cn (KIMI_CN_API_KEY)   — Kimi / Moonshot (China)
+#   minimax      (MINIMAX_API_KEY)     — MiniMax
+#   minimax-cn   (MINIMAX_CN_API_KEY)  — MiniMax (China)
+#   bedrock      (AWS IAM / boto3)     — AWS Bedrock (Converse API)
+#
+# For custom OpenAI-compatible endpoints, add base_url and key_env.
+#
+# fallback_model:
+#   provider: openrouter
+#   model: anthropic/claude-sonnet-4
+
 ## System
 ```
-/dev/loop2       49G  8.1G   39G  18% /
+/dev/loop2       49G  8.4G   39G  19% /
                total        used        free      shared  buff/cache   available
-Mem:            11Gi       764Mi       9.5Gi       340Ki       1.5Gi        10Gi
+Mem:            11Gi       709Mi        10Gi       340Ki       602Mi        10Gi
 ```
 
 ## Cron Jobs
@@ -536,10 +560,18 @@ Mem:            11Gi       764Mi       9.5Gi       340Ki       1.5Gi        10Gi
 
   da88db09c058 [active]
     Name:      Nightly Hermes Research Sync
-    Schedule:  0 0 * * *
+    Schedule:  0 8 * * *
     Repeat:    ∞
-    Next run:  2026-05-14T00:00:00+00:00
+    Next run:  2026-05-14T08:00:00+00:00
     Deliver:   local
     Script:    nightly-sync.sh
     Mode:      no-agent (script stdout delivered directly)
+
+  77e7ff41d6d7 [active]
+    Name:      Daily Briefing Report
+    Schedule:  0 12 * * *
+    Repeat:    ∞
+    Next run:  2026-05-13T12:00:00+00:00
+    Deliver:   telegram:922739544
+    Script:    daily-report.sh
 
