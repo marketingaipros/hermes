@@ -7,13 +7,13 @@ Private research repository tracking what Hermes Agent needs to become the ultim
 | Area | Status | Priority |
 |------|--------|----------|
 | Core LLM | ✅ OpenRouter + DeepSeek V4 Pro | — |
-| Voice Input (STT) | ❌ Not installed | 🔴 HIGH |
+| Voice Input (STT) | ✅ faster-whisper (local) | — |
 | Voice Output (TTS) | ✅ Edge TTS (default, free) | — |
 | GitHub Sync | ✅ Just connected | — |
-| Nightly Cron | 🟡 In progress | 🟡 MEDIUM |
+| Nightly Cron | ✅ Active (3 AM CT) | — |
 | Memory System | ✅ Enabled | — |
 | Skills Library | ✅ 100+ installed | — |
-| Multi-Agent | ❌ No tmux | 🟡 MEDIUM |
+| Multi-Agent | ✅ tmux 3.4 installed | — |
 
 ## Files
 

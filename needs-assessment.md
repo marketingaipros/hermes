@@ -38,7 +38,7 @@ stt:
 
 ### 2. Hermes Update Available
 
-**Status:** 1 commit behind main. Running v0.13.0 (2026.5.7).
+**Status:** ✅ Up to date. Running v0.13.0 (2026.5.7).
 
 ```bash
 hermes update
@@ -48,15 +48,13 @@ Bug fixes and new features accumulate fast. Staying current prevents hitting alr
 
 ## 🟡 Important Gaps
 
-### 3. tmux Not Installed
+### 3. tmux
 
-**Status:** Missing. Needed for spawning parallel Hermes instances (multi-agent workflows, long-running background agents).
+**Status:** ✅ Installed (v3.4). Needed for spawning parallel Hermes instances (multi-agent workflows, long-running background agents).
 
-```bash
-apt-get install -y tmux
-```
+✅ Already installed (v3.4).
 
-Without tmux, we can't:
+With tmux, we can now:
 - Run multiple Hermes instances side-by-side
 - Have an agent work on a task while we chat separately
 - Spawn interactive Hermes sessions programmatically

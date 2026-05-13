@@ -26,7 +26,7 @@
 
 | Detail | Value |
 |--------|-------|
-| Version | v0.13.0 (2026.5.7) |
+| Version | v0.13.0 (2026.5.7) — up to date |
 | Project path | /usr/local/lib/hermes-agent |
 | Config | ~/.hermes/config.yaml |
 | Secrets | ~/.hermes/.env |
@@ -43,7 +43,7 @@
 | python3 | 3.12.3 | ✅ |
 | pip3 | ✓ | ✅ |
 | ffmpeg | 7:6.1.1 | ✅ (needed for STT/TTS) |
-| tmux | ✗ | ❌ NOT INSTALLED |
+| tmux | 3.4 | ✅ INSTALLED |
 | vim/neovim | ✗ | ❌ NOT INSTALLED |
 | jq | ✗ | ❌ NOT INSTALLED |
 | gh CLI | ✗ | ❌ NOT INSTALLED |

@@ -12,7 +12,7 @@ Priority-ordered roadmap. Each item has exact commands.
 - [ ] Push initial commit
 - [ ] Set up nightly cron
 
-### 2. 🔴 Install STT (Speech-to-Text)
+### 2. ✅ STT (Speech-to-Text) — Already working
 
 ```bash
 # Install faster-whisper + dependencies
@@ -30,14 +30,14 @@ hermes config set stt.local.model small
 
 **Decision:** faster-whisper `small` model (~466MB) is the best balance of quality and CPU speed. On an 11GB RAM system, it'll fit easily and run acceptably fast.
 
-### 3. 🔴 Install Missing Tools
+### 3. ✅ tmux Installed — remaining tools below
 
 ```bash
 apt-get update
 apt-get install -y tmux jq htop neovim
 ```
 
-### 4. 🔴 Update Hermes
+### 4. ✅ Hermes Updated
 
 ```bash
 hermes update
