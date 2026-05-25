@@ -1,17 +1,17 @@
-# Hermes Nightly State — 2026-05-23 16:22 UTC
+# Hermes Nightly State — 2026-05-25 08:00 UTC
 
 ## Version
 Hermes Agent v0.13.0 (2026.5.7)
 Project: /usr/local/lib/hermes-agent
 Python: 3.11.15
 OpenAI SDK: 2.24.0
-Update available: 1093 commits behind — run 'hermes update'
+Update available: 1281 commits behind — run 'hermes update'
 
 ## Skills
-- Count: 84
+- Count: 90
 
 ## Sessions
-- Count: 49
+- Count: 111
 
 ## Config (secrets redacted)
 model:
@@ -340,7 +340,7 @@ memory:
   user_profile_enabled: true
   memory_char_limit: 2200
   user_char_limit: 1375
-  provider: ''
+  provider: honcho
   nudge_interval: 10
   flush_min_turns: 6
 delegation:
@@ -383,7 +383,7 @@ slack:
   allowed_channels: ''
   channel_prompts: {}
 discord:
-  require_mention: true
+  require_mention: false
   free_response_channels: ''
   allowed_channels: ''
   auto_thread: true
@@ -549,9 +549,9 @@ known_plugin_toolsets:
 
 ## System
 ```
-/dev/loop0       49G   13G   34G  28% /
+/dev/loop0       49G   16G   31G  34% /
                total        used        free      shared  buff/cache   available
-Mem:            11Gi       982Mi        10Gi       316Ki       546Mi        10Gi
+Mem:            11Gi       1.8Gi       9.1Gi        23Mi       835Mi       9.9Gi
 ```
 
 ## Cron Jobs
@@ -564,17 +564,17 @@ Mem:            11Gi       982Mi        10Gi       316Ki       546Mi        10Gi
     Name:      Nightly Hermes Research Sync
     Schedule:  0 8 * * *
     Repeat:    ∞
-    Next run:  2026-05-24T08:00:00+00:00
+    Next run:  2026-05-26T08:00:00+00:00
     Deliver:   local
     Script:    nightly-sync.sh
     Mode:      no-agent (script stdout delivered directly)
-    Last run:  2026-05-23T08:00:51.839320+00:00  error: Blocked: script path resolves outside the scripts directory (/root/.hermes/scripts): 'nightly-sync.sh'
+    Last run:  2026-05-23T16:22:34.942985+00:00  ok
 
   77e7ff41d6d7 [active]
     Name:      Daily Briefing Report
     Schedule:  0 12 * * *
     Repeat:    ∞
-    Next run:  2026-05-24T12:00:00+00:00
+    Next run:  2026-05-25T12:00:00+00:00
     Deliver:   telegram:922739544
     Script:    daily-report.sh
     Last run:  2026-05-23T12:00:33.579655+00:00  error: RuntimeError: HTTP 402: Provider returned error
@@ -583,27 +583,27 @@ Mem:            11Gi       982Mi        10Gi       316Ki       546Mi        10Gi
     Name:      Wiki Daily Regeneration
     Schedule:  0 6 * * *
     Repeat:    ∞
-    Next run:  2026-05-24T06:00:00+00:00
+    Next run:  2026-05-26T06:00:00+00:00
     Deliver:   local
-    Last run:  2026-05-23T06:00:42.983479+00:00  ok
+    Last run:  2026-05-25T06:01:12.555033+00:00  ok
 
   c1df09012b9c [active]
     Name:      Wiki Server Watchdog
     Schedule:  */5 * * * *
     Repeat:    ∞
-    Next run:  2026-05-23T16:25:00+00:00
+    Next run:  2026-05-25T08:05:00+00:00
     Deliver:   local
     Script:    wiki-watchdog.sh
     Mode:      no-agent (script stdout delivered directly)
-    Last run:  2026-05-23T16:20:31.783345+00:00  ok
+    Last run:  2026-05-25T08:00:41.241730+00:00  ok
 
   74cc581c0903 [active]
     Name:      Email Triage Agent
-    Schedule:  0 * * * *
+    Schedule:  30 * * *
     Repeat:    ∞
-    Next run:  2026-05-23T17:00:00+00:00
+    Next run:  2026-05-25T08:30:00+00:00
     Deliver:   telegram:922739544
     Skills:    himalaya
     Script:    email-fetch.sh
-    Last run:  2026-05-23T16:00:34.097139+00:00  error: RuntimeError: HTTP 429: Provider returned error
+    Last run:  2026-05-25T07:30:40.592040+00:00  error: RuntimeError: HTTP 429: Provider returned error
 
