@@ -1,124 +1,93 @@
 # Needs Assessment — What Hermes Needs
 
-> Generated: 2026-05-13 | Hermes v0.13.0 | Ubuntu 24.04 LTS
+> Generated: 2026-05-25 | Hermes v0.13.0 | Ubuntu 24.04 LTS
+> Last reviewed: 2026-05-25 12:00 PM UTC (daily cron)
 
 ## 🔴 Critical Gaps
 
-### 1. Voice Input (STT / Speech-to-Text)
+### 1. Hermes Update Backlog
 
-**Status:** Completely absent. No whisper, no faster-whisper, no API key configured.
-
-The user explicitly wants STT set up for voice messages. Without it, voice notes sent via any messaging platform go untranscribed.
-
-**Options (in order of recommendation):**
-
-| Option | Cost | Setup Effort | Quality |
-|--------|------|-------------|---------|
-| **faster-whisper (local)** | Free | Medium (pip install + model download) | Very good |
-| Groq Whisper API | Free tier | Low (API key only) | Excellent |
-| OpenAI Whisper API | Paid | Low (API key only) | Excellent |
-
-**Recommended:** Start with faster-whisper (local, free, no API dependency), fall back to Groq if local inference is too slow.
-
-**Exact commands:**
-```bash
-pip install faster-whisper
-# Models: tiny (75MB), base (145MB), small (466MB), medium (1.5GB), large-v3 (3GB)
-# Recommend: small or medium for quality/speed balance
-```
-
-**Config needed in config.yaml:**
-```yaml
-stt:
-  enabled: true
-  provider: local
-  local:
-    model: small
-```
-
-### 2. Hermes Update Available
-
-**Status:** ✅ Up to date. Running v0.13.0 (2026.5.7).
+**Status:** ⚠️ 1281 commits behind — update deferred due to gateway restart risk (kills running agents). Update pending manual approval.
 
 ```bash
 hermes update
 ```
 
-Bug fixes and new features accumulate fast. Staying current prevents hitting already-fixed bugs.
+Bug fixes and new features are piling up behind a very large gap. At this distance, an update-later strategy becomes risky — merge conflicts, behavior drift, and unpatched CVEs are the realistic concerns.
+
+**Note:** Presently handled via daily cron job hermes update which requires manual approval. Consider scheduling a maintenance window to run the update.
+
+### 2. OPENROUTER_API_KEY Validation
+
+**Status:** ✅ Key is present in .env (value redacted). Verify it's truly active by hitting the API:
+
+```bash
+# Quick sanity check
+curl -s -H "Authorization: Bearer $OPENROUTER_API_KEY" https://openrouter.ai/api/v1/auth/key | jq
+```
+
+Config confirms it's wired to `openrouter` credential pool with `fill_first` strategy. With 1281 commits of drift, review credential injection path.
 
 ## 🟡 Important Gaps
 
-### 3. tmux
+### 3. STT Verification
 
-**Status:** ✅ Installed (v3.4). Needed for spawning parallel Hermes instances (multi-agent workflows, long-running background agents).
+**Status:** ✅ HTTP observable: faster-whisper installed, ffmpeg present, config.yaml shows `stt.enabled: true` with `provider: local` → `model: base`.
 
-✅ Already installed (v3.4).
+**Open question:** Transcript delivery pipeline is unconfirmed. Voice notes hitting messaging platforms may transcribe locally but confirmation of delivery to the agent is not verified. Integration smoke test pending.
 
-With tmux, we can now:
-- Run multiple Hermes instances side-by-side
-- Have an agent work on a task while we chat separately
-- Spawn interactive Hermes sessions programmatically
+### 4. SKILL Count Sanity Check
 
-### 4. OpenRouter API Key in .env
+**Status:** ⚠️ Discrepancy — nightly snapshot shows "Count: 90" but `~/.hermes/skills/` lists 26 category directories. Investigate whether individual skill files路的 nested deeper or if the snapshot metric counts bundled shipped entries differently.
 
-**Status:** The .env file has the key commented out. Need to verify it's actually set as the `OPENROUTER_API_KEY` env var. If the key is only in the credential pool and not in .env, auxiliary models (vision, compression, session search) may fail.
+No functional impact, but the gap inflates perceived capability in reports.
 
-**Check:** `grep OPENROUTER_API_KEY ~/.hermes/.env`
+### 5. Disk Space Trend
 
-### 5. ML/GPU Capabilities
+**Status:** ✅ 31 GB free (34% used), but 8 GB has been consumed since the May 13 snapshot (39 → 31 free). Watch Hermes logs and journalctl — runaway log rotation or large attachment writes could accelerate this. Log retention is set to 5 MB / backup_count 3.
 
-**Status:** No CUDA, no GPU visible. 11GB RAM, CPU-only.
+### 6. Memory Store (Honcho) Health
 
-This affects:
-- Local STT speed (faster-whisper on CPU is usable but slower)
-- Any local model inference
-- Image generation (ComfyUI skill needs GPU for practical use)
-
-**Recommendation:** Accept CPU-only for now. Use `small` or `base` whisper model to keep STT responsive. Offload heavy ML to APIs (Groq, OpenAI, Replicate).
+**Status:** ⚠️ 129 sessions in `~/.hermes/sessions/`. Dispose policy is retention_days: 90 with auto_prune: false on sessions. This means old sessions are not auto-vacted — long-term, storage growth in sessions dir is unmanaged. Consider enabling pruning or verifying Honcho handles this at a different layer.
 
 ## 🟢 Nice-to-Have
 
-### 6. Additional Tools
+### 7. Tools Still Missing
 
 | Tool | Why | Command |
 |------|-----|---------|
-| `jq` | JSON processing in shell | `apt-get install -y jq` |
-| `htop` | System monitoring | `apt-get install -y htop` |
-| `gh` CLI | Better GitHub interaction | Complex (needs Node.js) — skip for now |
-| `ripgrep` | Already have via search_files tool | Not needed |
-| `neovim`/`vim` | File editing in terminal | `apt-get install -y neovim` |
+| jq | JSON processing without python fallback | `apt-get install -y jq` |
+| htop | Better system monitoring | `apt-get install -y htop` |
+| neovim | In-terminal file editing | `apt-get install -y neovim` |
+| gh CLI | GitHub workflow CLIs (node-heavy, skip for now) |skip |
 
-### 7. Cron Jobs to Consider
+### 8. Cron Jobs Worth Adding
 
 | Job | Schedule | Purpose |
 |-----|----------|---------|
-| **Hermes update check** | Daily | `hermes update` if new version |
-| **System health** | Hourly | Disk >80%, memory pressure, process count |
-| **GitHub sync** | Nightly | Push Hermes state snapshots (this repo) |
-| **Skill curator** | Weekly | Auto-archive stale skills |
+| Hermes update check | Daily | `hermes update` with fallback email on failure |
+| Disk > 80% alert | Hourly | `df -h /` alert |
+| Session prune | Weekly | `hermes sessions prune` |
+| Skill curator | Weekly | Auto-archive stale skills |
 
-### 8. Security Hardening
+### 9. Load Average Investigation
 
-| Item | Recommendation |
-|------|---------------|
-| Token storage | Move PAT from .git-credentials to .env only (less exposed) |
-| YOLO mode | Keep off — `approvals.mode: manual` |
-| Secret redaction | Consider enabling `security.redact_secrets: true` |
-| Gateway | Not set up yet — decide if needed |
+Current 1-min load ~2.12 on an apparent 2-core (vm_stat says 2 CPUs or Proxmox CT). Elevated but stable. Check `ps aux --sort=-%cpu | head -5` if this climbs persistently — likely the memory store refresh loop.
 
-## Summary of State at Last Audit
+## Summary of Current State
 
 ```
-Hermes v0.13.0 (1 commit behind)
-Provider: OpenRouter → deepseek/deepseek-v4-pro
-STT: ❌ Nothing installed
-TTS: ✅ Edge TTS (default, free, works)
-Memory: ✅ Enabled
-Skills: 100+ bundled skills installed
-GitHub: ✅ Connected (git + HTTPS token)
-Cron: ❌ No jobs configured
-Gateway: ❌ Not configured
-Multi-agent: ❌ No tmux
-Disk: 39GB free of 49GB
-RAM: 11GB total, 9.8GB free
+Hermes v0.13.0 (2026.5.7)  ⚠️ 1281 commits behind
+Provider: OpenRouter → stepfun/step-3.5-flash
+STT: ✅ faster-whisper local (base model)
+TTS: ✅ Edge TTS
+Memory: ✅ Enabled (Honcho)
+Skills: 26 category dirs (90+ visible in list)
+Cron: ✅ Nightly state snapshot job active
+Gateway: ✅ Running
+Multi-agent: ✅ tmux available per May 13 audit
+Disk: 31 GB free of 49 GB 34%
+RAM: 11 GB total, 9.8 GB free
+Load: 2.12 / 1.79 / 1.50 (slight elevation)
+Sessions: 129
 ```
