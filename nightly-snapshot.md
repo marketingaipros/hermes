@@ -1,17 +1,17 @@
-# Hermes Nightly State — 2026-05-25 08:00 UTC
+# Hermes Nightly State — 2026-05-26 08:00 UTC
 
 ## Version
 Hermes Agent v0.13.0 (2026.5.7)
 Project: /usr/local/lib/hermes-agent
 Python: 3.11.15
 OpenAI SDK: 2.24.0
-Update available: 1281 commits behind — run 'hermes update'
+Update available: 1389 commits behind — run 'hermes update'
 
 ## Skills
 - Count: 90
 
 ## Sessions
-- Count: 111
+- Count: 141
 
 ## Config (secrets redacted)
 model:
@@ -551,7 +551,7 @@ known_plugin_toolsets:
 ```
 /dev/loop0       49G   16G   31G  34% /
                total        used        free      shared  buff/cache   available
-Mem:            11Gi       1.8Gi       9.1Gi        23Mi       835Mi       9.9Gi
+Mem:            11Gi       1.9Gi       9.0Gi        23Mi       849Mi       9.8Gi
 ```
 
 ## Cron Jobs
@@ -564,46 +564,36 @@ Mem:            11Gi       1.8Gi       9.1Gi        23Mi       835Mi       9.9Gi
     Name:      Nightly Hermes Research Sync
     Schedule:  0 8 * * *
     Repeat:    ∞
-    Next run:  2026-05-26T08:00:00+00:00
+    Next run:  2026-05-27T08:00:00+00:00
     Deliver:   local
     Script:    nightly-sync.sh
     Mode:      no-agent (script stdout delivered directly)
-    Last run:  2026-05-23T16:22:34.942985+00:00  ok
+    Last run:  2026-05-25T08:00:49.434725+00:00  ok
 
   77e7ff41d6d7 [active]
     Name:      Daily Briefing Report
     Schedule:  0 12 * * *
     Repeat:    ∞
-    Next run:  2026-05-25T12:00:00+00:00
+    Next run:  2026-05-26T12:00:00+00:00
     Deliver:   telegram:922739544
     Script:    daily-report.sh
-    Last run:  2026-05-23T12:00:33.579655+00:00  error: RuntimeError: HTTP 402: Provider returned error
+    Last run:  2026-05-25T12:03:40.819833+00:00  ok
 
   e441804c0f18 [active]
     Name:      Wiki Daily Regeneration
     Schedule:  0 6 * * *
     Repeat:    ∞
-    Next run:  2026-05-26T06:00:00+00:00
+    Next run:  2026-05-27T06:00:00+00:00
     Deliver:   local
-    Last run:  2026-05-25T06:01:12.555033+00:00  ok
+    Last run:  2026-05-26T06:00:58.005757+00:00  ok
 
   c1df09012b9c [active]
     Name:      Wiki Server Watchdog
     Schedule:  */5 * * * *
     Repeat:    ∞
-    Next run:  2026-05-25T08:05:00+00:00
+    Next run:  2026-05-26T08:05:00+00:00
     Deliver:   local
     Script:    wiki-watchdog.sh
     Mode:      no-agent (script stdout delivered directly)
-    Last run:  2026-05-25T08:00:41.241730+00:00  ok
-
-  74cc581c0903 [active]
-    Name:      Email Triage Agent
-    Schedule:  30 * * *
-    Repeat:    ∞
-    Next run:  2026-05-25T08:30:00+00:00
-    Deliver:   telegram:922739544
-    Skills:    himalaya
-    Script:    email-fetch.sh
-    Last run:  2026-05-25T07:30:40.592040+00:00  error: RuntimeError: HTTP 429: Provider returned error
+    Last run:  2026-05-26T08:00:01.364717+00:00  ok
 
