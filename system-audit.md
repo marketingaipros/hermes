@@ -33,7 +33,7 @@
 | Config | ~/.hermes/config.yaml |
 | Secrets | ~/.hermes/.env |
 | Skills dir | ~/.hermes/skills/ (26 category dirs) |
-| Sessions | ~/.hermes/sessions/ (129 entries) |
+| Sessions | ~/.hermes/sessions/ (164 entries) |
 
 ## Installed Tools
 

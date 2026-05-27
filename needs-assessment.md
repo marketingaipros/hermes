@@ -7,7 +7,7 @@
 
 ### 1. Hermes Update Backlog
 
-**Status:** ⚠️ 1281 commits behind — update deferred due to gateway restart risk (kills running agents). Update pending manual approval.
+**Status:** ⚠️ 1428 commits behind — update deferred due to gateway restart risk (kills running agents). Update pending manual approval.
 
 ```bash
 hermes update
@@ -38,7 +38,7 @@ Config confirms it's wired to `openrouter` credential pool with `fill_first` str
 
 ### 4. SKILL Count Sanity Check
 
-**Status:** ⚠️ Discrepancy — nightly snapshot shows "Count: 90" but `~/.hermes/skills/` lists 26 category directories. Investigate whether individual skill files路的 nested deeper or if the snapshot metric counts bundled shipped entries differently.
+**Status:** ⚠️ Discrepancy — nightly snapshot shows "Count: 90" but actual SKILL.md count is now 98. `~/.hermes/skills/` still has 26 category directories. Investigate whether skill files are nested deeper or snapshot metric undercounts.
 
 No functional impact, but the gap inflates perceived capability in reports.
 
@@ -48,7 +48,7 @@ No functional impact, but the gap inflates perceived capability in reports.
 
 ### 6. Memory Store (Honcho) Health
 
-**Status:** ⚠️ 129 sessions in `~/.hermes/sessions/`. Dispose policy is retention_days: 90 with auto_prune: false on sessions. This means old sessions are not auto-vacted — long-term, storage growth in sessions dir is unmanaged. Consider enabling pruning or verifying Honcho handles this at a different layer.
+**Status:** ⚠️ 164 sessions in `~/.hermes/sessions/`. Dispose policy is retention_days: 90 with auto_prune: false on sessions. This means old sessions are not auto-vaced — long-term, storage growth in sessions dir is unmanaged. Consider enabling pruning or verifying Honcho handles this at a different layer.
 
 ## 🟢 Nice-to-Have
 
@@ -77,17 +77,17 @@ Current 1-min load ~2.12 on an apparent 2-core (vm_stat says 2 CPUs or Proxmox C
 ## Summary of Current State
 
 ```
-Hermes v0.13.0 (2026.5.7)  ⚠️ 1281 commits behind
+Hermes v0.13.0 (2026.5.7)  ⚠️ 1428 commits behind
 Provider: OpenRouter → stepfun/step-3.5-flash
 STT: ✅ faster-whisper local (base model)
 TTS: ✅ Edge TTS
 Memory: ✅ Enabled (Honcho)
-Skills: 26 category dirs (90+ visible in list)
+Skills: 26 category dirs (98+ visible)
 Cron: ✅ Nightly state snapshot job active
 Gateway: ✅ Running
 Multi-agent: ✅ tmux available per May 13 audit
 Disk: 31 GB free of 49 GB 34%
-RAM: 11 GB total, 9.8 GB free
-Load: 2.12 / 1.79 / 1.50 (slight elevation)
-Sessions: 129
+RAM: 11 GB total, ~9.6 GB available
+Load: 1.51 / 1.40 / 1.29 (improved)
+Sessions: 164
 ```
