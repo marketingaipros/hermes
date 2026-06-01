@@ -1,13 +1,13 @@
 # Needs Assessment — What Hermes Needs
 
-> Generated: 2026-05-28 | Hermes v0.13.0 | Ubuntu 24.04 LTS
-> Last reviewed: 2026-05-28 12:00 PM UTC (daily cron)
+> Generated: 2026-05-31 | Hermes v0.13.0 | Ubuntu 24.04 LTS
+> Last reviewed: 2026-05-31 12:00 PM UTC (daily cron)
 
 ## 🔴 Critical Gaps
 
 ### 1. Hermes Update Backlog
 
-**Status:** ⚠️ 1598 commits behind — update deferred due to gateway restart risk (kills running agents). Update pending manual approval.
+**Status:** ⚠️ 1928 commits behind — update deferred due to gateway restart risk (kills running agents). Update pending manual approval.
 
 ```
 hermes update
@@ -26,7 +26,7 @@ Bug fixes and new features are piling up behind a very large gap. At this distan
 curl -s -H "Authorization: Bearer $OPENR...KEY" https://openrouter.ai/api/v1/auth/key | jq
 ```
 
-Config confirms it's wired to `openrouter` credential pool with `fill_first` strategy. With 1598 commits of drift, review credential injection path.
+Config confirms it's wired to `openrouter` credential pool with `fill_first` strategy. With 1928 commits of drift, review credential injection path.
 
 ## 🟡 Important Gaps
 
@@ -38,7 +38,7 @@ Config confirms it's wired to `openrouter` credential pool with `fill_first` str
 
 ### 4. SKILL Count Sanity Check
 
-**Status:** ⚠️ Discrepancy — nightly snapshot shows "Count: 90" but actual SKILL.md count is now 98. `~/.hermes/skills/` still has 26 category directories. Investigate whether skill files are nested deeper or snapshot metric undercounts.
+**Status:** ⚠️ Discrepancy — nightly snapshot shows "Count: 91" but actual SKILL.md count is now 98. `~/.hermes/skills/` still has 26 category directories. Investigate whether skill files are nested deeper or snapshot metric undercounts.
 
 No functional impact, but the gap inflates perceived capability in reports.
 
@@ -48,7 +48,7 @@ No functional impact, but the gap inflates perceived capability in reports.
 
 ### 6. Memory Store (Honcho) Health
 
-**Status:** ⚠️ 170 sessions in `~/.hermes/sessions/`. Dispose policy is retention_days: 90 with auto_prune: false on sessions. This means old sessions are not auto-vaced — long-term, storage growth in sessions dir is unmanaged. Consider enabling pruning or verifying Honcho handles this at a different layer.
+**Status:** ⚠️ 175 sessions in `~/.hermes/sessions/`. Dispose policy is retention_days: 90 with auto_prune: false on sessions. This means old sessions are not auto-vaced — long-term, storage growth in sessions dir is unmanaged. Consider enabling pruning or verifying Honcho handles this at a different layer.
 
 ## 🟢 Nice-to-Have
 
@@ -72,17 +72,17 @@ No functional impact, but the gap inflates perceived capability in reports.
 
 ### 9. Load Average Investigation
 
-Current 1-min load ~1.29 on an apparent 2-core (vm_stat says 2 CPUs or Proxmox CT). Improved since last review. Monitor if this climbs — likely the memory store refresh loop.
+Current 1-min load ~0.96 on an apparent 2-core (vm_stat says 2 CPUs or Proxmox CT). Improved since last review. Monitor if this climbs — likely the memory store refresh loop.
 
 ## Summary of Current State
 
 ```
-Hermes v0.13.0 (2026.5.7)  ⚠️ 1598 commits behind
+Hermes v0.13.0 (2026.5.7)  ⚠️ 1928 commits behind
 Provider: OpenRouter → stepfun/step-3.5-flash
 STT: ✅ faster-whisper local (base model)
 TTS: ✅ Edge TTS
 Memory: ✅ Enabled (Honcho)
-Skills: 26 category dirs (98+ visible, nightly snapshot count 90)
+Skills: 26 category dirs (98+ visible, nightly snapshot count 91)
 Cron: ✅ Nightly state snapshot job active
 Gateway: ✅ Running
 Disk: 31 GB free / 49 GB total (35%)
