@@ -9,8 +9,8 @@
 |-----------|-------|
 | CPU | x86_64 (Proxmox VE 6.8.12-22-pve) |
 | Cores | 2 (inferred from load) |
-| RAM | 11 GB total, ~2.6 GB used, 8.1 GB free |
-| Disk | 49 GB (loop device), 17 GB used, 31 GB free (35%) |
+| RAM | 11 GB total, ~2.6 GB used, 8.4 GB free |
+| Disk | 49 GB (loop device), 17 GB used, 31 GB free (36%) |
 | GPU | None visible |
 | Hostname | app-coolify |
 | Kernel | 6.8.12-22-pve |
@@ -33,7 +33,7 @@
 | Config | ~/.hermes/config.yaml |
 | Secrets | ~/.hermes/.env |
 | Skills dir | ~/.hermes/skills/ (26 category dirs, 99 SKILL.md files) |
-| Sessions | ~/.hermes/sessions/ (175 records) |
+| Sessions | ~/.hermes/sessions/ (209 records) |
 
 ## Installed Tools
 

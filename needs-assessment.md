@@ -1,13 +1,13 @@
 # Needs Assessment — What Hermes Needs
 
-> Generated: 2026-05-31 | Hermes v0.13.0 | Ubuntu 24.04 LTS
-> Last reviewed: 2026-05-31 12:00 PM UTC (daily cron)
+> Generated: 2026-06-01 | Hermes v0.13.0 | Ubuntu 24.04 LTS
+> Last reviewed: 2026-06-01 12:00 PM UTC (daily cron)
 
 ## 🔴 Critical Gaps
 
 ### 1. Hermes Update Backlog
 
-**Status:** ⚠️ 1928 commits behind — update deferred due to gateway restart risk (kills running agents). Update pending manual approval.
+**Status:** ⚠️ 1987 commits behind — update deferred due to gateway restart risk (kills running agents). Update pending manual approval. The backlog grew from 1928 to 1987 since the morning snapshot.
 
 ```
 hermes update
@@ -38,7 +38,7 @@ Config confirms it's wired to `openrouter` credential pool with `fill_first` str
 
 ### 4. SKILL Count Sanity Check
 
-**Status:** ⚠️ Discrepancy — nightly snapshot shows "Count: 91" but actual SKILL.md count is now 98. `~/.hermes/skills/` still has 26 category directories. Investigate whether skill files are nested deeper or snapshot metric undercounts.
+**Status:** ⚠️ Discrepancy — nightly snapshot shows "Count: 91" but actual SKILL.md count is now 99. `~/.hermes/skills/` still has 26 category directories. The mismatch continues to widen (actual skills added). Investigate whether nightlies are undercounting or skills are being added faster than snapshots capture.
 
 No functional impact, but the gap inflates perceived capability in reports.
 
@@ -48,7 +48,11 @@ No functional impact, but the gap inflates perceived capability in reports.
 
 ### 6. Memory Store (Honcho) Health
 
-**Status:** ⚠️ 175 sessions in `~/.hermes/sessions/`. Dispose policy is retention_days: 90 with auto_prune: false on sessions. This means old sessions are not auto-vaced — long-term, storage growth in sessions dir is unmanaged. Consider enabling pruning or verifying Honcho handles this at a different layer.
+**Status:** ⚠️ 209 sessions in `~/.hermes/sessions/`. Dispose policy is retention_days: 90 with auto_prune: false on sessions. This means old sessions are not auto-vaced — long-term, storage growth in sessions dir is unmanaged. Consider enabling pruning or verifying Honcho handles this at a different layer.
+
+### 7. Gateway Load & Errors
+
+**Status:** ⚠️ Load average (1min) climbed from ~0.96 to 1.12 since morning; 5/15min averages also up. Gateway logs show repeated `skill_manage` errors about malformed YAML frontmatter in some SKILL.md files. This could indicate a skill upload with incorrect format or a corrupted skill file. Errors trigger tool loop warnings but are non-fatal. Investigate the offending skill file(s) and correct or remove them.
 
 ## 🟢 Nice-to-Have
 
@@ -77,17 +81,17 @@ Current 1-min load ~0.96 on an apparent 2-core (vm_stat says 2 CPUs or Proxmox C
 ## Summary of Current State
 
 ```
-Hermes v0.13.0 (2026.5.7)  ⚠️ 1928 commits behind
+Hermes v0.13.0 (2026.5.7)  ⚠️ 1987 commits behind
 Provider: OpenRouter → stepfun/step-3.5-flash
 STT: ✅ faster-whisper local (base model)
 TTS: ✅ Edge TTS
 Memory: ✅ Enabled (Honcho)
-Skills: 26 category dirs (98+ visible, nightly snapshot count 91)
+Skills: 26 category dirs (99+ visible, nightly snapshot count 91)
 Cron: ✅ Nightly state snapshot job active
-Gateway: ✅ Running
-Disk: 31 GB free / 49 GB total (35%)
-RAM: ~9.4 GB free / 11 GB total (2.3 GB used)
-Load: 1.29 / 1.08 / 1.03 (improved)
-Sessions: 170 (auto-prune: false)
+Gateway: ✅ Running (with skill_manage YAML warnings)
+Disk: 31 GB free / 49 GB total (36%)
+RAM: ~8.4 GB free / 11 GB total (~2.6 GB used)
+Load: 1.12 / 1.35 / 1.35 (elevated)
+Sessions: 209 (auto-prune: false)
 Tailscaled: ✅ Active
 ```
