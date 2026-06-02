@@ -1,21 +1,21 @@
 # Needs Assessment — What Hermes Needs
 
-> Generated: 2026-06-01 | Hermes v0.13.0 | Ubuntu 24.04 LTS
-> Last reviewed: 2026-06-01 12:00 PM UTC (daily cron)
+> Generated: 2026-06-02 | Hermes v0.13.0 | Ubuntu 24.04 LTS
+> Last reviewed: 2026-06-02 12:00 PM UTC (daily cron)
 
 ## 🔴 Critical Gaps
 
 ### 1. Hermes Update Backlog
 
-**Status:** ⚠️ 1987 commits behind — update deferred due to gateway restart risk (kills running agents). Update pending manual approval. The backlog grew from 1928 to 1987 since the morning snapshot.
+**Status:** ⚠️ 2075 commits behind — update deferred due to gateway restart risk (kills running agents). The backlog grew from 1987 to 2075 since this morning's snapshot, adding 88 new commits in <24h.
 
 ```
 hermes update
 ```
 
-Bug fixes and new features are piling up behind a very large gap. At this distance, an update-later strategy becomes risky — merge conflicts, behavior drift, and unpatched CVEs are the realistic concerns.
+Bug fixes and new features continue to accumulate. At this distance, an update-later strategy becomes increasingly risky — merge conflicts, behavior drift, and unpatched CVEs are realistic concerns. Consider scheduling a maintenance window to run the update, ideally within the next 48h.
 
-**Note:** Presently handled via daily cron job hermes update which requires manual approval. Consider scheduling a maintenance window to run the update.
+**Note:** Daily cron job `hermes update` exists but requires manual approval. Evaluate if automatic updates with rollback could be enabled in a controlled manner.
 
 ### 2. OPENROUTER_API_KEY Validation
 
@@ -23,10 +23,10 @@ Bug fixes and new features are piling up behind a very large gap. At this distan
 
 ```
 # Quick sanity check
-curl -s -H "Authorization: Bearer $OPENR...KEY" https://openrouter.ai/api/v1/auth/key | jq
+curl -s -H "Authorization: Bearer ***" https://openrouter.ai/api/v1/auth/key | jq
 ```
 
-Config confirms it's wired to `openrouter` credential pool with `fill_first` strategy. With 1928 commits of drift, review credential injection path.
+Config confirms it's wired to `openrouter` credential pool with `fill_first` strategy. With >2000 commits of drift, review credential injection path for any breaking changes.
 
 ## 🟡 Important Gaps
 
@@ -38,21 +38,19 @@ Config confirms it's wired to `openrouter` credential pool with `fill_first` str
 
 ### 4. SKILL Count Sanity Check
 
-**Status:** ⚠️ Discrepancy — nightly snapshot shows "Count: 91" but actual SKILL.md count is now 99. `~/.hermes/skills/` still has 26 category directories. The mismatch continues to widen (actual skills added). Investigate whether nightlies are undercounting or skills are being added faster than snapshots capture.
+**Status:** ⚠️ Discrepancy — nightly snapshot shows "Count: 91" but actual SKILL.md count is now 99. `~/.hermes/skills/` has 26 category directories. The mismatch continues to widen (actual skills added). Investigate whether nightlies are undercounting or skills are being added faster than snapshots capture.
 
-No functional impact, but the gap inflates perceived capability in reports.
+No functional impact, but the gap inflates perceived capability in reports. Recommend fixing the snapshot script to count skills accurately or adjust expectations.
 
-### 5. Disk Space Trend
+### 5. Memory Store (Honcho) Health
 
-**Status:** ✅ 31 GB free (35% used), but 8 GB has been consumed since the May 13 snapshot (39 → 31 free). Watch Hermes logs and journalctl — runaway log rotation or large attachment writes could accelerate this. Log retention is set to 5 MB / backup_count 3.
+**Status:** ⚠️ 186 sessions in `~/.hermes/sessions/`. Dispose policy is retention_days: 90 with auto_prune: false on sessions. This means old sessions are not auto-vacuumed — long-term storage growth in sessions dir is unmanaged. Consider enabling pruning or verifying Honcho handles cleanup at a different layer.
 
-### 6. Memory Store (Honcho) Health
+System-audit previously noted 209 sessions; current count is 186, indicating some cleanup may have occurred manually or via external process. Verify the consistency of session lifecycle.
 
-**Status:** ⚠️ 209 sessions in `~/.hermes/sessions/`. Dispose policy is retention_days: 90 with auto_prune: false on sessions. This means old sessions are not auto-vaced — long-term, storage growth in sessions dir is unmanaged. Consider enabling pruning or verifying Honcho handles this at a different layer.
+### 6. Gateway Load & Errors
 
-### 7. Gateway Load & Errors
-
-**Status:** ⚠️ Load average (1min) climbed from ~0.96 to 1.12 since morning; 5/15min averages also up. Gateway logs show repeated `skill_manage` errors about malformed YAML frontmatter in some SKILL.md files. This could indicate a skill upload with incorrect format or a corrupted skill file. Errors trigger tool loop warnings but are non-fatal. Investigate the offending skill file(s) and correct or remove them.
+**Status:** ✅ Load average improved: 1min from 1.12 to 0.64, 5min from 1.35 to 0.77, 15min from 1.35 to 0.90. Gateway logs show no recent `skill_manage` YAML frontmatter errors in the past hour. Previous warnings appear resolved orWere transient.
 
 ## 🟢 Nice-to-Have
 
@@ -63,7 +61,7 @@ No functional impact, but the gap inflates perceived capability in reports.
 | jq | JSON processing without python fallback | `apt-get install -y jq` |
 | htop | Better system monitoring | `apt-get install -y htop` |
 | neovim | In-terminal file editing | `apt-get install -y neovim` |
-| gh CLI | GitHub workflow CLIs (node-heavy, skip for now) |skip |
+| gh CLI | GitHub workflow CLIs (node-heavy, skip for now) | skip |
 
 ### 8. Cron Jobs Worth Adding
 
@@ -76,22 +74,30 @@ No functional impact, but the gap inflates perceived capability in reports.
 
 ### 9. Load Average Investigation
 
-Current 1-min load ~0.96 on an apparent 2-core (vm_stat says 2 CPUs or Proxmox CT). Improved since last review. Monitor if this climbs — likely the memory store refresh loop.
+Current 1-min load ~0.64 on an apparent 2-core VM. Significantly improved since last review (was 1.12). Monitor if this stays low — likely the memory store refresh loop was optimized or load decreased.
 
 ## Summary of Current State
 
 ```
-Hermes v0.13.0 (2026.5.7)  ⚠️ 1987 commits behind
+Hermes v0.13.0 (2026.5.7)  ⚠️ 2075 commits behind (←88 new overnight)
 Provider: OpenRouter → stepfun/step-3.5-flash
 STT: ✅ faster-whisper local (base model)
 TTS: ✅ Edge TTS
 Memory: ✅ Enabled (Honcho)
 Skills: 26 category dirs (99+ visible, nightly snapshot count 91)
 Cron: ✅ Nightly state snapshot job active
-Gateway: ✅ Running (with skill_manage YAML warnings)
+Gateway: ✅ Running (no recent YAML errors)
 Disk: 31 GB free / 49 GB total (36%)
-RAM: ~8.4 GB free / 11 GB total (~2.6 GB used)
-Load: 1.12 / 1.35 / 1.35 (elevated)
-Sessions: 209 (auto-prune: false)
+RAM: 2.5Gi used / 11Gi total (~8.4Gi free)
+Load: 0.64 / 0.77 / 0.90 (✅ improved)
+Sessions: 186 (auto-prune: false)
 Tailscaled: ✅ Active
 ```
+
+## Action Items
+
+1. Schedule maintenance window to run `hermes update` within 48h.
+2. Fix skill counting in nightly snapshot or document expected variance.
+3. Enable session auto-prune or confirm external cleanup mechanism.
+4. Perform STT end-to-end smoke test (voice note → transcript → agent).
+5. Consider adding missing tools (jq, htop, neovim) for ops convenience.
