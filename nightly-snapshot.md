@@ -1,23 +1,23 @@
-# Hermes Nightly State — 2026-06-03 08:00 UTC
+# Hermes Nightly State — 2026-06-04 08:00 UTC
 
 ## Version
 Hermes Agent v0.13.0 (2026.5.7)
 Project: /usr/local/lib/hermes-agent
 Python: 3.11.15
 OpenAI SDK: 2.24.0
-Update available: 2178 commits behind — run 'hermes update'
+Update available: 2318 commits behind — run 'hermes update'
 
 ## Skills
 - Count: 91
 
 ## Sessions
-- Count: 189
+- Count: 191
 
 ## Config (secrets redacted)
 model:
-  default: stepfun/step-3.5-flash
-  provider: openrouter
-  base_url: https://openrouter.ai/api/v1
+  default: deepseek/deepseek-v4-flash:free
+  provider: deepseek
+  base_url: ''
   api_mode: chat_completions
 providers: {}
 fallback_providers: []
@@ -174,59 +174,59 @@ bedrock:
     trace: disabled
 auxiliary:
   vision:
-    provider: auto
-    model: ''
+    provider: openrouter
+    model: google/gemma-4-31b-it:free
     base_url: ''
     api_key: [REDACTED]
     timeout: 120
     extra_body: {}
     download_timeout: 30
   web_extract:
-    provider: auto
-    model: ''
+    provider: openrouter
+    model: google/gemma-4-31b-it:free
     base_url: ''
     api_key: [REDACTED]
     timeout: 360
     extra_body: {}
   compression:
-    provider: auto
-    model: ''
+    provider: openrouter
+    model: google/gemma-4-31b-it:free
     base_url: ''
     api_key: [REDACTED]
     timeout: 120
     extra_body: {}
   session_search:
-    provider: auto
-    model: ''
+    provider: openrouter
+    model: google/gemma-4-31b-it:free
     base_url: ''
     api_key: [REDACTED]
     timeout: 30
     extra_body: {}
     max_concurrency: 3
   skills_hub:
-    provider: auto
-    model: ''
+    provider: openrouter
+    model: google/gemma-4-31b-it:free
     base_url: ''
     api_key: [REDACTED]
     timeout: 30
     extra_body: {}
   approval:
-    provider: auto
-    model: ''
+    provider: openrouter
+    model: google/gemma-4-31b-it:free
     base_url: ''
     api_key: [REDACTED]
     timeout: 30
     extra_body: {}
   mcp:
-    provider: auto
-    model: ''
+    provider: openrouter
+    model: google/gemma-4-31b-it:free
     base_url: ''
     api_key: [REDACTED]
     timeout: 30
     extra_body: {}
   title_generation:
-    provider: auto
-    model: ''
+    provider: openrouter
+    model: google/gemma-4-31b-it:free
     base_url: ''
     api_key: [REDACTED]
     timeout: 30
@@ -239,8 +239,8 @@ auxiliary:
     timeout: 120
     extra_body: {}
   curator:
-    provider: auto
-    model: ''
+    provider: openrouter
+    model: google/gemma-4-31b-it:free
     base_url: ''
     api_key: [REDACTED]
     timeout: 600
@@ -366,6 +366,7 @@ skills:
   inline_shell_timeout: 10
   guard_agent_created: false
   creation_nudge_interval: 15
+  disabled: []
 curator:
   enabled: true
   interval_hours: 168
@@ -462,7 +463,6 @@ sessions:
   min_interval_hours: 24
 onboarding:
   seen:
-    
     tool_progress_prompt: true
     busy_input_prompt: true
 updates:
@@ -475,7 +475,6 @@ lsp:
   install_strategy: auto
   servers: {}
 _config_version: 23
-
 tavily:
   api_key: [REDACTED]
 session_reset:
@@ -527,6 +526,10 @@ platform_toolsets:
 known_plugin_toolsets:
   cli:
   - spotify
+plugins:
+  enabled:
+  - disk-cleanup
+  disabled: []
 
 # ── Fallback Model ────────────────────────────────────────────────────
 # Automatic provider failover when primary is unavailable.
@@ -554,7 +557,7 @@ known_plugin_toolsets:
 ```
 /dev/loop0       49G   17G   30G  36% /
                total        used        free      shared  buff/cache   available
-Mem:            11Gi       2.5Gi       8.3Gi        25Mi       901Mi       9.2Gi
+Mem:            11Gi       2.7Gi       8.1Gi        25Mi       954Mi       9.0Gi
 ```
 
 ## Cron Jobs
@@ -567,36 +570,36 @@ Mem:            11Gi       2.5Gi       8.3Gi        25Mi       901Mi       9.2Gi
     Name:      Nightly Hermes Research Sync
     Schedule:  0 8 * * *
     Repeat:    ∞
-    Next run:  2026-06-04T08:00:00+00:00
+    Next run:  2026-06-05T08:00:00+00:00
     Deliver:   local
     Script:    nightly-sync.sh
     Mode:      no-agent (script stdout delivered directly)
-    Last run:  2026-06-02T08:00:22.061346+00:00  ok
+    Last run:  2026-06-03T08:00:37.398755+00:00  ok
 
   77e7ff41d6d7 [active]
     Name:      Daily Briefing Report
     Schedule:  0 12 * * *
     Repeat:    ∞
-    Next run:  2026-06-03T12:00:00+00:00
+    Next run:  2026-06-04T12:00:00+00:00
     Deliver:   telegram:922739544
     Script:    daily-report.sh
-    Last run:  2026-06-02T12:11:03.058479+00:00  ok
+    Last run:  2026-06-03T12:26:38.899079+00:00  ok
 
   e441804c0f18 [active]
     Name:      Wiki Daily Regeneration
     Schedule:  0 6 * * *
     Repeat:    ∞
-    Next run:  2026-06-04T06:00:00+00:00
+    Next run:  2026-06-05T06:00:00+00:00
     Deliver:   local
-    Last run:  2026-06-03T06:04:22.099078+00:00  ok
+    Last run:  2026-06-04T06:01:45.874991+00:00  ok
 
   c1df09012b9c [active]
     Name:      Wiki Server Watchdog
     Schedule:  */5 * * * *
     Repeat:    ∞
-    Next run:  2026-06-03T08:05:00+00:00
+    Next run:  2026-06-04T08:05:00+00:00
     Deliver:   local
     Script:    wiki-watchdog.sh
     Mode:      no-agent (script stdout delivered directly)
-    Last run:  2026-06-03T08:00:26.444852+00:00  ok
+    Last run:  2026-06-04T08:00:50.469538+00:00  ok
 
