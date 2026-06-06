@@ -1,23 +1,23 @@
-# Hermes Nightly State — 2026-06-05 08:00 UTC
+# Hermes Nightly State — 2026-06-06 08:00 UTC
 
 ## Version
 Hermes Agent v0.13.0 (2026.5.7)
 Project: /usr/local/lib/hermes-agent
 Python: 3.11.15
 OpenAI SDK: 2.24.0
-Update available: 2485 commits behind — run 'hermes update'
+Update available: 2553 commits behind — run 'hermes update'
 
 ## Skills
 - Count: 91
 
 ## Sessions
-- Count: 191
+- Count: 193
 
 ## Config (secrets redacted)
 model:
-  default: deepseek/deepseek-v4-flash:free
-  provider: deepseek
-  base_url: ''
+  default: qwen/qwen3.6-35b-a3b
+  provider: openrouter
+  base_url: https://openrouter.ai/api/v1
   api_mode: chat_completions
 providers: {}
 fallback_providers: []
@@ -474,6 +474,7 @@ lsp:
   wait_timeout: 5
   install_strategy: auto
   servers: {}
+_config_version: 23
 tavily:
   api_key: [REDACTED]
 session_reset:
@@ -554,9 +555,9 @@ plugins:
 
 ## System
 ```
-/dev/loop0       49G   17G   30G  36% /
+/dev/loop0       49G   18G   29G  38% /
                total        used        free      shared  buff/cache   available
-Mem:            11Gi       2.7Gi       8.1Gi        25Mi       936Mi       9.0Gi
+Mem:            11Gi       2.6Gi       7.6Gi        25Mi       1.5Gi       9.1Gi
 ```
 
 ## Cron Jobs
@@ -569,36 +570,36 @@ Mem:            11Gi       2.7Gi       8.1Gi        25Mi       936Mi       9.0Gi
     Name:      Nightly Hermes Research Sync
     Schedule:  0 8 * * *
     Repeat:    ∞
-    Next run:  2026-06-06T08:00:00+00:00
+    Next run:  2026-06-07T08:00:00+00:00
     Deliver:   local
     Script:    nightly-sync.sh
     Mode:      no-agent (script stdout delivered directly)
-    Last run:  2026-06-04T08:01:00.923124+00:00  ok
+    Last run:  2026-06-05T08:01:11.104863+00:00  ok
 
   77e7ff41d6d7 [active]
     Name:      Daily Briefing Report
     Schedule:  0 12 * * *
     Repeat:    ∞
-    Next run:  2026-06-05T12:00:00+00:00
+    Next run:  2026-06-06T12:00:00+00:00
     Deliver:   telegram:922739544
     Script:    daily-report.sh
-    Last run:  2026-06-04T12:00:15.134817+00:00  error: RuntimeError: Provider 'deepseek' is set in config.yaml but no API key was found. Set the DEEPSEEK_API_KEY environment variable, or switch to a different provider with `hermes model`.
+    Last run:  2026-06-05T12:00:20.683290+00:00  error: RuntimeError: Provider 'deepseek' is set in config.yaml but no API key was found. Set the DEEPSEEK_API_KEY environment variable, or switch to a different provider with `hermes model`.
 
   e441804c0f18 [active]
     Name:      Wiki Daily Regeneration
     Schedule:  0 6 * * *
     Repeat:    ∞
-    Next run:  2026-06-06T06:00:00+00:00
+    Next run:  2026-06-07T06:00:00+00:00
     Deliver:   local
-    Last run:  2026-06-05T06:00:54.333809+00:00  error: RuntimeError: Provider 'deepseek' is set in config.yaml but no API key was found. Set the DEEPSEEK_API_KEY environment variable, or switch to a different provider with `hermes model`.
+    Last run:  2026-06-06T06:00:54.250966+00:00  error: RuntimeError: Provider 'deepseek' is set in config.yaml but no API key was found. Set the DEEPSEEK_API_KEY environment variable, or switch to a different provider with `hermes model`.
 
   c1df09012b9c [active]
     Name:      Wiki Server Watchdog
     Schedule:  */5 * * * *
     Repeat:    ∞
-    Next run:  2026-06-05T08:05:00+00:00
+    Next run:  2026-06-06T08:05:00+00:00
     Deliver:   local
     Script:    wiki-watchdog.sh
     Mode:      no-agent (script stdout delivered directly)
-    Last run:  2026-06-05T08:00:58.458950+00:00  ok
+    Last run:  2026-06-06T08:00:46.829527+00:00  ok
 
