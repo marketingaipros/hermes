@@ -111,16 +111,20 @@
 ## System Metrics at a Glance
 
 ```
-Load:     0.64 0.77 0.90
-Memory:   2.5Gi used / 11Gi total
-Disk:     31 GiB free / 49 GiB total (36%)
-Sessions: 186
+Load:     0.96  1.23  1.44
+Memory:   2.8Gi used / 11Gi total
+Disk:     30 GiB free / 49 GiB total (37%)
+Sessions: 230 (↑44 overnight — Wazuh lab activity)
 Services: hermes-gateway ✅  |  tailscaled ✅
+Cron:     all 3 jobs ✅ (errors from deepseek key resolved)
+Uptime:   15 days 10 hours
 ```
 
 ## Recent Notable Events
 
-- **2026-06-02 12:00**: Daily audit shows load improved to 0.64/0.77/0.90. No recent YAML frontmatter errors in gateway logs.
-- **2026-06-02 08:00**: Nightly snapshot recorded; update backlog at 1987 commits behind.
-- **2026-06-02 12:09**: Current metrics captured; backlog at 2075 behind (↑88 in <4h).
-- **2026-05-29 21:23**: skill_manage error: "SKILL.md must start with YAML frontmatter (---)." (resolved)
+- **2026-06-07 12:00**: Daily audit — provider switched to `qwen/qwen3.6-35b-a3b`. 2659 commits behind (↑106). Sessions grew to 230 from Wazuh lab work.
+- **2026-06-07 08:00**: Nightly snapshot recorded; all 3 cron jobs passing.
+- **2026-06-07 06:00**: Wiki regeneration cron succeeded (was failing with deepseek key error).
+- **2026-06-06 19:13–23:45**: Wazuh SentinelTech lab session — 34 messages, knowledge baseline creation and Phase 1A-2B completion.
+- **2026-06-06 12:00**: Daily briefing — deepseek key error on cron jobs.
+- **2026-06-06 08:00**: Nightly snapshot — 2553 commits behind.

@@ -1,32 +1,25 @@
 # Needs Assessment — What Hermes Needs
 
 > Generated: 2026-06-02 | Hermes v0.13.0 | Ubuntu 24.04 LTS
-> Last reviewed: 2026-06-02 12:00 PM UTC (daily cron)
+> Last reviewed: 2026-06-07 12:00 PM UTC (daily cron)
 
 ## 🔴 Critical Gaps
 
 ### 1. Hermes Update Backlog
 
-**Status:** ⚠️ 2075 commits behind — update deferred due to gateway restart risk (kills running agents). The backlog grew from 1987 to 2075 since this morning's snapshot, adding 88 new commits in <24h.
+**Status:** 🔴 2659 commits behind — critical escalation. Grew 106 commits in last 24h (was 2553 yesterday). Update deferred due to gateway restart risk (kills running agents).
 
 ```
 hermes update
 ```
 
-Bug fixes and new features continue to accumulate. At this distance, an update-later strategy becomes increasingly risky — merge conflicts, behavior drift, and unpatched CVEs are realistic concerns. Consider scheduling a maintenance window to run the update, ideally within the next 48h.
+Bug fixes and new features continue to accumulate. At this distance, an update-later strategy becomes increasingly risky — merge conflicts, behavior drift, and unpatched CVEs are realistic concerns. Maintenance window needed ASAP.
 
 **Note:** Daily cron job `hermes update` exists but requires manual approval. Evaluate if automatic updates with rollback could be enabled in a controlled manner.
 
 ### 2. OPENROUTER_API_KEY Validation
 
-**Status:** ✅ Key is present in .env (value redacted). Verify it's truly active by hitting the API:
-
-```
-# Quick sanity check
-curl -s -H "Authorization: Bearer ***" https://openrouter.ai/api/v1/auth/key | jq
-```
-
-Config confirms it's wired to `openrouter` credential pool with `fill_first` strategy. With >2000 commits of drift, review credential injection path for any breaking changes.
+**Status:** ✅ Key is present in .env. Config confirms wired to `openrouter` credential pool with `fill_first` strategy. Model set to `qwen/qwen3.6-35b-a3b` (was stepfun/step-3.5-flash — provider switch completed). With 2659 commits of drift, credential injection path should be re-verified on next update.
 
 ## 🟡 Important Gaps
 
@@ -79,25 +72,26 @@ Current 1-min load ~0.64 on an apparent 2-core VM. Significantly improved since 
 ## Summary of Current State
 
 ```
-Hermes v0.13.0 (2026.5.7)  ⚠️ 2075 commits behind (←88 new overnight)
-Provider: OpenRouter → stepfun/step-3.5-flash
+Hermes v0.13.0 (2026.5.7)  🔴 2659 commits behind (↑106 overnight)
+Provider: OpenRouter → qwen/qwen3.6-35b-a3b (switched from stepfun)
 STT: ✅ faster-whisper local (base model)
 TTS: ✅ Edge TTS
 Memory: ✅ Enabled (Honcho)
-Skills: 26 category dirs (99+ visible, nightly snapshot count 91)
-Cron: ✅ Nightly state snapshot job active
-Gateway: ✅ Running (no recent YAML errors)
-Disk: 31 GB free / 49 GB total (36%)
-RAM: 2.5Gi used / 11Gi total (~8.4Gi free)
-Load: 0.64 / 0.77 / 0.90 (✅ improved)
-Sessions: 186 (auto-prune: false)
+Skills: 95 visible (nightly snapshot count matches)
+Cron: ✅ Nightly state snapshot + daily briefing running, errors resolved
+Gateway: ✅ Running (active, 3.3GB RSS)
+Disk: 30 GiB free / 49 GiB total (37%)
+RAM: 2.8Gi used / 11Gi total (~8.9Gi free)
+Load: 0.96 / 1.23 / 1.44 (✅ stable)
+Sessions: 230 (auto-prune: false, ↑44 overnight — Wazuh lab activity)
 Tailscaled: ✅ Active
+Uptime: 15 days 10 hours
 ```
 
 ## Action Items
 
-1. Schedule maintenance window to run `hermes update` within 48h.
-2. Fix skill counting in nightly snapshot or document expected variance.
-3. Enable session auto-prune or confirm external cleanup mechanism.
+1. **URGENT** — Schedule maintenance window to run `hermes update`. 2659 commits behind, growing ~100/day.
+2. Fix skill counting in nightly snapshot (now reconciled at 95).
+3. Enable session auto-prune or confirm external cleanup mechanism (230 sessions growing).
 4. Perform STT end-to-end smoke test (voice note → transcript → agent).
 5. Consider adding missing tools (jq, htop, neovim) for ops convenience.
