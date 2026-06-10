@@ -1,17 +1,17 @@
-# Hermes Nightly State — 2026-06-09 08:00 UTC
+# Hermes Nightly State — 2026-06-10 08:00 UTC
 
 ## Version
 Hermes Agent v0.13.0 (2026.5.7)
 Project: /usr/local/lib/hermes-agent
 Python: 3.11.15
 OpenAI SDK: 2.24.0
-Update available: 2962 commits behind — run 'hermes update'
+Update available: 3015 commits behind — run 'hermes update'
 
 ## Skills
 - Count: 95
 
 ## Sessions
-- Count: 237
+- Count: 255
 
 ## Config (secrets redacted)
 model:
@@ -396,7 +396,8 @@ whatsapp: {}
 telegram:
   reactions: false
   channel_prompts: {}
-  allowed_chats: ''
+  allowed_chats: 922739544
+  token: 8477537988:AAFoiTA4xAF9eB3DRsooTJt2iG0tV3AeyNI
 mattermost:
   require_mention: true
   free_response_channels: ''
@@ -415,9 +416,17 @@ approvals:
 command_allowlist:
 - script execution via -e/-c flag
 - stop/restart hermes gateway (kills running agents)
-- overwrite project env/config file
 - overwrite system file via redirection
-quick_commands: {}
+- stop/restart system service
+- overwrite project env/config file
+quick_commands:
+  status: "Read-only SentinelTech Wazuh status check. Validate the Wazuh MCP connection and Wazuh Manager health. Do not perform remediation, blocking, isolation, quarantine, restart, delete, disable, kill, or active response."
+  agents: "Read-only SentinelTech Wazuh agent inventory. List all Wazuh agents with ID, name, status, IP, OS, and last seen if available. Do not perform remediation."
+  active: "Read-only SentinelTech Wazuh active agent check. List only active/running Wazuh agents. Do not perform remediation."
+  disconnected: "Read-only SentinelTech Wazuh disconnected agent check. List disconnected, never connected, or unhealthy Wazuh agents. Do not perform remediation."
+  alerts: "Read-only SentinelTech Wazuh alert summary. Summarize recent alerts, severity, affected agent, rule, timestamp, and recommended human-review next step. Do not perform remediation."
+  report: "Read-only SentinelTech Wazuh technician report. Generate a concise security report with agent health, recent alerts, risks, and human-review recommendations. Do not perform remediation."
+
 hooks: {}
 hooks_auto_accept: false
 personalities: {}
@@ -531,33 +540,11 @@ plugins:
   - disk-cleanup
   disabled: []
 
-# ── Fallback Model ────────────────────────────────────────────────────
-# Automatic provider failover when primary is unavailable.
-# Uncomment and configure to enable. Triggers on rate limits (429),
-# overload (529), service errors (503), or connection failures.
-#
-# Supported providers:
-#   openrouter   (OPENROUTER_API_KEY)  — routes to any model
-#   openai-codex (OAuth — hermes auth) — OpenAI Codex
-#   nous         (OAuth — hermes auth) — Nous Portal
-#   zai          (ZAI_API_KEY)         — Z.AI / GLM
-#   kimi-coding  (KIMI_API_KEY)        — Kimi / Moonshot
-#   kimi-coding-cn (KIMI_CN_API_KEY)   — Kimi / Moonshot (China)
-#   minimax      (MINIMAX_API_KEY)     — MiniMax
-#   minimax-cn   (MINIMAX_CN_API_KEY)  — MiniMax (China)
-#   bedrock      (AWS IAM / boto3)     — AWS Bedrock (Converse API)
-#
-# For custom OpenAI-compatible endpoints, add base_url and key_env.
-#
-# fallback_model:
-#   provider: openrouter
-#   model: anthropic/claude-sonnet-4
-
 ## System
 ```
 /dev/loop0       49G   18G   30G  38% /
                total        used        free      shared  buff/cache   available
-Mem:            11Gi       2.3Gi       7.5Gi        30Mi       1.8Gi       9.3Gi
+Mem:            11Gi       2.4Gi       8.6Gi        32Mi       739Mi       9.3Gi
 ```
 
 ## Cron Jobs
@@ -570,36 +557,36 @@ Mem:            11Gi       2.3Gi       7.5Gi        30Mi       1.8Gi       9.3Gi
     Name:      Nightly Hermes Research Sync
     Schedule:  0 8 * * *
     Repeat:    ∞
-    Next run:  2026-06-10T08:00:00+00:00
+    Next run:  2026-06-11T08:00:00+00:00
     Deliver:   local
     Script:    nightly-sync.sh
     Mode:      no-agent (script stdout delivered directly)
-    Last run:  2026-06-08T08:00:23.387154+00:00  ok
+    Last run:  2026-06-09T08:00:38.654707+00:00  ok
 
   77e7ff41d6d7 [active]
     Name:      Daily Briefing Report
     Schedule:  0 12 * * *
     Repeat:    ∞
-    Next run:  2026-06-09T12:00:00+00:00
+    Next run:  2026-06-10T12:00:00+00:00
     Deliver:   telegram:922739544
     Script:    daily-report.sh
-    Last run:  2026-06-08T12:01:22.835459+00:00  ok
+    Last run:  2026-06-09T12:01:33.319277+00:00  ok
 
   e441804c0f18 [active]
     Name:      Wiki Daily Regeneration
     Schedule:  0 6 * * *
     Repeat:    ∞
-    Next run:  2026-06-10T06:00:00+00:00
+    Next run:  2026-06-11T06:00:00+00:00
     Deliver:   local
-    Last run:  2026-06-09T06:01:14.386430+00:00  ok
+    Last run:  2026-06-10T06:01:06.113513+00:00  ok
 
   c1df09012b9c [active]
     Name:      Wiki Server Watchdog
     Schedule:  */5 * * * *
     Repeat:    ∞
-    Next run:  2026-06-09T08:05:00+00:00
+    Next run:  2026-06-10T08:05:00+00:00
     Deliver:   local
     Script:    wiki-watchdog.sh
     Mode:      no-agent (script stdout delivered directly)
-    Last run:  2026-06-09T08:00:20.414133+00:00  ok
+    Last run:  2026-06-10T08:00:14.263606+00:00  ok
 
