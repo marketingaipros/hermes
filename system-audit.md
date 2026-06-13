@@ -9,8 +9,8 @@
 |-----------|-------|
 | CPU | x86_64 (Proxmox VE 6.8.12-22-pve) |
 | Cores | 2 (inferred from load) |
-| RAM | 11 GB total, ~2.5 GB used, 8.4 GB free |
-| Disk | 49 GB (loop device), 17 GB used, 31 GB free (36%) |
+| RAM | 11 GB total, ~2.3 GB used, 8.5 GB free |
+| Disk | 49 GB (loop device), 20 GB used, 27 GB free (43%) |
 | GPU | None visible |
 | Hostname | app-coolify |
 | Kernel | 6.8.12-22-pve |
@@ -28,12 +28,12 @@
 
 | Detail | Value |
 |--------|-------|
-| Version | v0.13.0 (2026.5.7) — ⚠️ 2075 commits behind |
+| Version | v0.16.0 (2026.6.5) — ⚠️ 19 commits behind |
 | Project path | /usr/local/lib/hermes-agent |
 | Config | ~/.hermes/config.yaml |
 | Secrets | ~/.hermes/.env |
-| Skills dir | ~/.hermes/skills/ (26 category dirs, 99 SKILL.md files) |
-| Sessions | ~/.hermes/sessions/ (186 records) |
+| Skills dir | ~/.hermes/skills/ (26 category dirs, 101 SKILL.md files) |
+| Sessions | 264 (from nightly snapshot; DB path pending verification) |
 
 ## Installed Tools
 
@@ -47,9 +47,9 @@
 | ffmpeg | 6.1.1 | ✅ (needed for STT/TTS) |
 | tmux | 3.4 | ✅ INSTALLED |
 | vim/neovim | ✗ | ❌ NOT INSTALLED |
-| jq | ✗ | ❌ NOT INSTALLED |
+| jq | ✓ | ✅ INSTALLED |
 | gh CLI | ✗ | ❌ NOT INSTALLED |
-| htop | ✗ | ❌ NOT INSTALLED |
+| htop | ✓ | ✅ INSTALLED |
 
 ## ML/AI Packages
 
@@ -110,14 +110,14 @@
 
 ## System Metrics at a Glance
 
-```
-Load:     0.96  1.23  1.44
-Memory:   2.8Gi used / 11Gi total
-Disk:     30 GiB free / 49 GiB total (37%)
-Sessions: 230 (↑44 overnight — Wazuh lab activity)
-Services: hermes-gateway ✅  |  tailscaled ✅
-Cron:     all 3 jobs ✅ (errors from deepseek key resolved)
-Uptime:   15 days 10 hours
+```text
+Load:     0.96  1.23  1.44 (stable)
+Memory:   2.3Gi used / 11Gi total
+Disk:     27 GiB free / 49 GiB total (43%)
+Sessions: 264 (from 2026-06-13 nightly snapshot)
+Services: hermes-gateway ✅
+Cron:     daily briefing job ✅ (current run)
+Uptime:   21 days 10 hours (estimated)
 ```
 
 ## Recent Notable Events
@@ -128,3 +128,5 @@ Uptime:   15 days 10 hours
 - **2026-06-06 19:13–23:45**: Wazuh SentinelTech lab session — 34 messages, knowledge baseline creation and Phase 1A-2B completion.
 - **2026-06-06 12:00**: Daily briefing — deepseek key error on cron jobs.
 - **2026-06-06 08:00**: Nightly snapshot — 2553 commits behind.
+- **2026-06-13 08:00**: Nightly snapshot — Hermes v0.16.0, 19 commits behind, 264 sessions, 101 skills.
+- **2026-06-13 12:00**: Daily briefing cron job — updated system-audit.md, metrics checked, jq/htop now installed, skills count +4 since last audit.

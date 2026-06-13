@@ -7,7 +7,7 @@
 
 ### 1. Hermes Update Backlog
 
-**Status:** 🔴 3144 commits behind — critical. Jumped 485 commits in 9 days (~54/day, up from ~106/day estimate). Update deferred due to gateway restart risk. Merge conflict risk is now high.
+**Status:** 🟡 19 commits behind — improved. Reduced from 3144 commits in 2026-06-02. Update deferred due to gateway restart risk, but now low risk.
 
 **Note:** Daily cron job `hermes update` exists but requires manual approval. Evaluate if automatic updates with rollback could be enabled in a controlled manner.
 
@@ -25,13 +25,11 @@
 
 ### 4. SKILL Count Sanity Check
 
-**Status:** ⚠️ Gap persists — nightly snapshot reports "Count: 96" but actual SKILL.md count is 99 (3 new added since last snapshot). The undercount gap is growing as skills are added faster than snapshots capture them.
-
-No functional impact, but the gap inflates perceived capability in reports. Recommend fixing the snapshot script to count skills accurately.
+**Status:** ✅ Gap resolved — nightly snapshot now reports 101 skills, matching actual SKILL.md count. No action needed.
 
 ### 5. Memory Store (Honcho) Health
 
-**Status:** ⚠️ 261 sessions in `~/.hermes/sessions/`. Dispose policy is retention_days: 90 with auto_prune: false on sessions. Session count grew 75 since last audit (230 → 261). Long-term storage growth is unmanaged. Consider enabling pruning or verifying Honcho handles cleanup at a different layer.
+**Status:** ⚠️ 264 sessions (from nightly snapshot; DB path pending verification). Dispose policy is retention_days: 90 with auto_prune: false on sessions. Session count grew 3 since last audit (261 → 264). Long-term storage growth is unmanaged. Consider enabling pruning or verifying Honcho handles cleanup at a different layer.
 
 ### 6. Gateway Load & Errors
 
@@ -43,8 +41,6 @@ No functional impact, but the gap inflates perceived capability in reports. Reco
 
 | Tool | Why | Command |
 |------|-----|---------|
-| jq | JSON processing without python fallback | `apt-get install -y jq` |
-| htop | Better system monitoring | `apt-get install -y htop` |
 | neovim | In-terminal file editing | `apt-get install -y neovim` |
 | gh CLI | GitHub workflow CLIs (node-heavy, skip for now) | skip |
 
@@ -64,26 +60,26 @@ Current 1-min load ~0.64 on an apparent 2-core VM. Significantly improved since 
 ## Summary of Current State
 
 ```
-| Hermes v0.13.0 (2026.5.7)  🔴 3144 commits behind (↑485 in 9 days, ~54/day)
-Provider: OpenRouter → qwen/qwen3.6-35b-a3b
+| Hermes v0.16.0 (2026.6.5)  🟡 19 commits behind (reduced from 3144)
+Provider: OpenRouter → tencent/hy3-preview
 STT: ✅ faster-whisper local (base model)
 TTS: ✅ Edge TTS
 Memory: ✅ Enabled (Honcho)
-Skills: 96 (snapshot count) / 99 (actual SKILL.md files — 3 new added since last snapshot)
-Cron: ✅ All 3 jobs running, errors resolved
-SaaS Playbook: ✅ Added today (508 lines, 5 files)
-Gateway: ✅ Running (3.9GB RSS, ↑0.6GB)
-Disk: 29 GiB free / 49 GiB total (38%)
-RAM: 2.5Gi used / 11Gi total (~9.2Gi free)
-Load: 1.69 / 1.46 / 1.33 (✅ stable, minor uptick)
-Sessions: 261 (↑75 since last audit — active work)
-Uptime: 19 days
+Skills: 101 (snapshot count matches actual SKILL.md files)
+Cron: ✅ Daily briefing job running
+SaaS Playbook: ✅ Added 2026-06-07
+Gateway: ✅ Running (stable load)
+Disk: 27 GiB free / 49 GiB total (43%)
+RAM: 2.3Gi used / 11Gi total (~9.4Gi free)
+Load: 0.96 / 1.23 / 1.44 (✅ stable)
+Sessions: 264 (from nightly snapshot)
+Uptime: ~21 days
 ```
 
 ## Action Items
 
-1. **URGENT** — Schedule maintenance window to run `hermes update`. 2659 commits behind, growing ~100/day.
-2. Fix skill counting in nightly snapshot (now reconciled at 95).
-3. Enable session auto-prune or confirm external cleanup mechanism (230 sessions growing).
-4. Perform STT end-to-end smoke test (voice note → transcript → agent).
-5. Consider adding missing tools (jq, htop, neovim) for ops convenience.
+1. ** LOW PRIORITY** — Schedule maintenance window to run `hermes update`. Now only 19 commits behind, low merge risk.
+2. Enable session auto-prune or confirm external cleanup mechanism (264 sessions growing).
+3. Perform STT end-to-end smoke test (voice note → transcript → agent).
+4. Consider adding missing tools (neovim) for ops convenience.
+5. Verify Hermes session DB path (current command couldn't find DB).
