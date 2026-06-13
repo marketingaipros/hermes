@@ -1,21 +1,21 @@
-# Hermes Nightly State — 2026-06-11 08:00 UTC
+# Hermes Nightly State — 2026-06-13 08:00 UTC
 
 ## Version
-Hermes Agent v0.13.0 (2026.5.7)
+Hermes Agent v0.16.0 (2026.6.5) · upstream a86b7b31
 Project: /usr/local/lib/hermes-agent
 Python: 3.11.15
 OpenAI SDK: 2.24.0
-Update available: 3144 commits behind — run 'hermes update'
+Update available: 19 commits behind — run 'hermes update'
 
 ## Skills
-- Count: 96
+- Count: 97
 
 ## Sessions
-- Count: 261
+- Count: 264
 
 ## Config (secrets redacted)
 model:
-  default: qwen/qwen3.6-35b-a3b
+  default: tencent/hy3-preview
   provider: openrouter
   base_url: https://openrouter.ai/api/v1
   api_mode: chat_completions
@@ -25,6 +25,7 @@ credential_pool_strategies:
   openrouter: fill_first
 toolsets:
 - hermes-cli
+max_concurrent_sessions: null
 agent:
   max_turns: 90
   gateway_timeout: 1800
@@ -32,6 +33,10 @@ agent:
   api_max_retries: 3
   service_tier: ''
   tool_use_enforcement: auto
+  task_completion_guidance: true
+  environment_probe: true
+  environment_hint: ''
+  coding_context: auto
   gateway_timeout_warning: 900
   clarify_timeout: 600
   gateway_notify_interval: 180
@@ -94,7 +99,6 @@ terminal:
   singularity_image: docker://nikolaik/python-nodejs:python3.11-nodejs20
   modal_image: nikolaik/python-nodejs:python3.11-nodejs20
   daytona_image: nikolaik/python-nodejs:python3.11-nodejs20
-  vercel_runtime: node24
   container_cpu: 1
   container_memory: 5120
   container_disk: 51200
@@ -104,6 +108,7 @@ terminal:
   docker_extra_args: []
   docker_run_as_host_user: false
   persistent_shell: true
+  vercel_runtime: node24
   lifetime_seconds: 300
 web:
   backend: ''
@@ -124,6 +129,8 @@ browser:
     user_id: ''
     session_key: ''
     adopt_existing_tab: false
+    rewrite_loopback_urls: false
+    loopback_host_alias: host.docker.internal
 checkpoints:
   enabled: false
   max_snapshots: 20
@@ -155,6 +162,9 @@ compression:
   target_ratio: 0.2
   protect_last_n: 20
   hygiene_hard_message_limit: 400
+  protect_first_n: 3
+  abort_on_summary_failure: false
+  codex_gpt55_autoraise: true
 prompt_caching:
   cache_ttl: 5m
 openrouter:
@@ -195,14 +205,6 @@ auxiliary:
     api_key: [REDACTED]
     timeout: 120
     extra_body: {}
-  session_search:
-    provider: openrouter
-    model: google/gemma-4-31b-it:free
-    base_url: ''
-    api_key: [REDACTED]
-    timeout: 30
-    extra_body: {}
-    max_concurrency: 3
   skills_hub:
     provider: openrouter
     model: google/gemma-4-31b-it:free
@@ -231,12 +233,33 @@ auxiliary:
     api_key: [REDACTED]
     timeout: 30
     extra_body: {}
+  tts_audio_tags:
+    provider: auto
+    model: ''
+    base_url: ''
+    api_key: [REDACTED]
+    timeout: 30
+    extra_body: {}
   triage_specifier:
     provider: auto
     model: ''
     base_url: ''
     api_key: [REDACTED]
     timeout: 120
+    extra_body: {}
+  kanban_decomposer:
+    provider: auto
+    model: ''
+    base_url: ''
+    api_key: [REDACTED]
+    timeout: 180
+    extra_body: {}
+  profile_describer:
+    provider: auto
+    model: ''
+    base_url: ''
+    api_key: [REDACTED]
+    timeout: 60
     extra_body: {}
   curator:
     provider: openrouter
@@ -245,12 +268,34 @@ auxiliary:
     api_key: [REDACTED]
     timeout: 600
     extra_body: {}
+  monitor:
+    provider: auto
+    model: ''
+    base_url: ''
+    api_key: [REDACTED]
+    timeout: 60
+    extra_body: {}
+  session_search:
+    provider: openrouter
+    model: google/gemma-4-31b-it:free
+    base_url: ''
+    api_key: [REDACTED]
+    timeout: 30
+    extra_body: {}
+    max_concurrency: 3
 display:
   compact: false
   personality: kawaii
   resume_display: full
+  resume_exchanges: 10
+  resume_max_user_chars: 300
+  resume_max_assistant_chars: 200
+  resume_max_assistant_lines: 3
+  resume_skip_tool_only: true
   busy_input_mode: interrupt
+  interface: cli
   tui_auto_resume_recent: false
+  tui_agents_nudge: true
   bell_on_complete: false
   show_reasoning: false
   streaming: true
@@ -258,8 +303,11 @@ display:
   final_response_markdown: strip
   persistent_output: true
   persistent_output_max_lines: 200
+  persist_prompts: true
   inline_diffs: true
   file_mutation_verifier: true
+  credits_notices: true
+  turn_completion_explainer: true
   show_cost: false
   skin: mono
   language: en
@@ -272,7 +320,11 @@ display:
   tool_progress_overrides: {}
   tool_preview_length: 0
   ephemeral_system_ttl: 0
-  platforms: {}
+  platforms:
+    telegram:
+      streaming: true
+    discord:
+      streaming: false
   runtime_footer:
     enabled: false
     fields:
@@ -285,6 +337,17 @@ display:
   background_process_notifications: all
 dashboard:
   theme: default
+  show_token_analytics: false
+  oauth:
+    client_id: ''
+    portal_url: ''
+  basic_auth:
+    username: ''
+    password_hash: ''
+    password: ''
+    secret: ''
+    session_ttl_seconds: 0
+  public_url: ''
 privacy:
   redact_pii: false
 tts:
@@ -297,6 +360,11 @@ tts:
   openai:
     model: gpt-4o-mini-tts
     voice: alloy
+  gemini:
+    model: gemini-2.5-flash-preview-tts
+    voice: Kore
+    audio_tags: false
+    persona_prompt_file: ''
   xai:
     voice_id: eve
     language: en
@@ -322,6 +390,11 @@ stt:
     model: whisper-1
   mistral:
     model: voxtral-mini-latest
+  elevenlabs:
+    model_id: scribe_v2
+    language_code: ''
+    tag_audio_events: false
+    diarize: false
 voice:
   record_key: ctrl+b
   max_recording_seconds: 120
@@ -338,6 +411,7 @@ context:
 memory:
   memory_enabled: true
   user_profile_enabled: true
+  write_approval: false
   memory_char_limit: 2200
   user_char_limit: 1375
   provider: honcho
@@ -348,6 +422,7 @@ delegation:
   provider: ''
   base_url: ''
   api_key: [REDACTED]
+  api_mode: ''
   inherit_mcp_toolsets: true
   max_iterations: 50
   child_timeout_seconds: 600
@@ -365,6 +440,7 @@ skills:
   inline_shell: false
   inline_shell_timeout: 10
   guard_agent_created: false
+  write_approval: false
   creation_nudge_interval: 15
   disabled: []
 curator:
@@ -373,11 +449,12 @@ curator:
   min_idle_hours: 2
   stale_after_days: 30
   archive_after_days: 90
+  prune_builtins: true
   backup:
     enabled: true
     keep: 5
 honcho: {}
-timezone: Central Time Zone
+timezone: America/Chicago
 slack:
   require_mention: true
   free_response_channels: ''
@@ -388,16 +465,35 @@ discord:
   free_response_channels: ''
   allowed_channels: ''
   auto_thread: true
+  thread_require_mention: false
+  history_backfill: true
+  history_backfill_limit: 50
   reactions: true
   channel_prompts: {}
   dm_role_auth_guild: ''
   server_actions: ''
+  allow_any_attachment: false
+  max_attachment_bytes: 33554432
+  voice_fx:
+    enabled: false
+    ambient_enabled: true
+    ambient_path: ''
+    ambient_gain: 0.18
+    duck_gain: 0.06
+    speech_gain: 1.0
+    ack_enabled: true
+    ack_phrases:
+    - Let me look into that.
+    - One moment.
+    - Checking on that now.
+    - Give me a sec.
+    - On it.
 whatsapp: {}
 telegram:
   reactions: false
   channel_prompts: {}
   allowed_chats: 922739544
-  token: 8477537988:AAFoiTA4xAF9eB3DRsooTJt2iG0tV3AeyNI
+  token: 8477537988:AAGYsG1UALnxN9tJwI4pv_gfVwnICQz9z44
 mattermost:
   require_mention: true
   free_response_channels: ''
@@ -414,19 +510,28 @@ approvals:
   mcp_reload_confirm: true
   destructive_slash_confirm: true
 command_allowlist:
-- script execution via -e/-c flag
 - stop/restart hermes gateway (kills running agents)
+- script execution via -e/-c flag
+- overwrite project env/config file
 - overwrite system file via redirection
 - stop/restart system service
-- overwrite project env/config file
+- script execution via heredoc
 quick_commands:
-  status: "Read-only SentinelTech Wazuh status check. Validate the Wazuh MCP connection and Wazuh Manager health. Do not perform remediation, blocking, isolation, quarantine, restart, delete, disable, kill, or active response."
-  agents: "Read-only SentinelTech Wazuh agent inventory. List all Wazuh agents with ID, name, status, IP, OS, and last seen if available. Do not perform remediation."
-  active: "Read-only SentinelTech Wazuh active agent check. List only active/running Wazuh agents. Do not perform remediation."
-  disconnected: "Read-only SentinelTech Wazuh disconnected agent check. List disconnected, never connected, or unhealthy Wazuh agents. Do not perform remediation."
-  alerts: "Read-only SentinelTech Wazuh alert summary. Summarize recent alerts, severity, affected agent, rule, timestamp, and recommended human-review next step. Do not perform remediation."
-  report: "Read-only SentinelTech Wazuh technician report. Generate a concise security report with agent health, recent alerts, risks, and human-review recommendations. Do not perform remediation."
-
+  status: Read-only SentinelTech Wazuh status check. Validate the Wazuh MCP connection
+    and Wazuh Manager health. Do not perform remediation, blocking, isolation, quarantine,
+    restart, delete, disable, kill, or active response.
+  agents: Read-only SentinelTech Wazuh agent inventory. List all Wazuh agents with
+    ID, name, status, IP, OS, and last seen if available. Do not perform remediation.
+  active: Read-only SentinelTech Wazuh active agent check. List only active/running
+    Wazuh agents. Do not perform remediation.
+  disconnected: Read-only SentinelTech Wazuh disconnected agent check. List disconnected,
+    never connected, or unhealthy Wazuh agents. Do not perform remediation.
+  alerts: Read-only SentinelTech Wazuh alert summary. Summarize recent alerts, severity,
+    affected agent, rule, timestamp, and recommended human-review next step. Do not
+    perform remediation.
+  report: Read-only SentinelTech Wazuh technician report. Generate a concise security
+    report with agent health, recent alerts, risks, and human-review recommendations.
+    Do not perform remediation.
 hooks: {}
 hooks_auto_accept: false
 personalities: {}
@@ -450,10 +555,24 @@ kanban:
   dispatch_in_gateway: true
   dispatch_interval_seconds: 60
   failure_limit: 2
+  worker_log_rotate_bytes: 2097152
+  worker_log_backup_count: 1
+  orchestrator_profile: ''
+  default_assignee: ''
+  max_in_progress_per_profile: null
+  auto_decompose: true
+  auto_decompose_per_tick: 3
+  dispatch_stale_timeout_seconds: 14400
 code_execution:
   mode: project
   timeout: 300
   max_tool_calls: 50
+tools:
+  tool_search:
+    enabled: auto
+    threshold_pct: 10
+    search_default_limit: 5
+    max_search_limit: 20
 logging:
   level: INFO
   max_size_mb: 5
@@ -465,24 +584,55 @@ model_catalog:
   providers: {}
 network:
   force_ipv4: false
+gateway:
+  strict: false
+  media_delivery_allow_dirs: []
+  trust_recent_files: true
+  trust_recent_files_seconds: 600
+streaming:
+  enabled: false
+  transport: auto
+  edit_interval: 0.8
+  buffer_threshold: 24
+  cursor: " \u2589"
+  fresh_final_after_seconds: 60.0
 sessions:
   auto_prune: false
   retention_days: 90
   vacuum_after_prune: true
   min_interval_hours: 24
+  write_json_snapshots: false
 onboarding:
   seen:
     tool_progress_prompt: true
     busy_input_prompt: true
+  profile_build: ask
 updates:
   pre_update_backup: false
   backup_keep: 5
+  non_interactive_local_changes: stash
 lsp:
   enabled: true
   wait_mode: document
   wait_timeout: 5
   install_strategy: auto
   servers: {}
+x_search:
+  model: grok-4.20-reasoning
+  timeout_seconds: 180
+  retries: 2
+secrets:
+  bitwarden:
+    enabled: false
+    access_token_env: BWS_ACCESS_TOKEN
+    project_id: ''
+    cache_ttl_seconds: 300
+    override_existing: true
+    auto_install: true
+    server_url: ''
+paste_collapse_threshold: 5
+paste_collapse_threshold_fallback: 5
+paste_collapse_char_threshold: 2000
 _config_version: 23
 tavily:
   api_key: [REDACTED]
@@ -491,8 +641,6 @@ session_reset:
   idle_minutes: 1440
   at_hour: 4
 group_sessions_per_user: true
-streaming:
-  enabled: false
 platform_toolsets:
   cli:
   - browser
@@ -535,58 +683,46 @@ platform_toolsets:
 known_plugin_toolsets:
   cli:
   - spotify
+mcp_servers:
+  wazuh:
+    url: http://127.0.0.1:3000/mcp
+    headers:
+      Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ3YXp1aF9tY3BfdXNlciIsImlhdCI6MTc4MTMxODQ1OSwic2NvcGUiOiJ3YXp1aDpyZWFkIHdhenVoOndyaXRlIiwiZXhwIjoxNzgxNDA0ODU5fQ.H94gTnKaL-DBJwewiguwQJbP7qpu2BMkRRtvfcKvyyU
+    timeout: 120
 plugins:
   enabled:
   - disk-cleanup
   disabled: []
 
+# ── Fallback Model ────────────────────────────────────────────────────
+# Automatic provider failover when primary is unavailable.
+# Uncomment and configure to enable. Triggers on rate limits (429),
+# overload (529), service errors (503), or connection failures.
+#
+# Supported providers:
+#   openrouter   (OPENROUTER_API_KEY)  — routes to any model
+#   openai-codex (OAuth — hermes auth) — OpenAI Codex
+#   nous         (OAuth — hermes auth) — Nous Portal
+#   zai          (ZAI_API_KEY)         — Z.AI / GLM
+#   kimi-coding  (KIMI_API_KEY)        — Kimi / Moonshot
+#   kimi-coding-cn (KIMI_CN_API_KEY)   — Kimi / Moonshot (China)
+#   minimax      (MINIMAX_API_KEY)     — MiniMax
+#   minimax-cn   (MINIMAX_CN_API_KEY)  — MiniMax (China)
+#   bedrock      (AWS IAM / boto3)     — AWS Bedrock (Converse API)
+#
+# For custom OpenAI-compatible endpoints, add base_url and key_env.
+#
+# fallback_model:
+#   provider: openrouter
+#   model: anthropic/claude-sonnet-4
+
 ## System
 ```
-/dev/loop0       49G   18G   29G  38% /
+/dev/loop0       49G   20G   27G  43% /
                total        used        free      shared  buff/cache   available
-Mem:            11Gi       2.5Gi       7.8Gi        32Mi       1.5Gi       9.2Gi
+Mem:            11Gi       2.3Gi       8.5Gi        29Mi       925Mi       9.4Gi
 ```
 
 ## Cron Jobs
-
-┌─────────────────────────────────────────────────────────────────────────┐
-│                         Scheduled Jobs                                  │
-└─────────────────────────────────────────────────────────────────────────┘
-
-  da88db09c058 [active]
-    Name:      Nightly Hermes Research Sync
-    Schedule:  0 8 * * *
-    Repeat:    ∞
-    Next run:  2026-06-12T08:00:00+00:00
-    Deliver:   local
-    Script:    nightly-sync.sh
-    Mode:      no-agent (script stdout delivered directly)
-    Last run:  2026-06-10T08:00:20.737005+00:00  ok
-
-  77e7ff41d6d7 [active]
-    Name:      Daily Briefing Report
-    Schedule:  0 12 * * *
-    Repeat:    ∞
-    Next run:  2026-06-11T12:00:00+00:00
-    Deliver:   telegram:922739544
-    Script:    daily-report.sh
-    Last run:  2026-06-10T12:02:12.539890+00:00  ok
-
-  e441804c0f18 [active]
-    Name:      Wiki Daily Regeneration
-    Schedule:  0 6 * * *
-    Repeat:    ∞
-    Next run:  2026-06-12T06:00:00+00:00
-    Deliver:   local
-    Last run:  2026-06-11T06:00:23.299607+00:00  ok
-
-  c1df09012b9c [active]
-    Name:      Wiki Server Watchdog
-    Schedule:  */5 * * * *
-    Repeat:    ∞
-    Next run:  2026-06-11T08:05:00+00:00
-    Deliver:   local
-    Script:    wiki-watchdog.sh
-    Mode:      no-agent (script stdout delivered directly)
-    Last run:  2026-06-11T08:00:29.233026+00:00  ok
-
+No scheduled jobs.
+Create one with 'hermes cron create ...' or the /cron command in chat.

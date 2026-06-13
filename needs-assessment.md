@@ -7,13 +7,7 @@
 
 ### 1. Hermes Update Backlog
 
-**Status:** 🔴 2659 commits behind — critical escalation. Grew 106 commits in last 24h (was 2553 yesterday). Update deferred due to gateway restart risk (kills running agents).
-
-```
-hermes update
-```
-
-Bug fixes and new features continue to accumulate. At this distance, an update-later strategy becomes increasingly risky — merge conflicts, behavior drift, and unpatched CVEs are realistic concerns. Maintenance window needed ASAP.
+**Status:** 🔴 3144 commits behind — critical. Jumped 485 commits in 9 days (~54/day, up from ~106/day estimate). Update deferred due to gateway restart risk. Merge conflict risk is now high.
 
 **Note:** Daily cron job `hermes update` exists but requires manual approval. Evaluate if automatic updates with rollback could be enabled in a controlled manner.
 
@@ -31,19 +25,17 @@ Bug fixes and new features continue to accumulate. At this distance, an update-l
 
 ### 4. SKILL Count Sanity Check
 
-**Status:** ⚠️ Discrepancy — nightly snapshot shows "Count: 91" but actual SKILL.md count is now 99. `~/.hermes/skills/` has 26 category directories. The mismatch continues to widen (actual skills added). Investigate whether nightlies are undercounting or skills are being added faster than snapshots capture.
+**Status:** ⚠️ Gap persists — nightly snapshot reports "Count: 96" but actual SKILL.md count is 99 (3 new added since last snapshot). The undercount gap is growing as skills are added faster than snapshots capture them.
 
-No functional impact, but the gap inflates perceived capability in reports. Recommend fixing the snapshot script to count skills accurately or adjust expectations.
+No functional impact, but the gap inflates perceived capability in reports. Recommend fixing the snapshot script to count skills accurately.
 
 ### 5. Memory Store (Honcho) Health
 
-**Status:** ⚠️ 186 sessions in `~/.hermes/sessions/`. Dispose policy is retention_days: 90 with auto_prune: false on sessions. This means old sessions are not auto-vacuumed — long-term storage growth in sessions dir is unmanaged. Consider enabling pruning or verifying Honcho handles cleanup at a different layer.
-
-System-audit previously noted 209 sessions; current count is 186, indicating some cleanup may have occurred manually or via external process. Verify the consistency of session lifecycle.
+**Status:** ⚠️ 261 sessions in `~/.hermes/sessions/`. Dispose policy is retention_days: 90 with auto_prune: false on sessions. Session count grew 75 since last audit (230 → 261). Long-term storage growth is unmanaged. Consider enabling pruning or verifying Honcho handles cleanup at a different layer.
 
 ### 6. Gateway Load & Errors
 
-**Status:** ✅ Load average improved: 1min from 1.12 to 0.64, 5min from 1.35 to 0.77, 15min from 1.35 to 0.90. Gateway logs show no recent `skill_manage` YAML frontmatter errors in the past hour. Previous warnings appear resolved orWere transient.
+**Status:** ✅ Gateway running, load average stable (1.69/1.46/1.33). Minor uptick from last check (0.96/1.23/1.44) but well within normal range. No errors in logs. Gateway RSS increased to ~3.9GB.
 
 ## 🟢 Nice-to-Have
 
@@ -72,20 +64,20 @@ Current 1-min load ~0.64 on an apparent 2-core VM. Significantly improved since 
 ## Summary of Current State
 
 ```
-Hermes v0.13.0 (2026.5.7)  🔴 2659 commits behind (↑106 overnight)
-Provider: OpenRouter → qwen/qwen3.6-35b-a3b (switched from stepfun)
+| Hermes v0.13.0 (2026.5.7)  🔴 3144 commits behind (↑485 in 9 days, ~54/day)
+Provider: OpenRouter → qwen/qwen3.6-35b-a3b
 STT: ✅ faster-whisper local (base model)
 TTS: ✅ Edge TTS
 Memory: ✅ Enabled (Honcho)
-Skills: 95 visible (nightly snapshot count matches)
-Cron: ✅ Nightly state snapshot + daily briefing running, errors resolved
-Gateway: ✅ Running (active, 3.3GB RSS)
-Disk: 30 GiB free / 49 GiB total (37%)
-RAM: 2.8Gi used / 11Gi total (~8.9Gi free)
-Load: 0.96 / 1.23 / 1.44 (✅ stable)
-Sessions: 230 (auto-prune: false, ↑44 overnight — Wazuh lab activity)
-Tailscaled: ✅ Active
-Uptime: 15 days 10 hours
+Skills: 96 (snapshot count) / 99 (actual SKILL.md files — 3 new added since last snapshot)
+Cron: ✅ All 3 jobs running, errors resolved
+SaaS Playbook: ✅ Added today (508 lines, 5 files)
+Gateway: ✅ Running (3.9GB RSS, ↑0.6GB)
+Disk: 29 GiB free / 49 GiB total (38%)
+RAM: 2.5Gi used / 11Gi total (~9.2Gi free)
+Load: 1.69 / 1.46 / 1.33 (✅ stable, minor uptick)
+Sessions: 261 (↑75 since last audit — active work)
+Uptime: 19 days
 ```
 
 ## Action Items
