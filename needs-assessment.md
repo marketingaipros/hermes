@@ -1,15 +1,15 @@
 # Needs Assessment — What Hermes Needs
 
 > Generated: 2026-06-02 | Hermes v0.13.0 | Ubuntu 24.04 LTS
-> Last reviewed: 2026-06-07 12:00 PM UTC (daily cron)
+> Last reviewed: 2026-06-14 17:00 UTC (daily cron)
 
 ## 🔴 Critical Gaps
 
 ### 1. Hermes Update Backlog
 
-**Status:** 🟡 19 commits behind — improved. Reduced from 3144 commits in 2026-06-02. Update deferred due to gateway restart risk, but now low risk.
+**Status:** 🔴 160 commits behind — INCREASED from 19 commits yesterday. Update backlog has grown significantly and needs attention.
 
-**Note:** Daily cron job `hermes update` exists but requires manual approval. Evaluate if automatic updates with rollback could be enabled in a controlled manner.
+**Note:** Daily cron job `hermes update` exists but requires manual approval. With 160 commits of drift, schedule a maintenance window to run `hermes update` soon.
 
 ### 2. OPENROUTER_API_KEY Validation
 
@@ -25,11 +25,11 @@
 
 ### 4. SKILL Count Sanity Check
 
-**Status:** ✅ Gap resolved — nightly snapshot now reports 101 skills, matching actual SKILL.md count. No action needed.
+**Status:** ⚠️ Skills count decreased from 101 to 97. Investigate what skills were removed or if count is accurate.
 
 ### 5. Memory Store (Honcho) Health
 
-**Status:** ⚠️ 264 sessions (from nightly snapshot; DB path pending verification). Dispose policy is retention_days: 90 with auto_prune: false on sessions. Session count grew 3 since last audit (261 → 264). Long-term storage growth is unmanaged. Consider enabling pruning or verifying Honcho handles cleanup at a different layer.
+**Status:** ⚠️ 264 sessions (from nightly snapshot; DB path pending verification). Dispose policy is retention_days: 90 with auto_prune: false on sessions. Session count stable but long-term storage growth is unmanaged. Consider enabling pruning or verifying Honcho handles cleanup at a different layer.
 
 ### 6. Gateway Load & Errors
 
