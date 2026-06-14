@@ -1,11 +1,11 @@
-# Hermes Nightly State — 2026-06-13 13:00 UTC
+# Hermes Nightly State — 2026-06-14 13:00 UTC
 
 ## Version
 Hermes Agent v0.16.0 (2026.6.5) · upstream b6c7ebf0
 Project: /usr/local/lib/hermes-agent
 Python: 3.11.15
 OpenAI SDK: 2.24.0
-Update available: 19 commits behind — run 'hermes update'
+Update available: 160 commits behind — run 'hermes update'
 
 ## Skills
 - Count: 97
@@ -720,7 +720,7 @@ plugins:
 ```
 /dev/loop0       49G   20G   27G  43% /
                total        used        free      shared  buff/cache   available
-Mem:            11Gi       2.3Gi       8.5Gi        29Mi       844Mi       9.3Gi
+Mem:            11Gi       2.2Gi       8.5Gi        29Mi       1.0Gi       9.5Gi
 ```
 
 ## Cron Jobs
