@@ -1,14 +1,14 @@
-# Hermes Nightly State — 2026-06-14 13:00 UTC
+# Hermes Nightly State — 2026-06-15 13:00 UTC
 
 ## Version
-Hermes Agent v0.16.0 (2026.6.5) · upstream b6c7ebf0
+Hermes Agent v0.16.0 (2026.6.5) · upstream 2c174bce
 Project: /usr/local/lib/hermes-agent
 Python: 3.11.15
 OpenAI SDK: 2.24.0
-Update available: 160 commits behind — run 'hermes update'
+Update available: 208 commits behind — run 'hermes update'
 
 ## Skills
-- Count: 97
+- Count: 98
 
 ## Sessions
 - Count: 264
@@ -493,7 +493,7 @@ telegram:
   reactions: false
   channel_prompts: {}
   allowed_chats: 922739544
-  token: 8477537988:AAGYsG1UALnxN9tJwI4pv_gfVwnICQz9z44
+  token: 8729226553:AAFnzd0GmTb3sjMPEN3fELg_BKDonGvYDtI
 mattermost:
   require_mention: true
   free_response_channels: ''
@@ -694,35 +694,53 @@ plugins:
   - disk-cleanup
   disabled: []
 
-# ── Fallback Model ────────────────────────────────────────────────────
-# Automatic provider failover when primary is unavailable.
-# Uncomment and configure to enable. Triggers on rate limits (429),
-# overload (529), service errors (503), or connection failures.
-#
-# Supported providers:
-#   openrouter   (OPENROUTER_API_KEY)  — routes to any model
-#   openai-codex (OAuth — hermes auth) — OpenAI Codex
-#   nous         (OAuth — hermes auth) — Nous Portal
-#   zai          (ZAI_API_KEY)         — Z.AI / GLM
-#   kimi-coding  (KIMI_API_KEY)        — Kimi / Moonshot
-#   kimi-coding-cn (KIMI_CN_API_KEY)   — Kimi / Moonshot (China)
-#   minimax      (MINIMAX_API_KEY)     — MiniMax
-#   minimax-cn   (MINIMAX_CN_API_KEY)  — MiniMax (China)
-#   bedrock      (AWS IAM / boto3)     — AWS Bedrock (Converse API)
-#
-# For custom OpenAI-compatible endpoints, add base_url and key_env.
-#
-# fallback_model:
-#   provider: openrouter
-#   model: anthropic/claude-sonnet-4
-
 ## System
 ```
-/dev/loop0       49G   20G   27G  43% /
+/dev/loop0       49G   21G   27G  44% /
                total        used        free      shared  buff/cache   available
-Mem:            11Gi       2.2Gi       8.5Gi        29Mi       1.0Gi       9.5Gi
+Mem:            11Gi       2.2Gi       8.4Gi        30Mi       1.1Gi       9.5Gi
 ```
 
 ## Cron Jobs
-No scheduled jobs.
-Create one with 'hermes cron create ...' or the /cron command in chat.
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                         Scheduled Jobs                                  │
+└─────────────────────────────────────────────────────────────────────────┘
+
+  da88db09c058 [active]
+    Name:      Nightly Hermes Research Sync
+    Schedule:  0 8 * * *
+    Repeat:    ∞
+    Next run:  2026-06-16T08:00:00-05:00
+    Deliver:   local
+    Script:    nightly-sync.sh
+    Mode:      no-agent (script stdout delivered directly)
+    Last run:  2026-06-14T08:00:35.274374-05:00  ok
+
+  77e7ff41d6d7 [active]
+    Name:      Daily Briefing Report
+    Schedule:  0 12 * * *
+    Repeat:    ∞
+    Next run:  2026-06-15T12:00:00-05:00
+    Deliver:   telegram:922739544
+    Script:    daily-report.sh
+    Last run:  2026-06-14T12:02:44.082357-05:00  ok
+
+  e441804c0f18 [active]
+    Name:      Wiki Daily Regeneration
+    Schedule:  0 6 * * *
+    Repeat:    ∞
+    Next run:  2026-06-16T06:00:00-05:00
+    Deliver:   local
+    Last run:  2026-06-15T06:01:02.704796-05:00  ok
+
+  c1df09012b9c [active]
+    Name:      Wiki Server Watchdog
+    Schedule:  */5 * * * *
+    Repeat:    ∞
+    Next run:  2026-06-15T08:05:00-05:00
+    Deliver:   local
+    Script:    wiki-watchdog.sh
+    Mode:      no-agent (script stdout delivered directly)
+    Last run:  2026-06-15T08:00:31.705700-05:00  ok
+
