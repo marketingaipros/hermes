@@ -1,19 +1,19 @@
 # Needs Assessment — What Hermes Needs
 
 > Generated: 2026-06-02 | Hermes v0.13.0 | Ubuntu 24.04 LTS
-> Last reviewed: 2026-06-14 17:00 UTC (daily cron)
+> Last reviewed: 2026-06-15 17:00 UTC (daily cron)
 
 ## 🔴 Critical Gaps
 
 ### 1. Hermes Update Backlog
 
-**Status:** 🔴 160 commits behind — INCREASED from 19 commits yesterday. Update backlog has grown significantly and needs attention.
+**Status:** 🔴 208 commits behind — INCREASED from 160 commits yesterday. Update backlog continues to grow.
 
-**Note:** Daily cron job `hermes update` exists but requires manual approval. With 160 commits of drift, schedule a maintenance window to run `hermes update` soon.
+**Note:** Daily cron job `hermes update` exists but requires manual approval. With 208 commits of drift, schedule a maintenance window to run `hermes update` soon.
 
 ### 2. OPENROUTER_API_KEY Validation
 
-**Status:** ✅ Key is present in .env. Config confirms wired to `openrouter` credential pool with `fill_first` strategy. Model set to `qwen/qwen3.6-35b-a3b` (was stepfun/step-3.5-flash — provider switch completed). With 2659 commits of drift, credential injection path should be re-verified on next update.
+**Status:** ✅ Key is present in .env. Config confirms wired to `openrouter` credential pool with `fill_first` strategy. Model set to `tencent/hy3-preview` (confirmed in nightly snapshot 2026-06-15). With 208 commits of drift, credential injection path should be re-verified on next update.
 
 ## 🟡 Important Gaps
 
@@ -25,7 +25,7 @@
 
 ### 4. SKILL Count Sanity Check
 
-**Status:** ⚠️ Skills count decreased from 101 to 97. Investigate what skills were removed or if count is accurate.
+**Status:** ⚠️ Skills count is 98 (from nightly snapshot 2026-06-15). Investigate if count is accurate and what changed.
 
 ### 5. Memory Store (Honcho) Health
 
@@ -33,7 +33,7 @@
 
 ### 6. Gateway Load & Errors
 
-**Status:** ✅ Gateway running, load average stable (1.69/1.46/1.33). Minor uptick from last check (0.96/1.23/1.44) but well within normal range. No errors in logs. Gateway RSS increased to ~3.9GB.
+**Status:** ✅ Gateway running, load average stable (1.56/1.52/1.26). Minor uptick from last check (0.96/1.23/1.44) but well within normal range. No errors in logs. Gateway RSS ~3.9GB.
 
 ## 🟢 Nice-to-Have
 
@@ -55,31 +55,31 @@
 
 ### 9. Load Average Investigation
 
-Current 1-min load ~0.64 on an apparent 2-core VM. Significantly improved since last review (was 1.12). Monitor if this stays low — likely the memory store refresh loop was optimized or load decreased.
+Current 1-min load ~1.56 on an apparent 2-core VM. Increased since last review (was 0.96). Monitor — load is trending up, possibly due to increased session activity or gateway memory growth.
 
 ## Summary of Current State
 
 ```
-| Hermes v0.16.0 (2026.6.5)  🟡 19 commits behind (reduced from 3144)
+| Hermes v0.16.0 (2026.6.5)  🔴 208 commits behind (increased from 160)
 Provider: OpenRouter → tencent/hy3-preview
 STT: ✅ faster-whisper local (base model)
 TTS: ✅ Edge TTS
 Memory: ✅ Enabled (Honcho)
-Skills: 101 (snapshot count matches actual SKILL.md files)
+Skills: 98 (from nightly snapshot 2026-06-15)
 Cron: ✅ Daily briefing job running
 SaaS Playbook: ✅ Added 2026-06-07
-Gateway: ✅ Running (stable load)
-Disk: 27 GiB free / 49 GiB total (43%)
-RAM: 2.3Gi used / 11Gi total (~9.4Gi free)
-Load: 0.96 / 1.23 / 1.44 (✅ stable)
+Gateway: ✅ Running (load trending up)
+Disk: 27 GiB free / 49 GiB total (44%)
+RAM: 2.2Gi used / 11Gi total (~9.5Gi free)
+Load: 1.56 / 1.52 / 1.26 (⚠️ trending up)
 Sessions: 264 (from nightly snapshot)
-Uptime: ~21 days
+Uptime: ~23 days
 ```
 
 ## Action Items
 
-1. ** LOW PRIORITY** — Schedule maintenance window to run `hermes update`. Now only 19 commits behind, low merge risk.
+1. **🔴 HIGH PRIORITY** — Schedule maintenance window to run `hermes update`. Now 208 commits behind, merge risk increasing.
 2. Enable session auto-prune or confirm external cleanup mechanism (264 sessions growing).
 3. Perform STT end-to-end smoke test (voice note → transcript → agent).
 4. Consider adding missing tools (neovim) for ops convenience.
-5. Verify Hermes session DB path (current command couldn't find DB).
+5. Monitor load average trend — investigate if load stays above 1.5 consistently.
