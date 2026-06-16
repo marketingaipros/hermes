@@ -1,13 +1,13 @@
 # Needs Assessment — What Hermes Needs
 
 > Generated: 2026-06-02 | Hermes v0.13.0 | Ubuntu 24.04 LTS
-> Last reviewed: 2026-06-15 17:00 UTC (daily cron)
+> Last reviewed: 2026-06-16 13:00 UTC (daily cron)
 
 ## 🔴 Critical Gaps
 
 ### 1. Hermes Update Backlog
 
-**Status:** 🔴 208 commits behind — INCREASED from 160 commits yesterday. Update backlog continues to grow.
+**Status:** 🔴 288 commits behind — INCREASED from 208 commits yesterday. Update backlog continues to grow.
 
 **Note:** Daily cron job `hermes update` exists but requires manual approval. With 208 commits of drift, schedule a maintenance window to run `hermes update` soon.
 
@@ -25,15 +25,14 @@
 
 ### 4. SKILL Count Sanity Check
 
-**Status:** ⚠️ Skills count is 98 (from nightly snapshot 2026-06-15). Investigate if count is accurate and what changed.
+**Status:** ⚠️ Skills count is 99 (from nightly snapshot 2026-06-16). Investigate if count is accurate and what changed.
 
 ### 5. Memory Store (Honcho) Health
 
 **Status:** ⚠️ 264 sessions (from nightly snapshot; DB path pending verification). Dispose policy is retention_days: 90 with auto_prune: false on sessions. Session count stable but long-term storage growth is unmanaged. Consider enabling pruning or verifying Honcho handles cleanup at a different layer.
 
 ### 6. Gateway Load & Errors
-
-**Status:** ✅ Gateway running, load average stable (1.56/1.52/1.26). Minor uptick from last check (0.96/1.23/1.44) but well within normal range. No errors in logs. Gateway RSS ~3.9GB.
+**Status:** ✅ Gateway running, load average improved (1.39/1.00/0.89). Down from yesterday's 1.56. No errors in logs. Gateway RSS ~3.9GB.
 
 ## 🟢 Nice-to-Have
 
@@ -59,21 +58,21 @@ Current 1-min load ~1.56 on an apparent 2-core VM. Increased since last review (
 
 ## Summary of Current State
 
-```
-| Hermes v0.16.0 (2026.6.5)  🔴 208 commits behind (increased from 160)
+```text
+| Hermes v0.16.0 (2026.6.5)  🔴 288 commits behind (increased from 208)
 Provider: OpenRouter → tencent/hy3-preview
 STT: ✅ faster-whisper local (base model)
 TTS: ✅ Edge TTS
 Memory: ✅ Enabled (Honcho)
-Skills: 98 (from nightly snapshot 2026-06-15)
+Skills: 99 (from nightly snapshot 2026-06-16)
 Cron: ✅ Daily briefing job running
 SaaS Playbook: ✅ Added 2026-06-07
-Gateway: ✅ Running (load trending up)
+Gateway: ✅ Running (load improved)
 Disk: 27 GiB free / 49 GiB total (44%)
-RAM: 2.2Gi used / 11Gi total (~9.5Gi free)
-Load: 1.56 / 1.52 / 1.26 (⚠️ trending up)
+RAM: 2.5Gi used / 11Gi total (~9.2Gi free)
+Load: 1.39 / 1.00 / 0.89 (✅ improved from 1.56)
 Sessions: 264 (from nightly snapshot)
-Uptime: ~23 days
+Uptime: ~24 days
 ```
 
 ## Action Items
