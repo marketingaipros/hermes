@@ -1,15 +1,15 @@
 # Needs Assessment — What Hermes Needs
 
 > Generated: 2026-06-02 | Hermes v0.13.0 | Ubuntu 24.04 LTS
-> Last reviewed: 2026-06-16 13:00 UTC (daily cron)
+> Last reviewed: 2026-06-17 13:00 UTC (daily cron)
 
 ## 🔴 Critical Gaps
 
 ### 1. Hermes Update Backlog
 
-**Status:** 🔴 288 commits behind — INCREASED from 208 commits yesterday. Update backlog continues to grow.
+**Status:** 🔴 356 commits behind — INCREASED from 288 commits yesterday (+68). Update backlog continues to grow.
 
-**Note:** Daily cron job `hermes update` exists but requires manual approval. With 208 commits of drift, schedule a maintenance window to run `hermes update` soon.
+**Note:** Daily cron job `hermes update` exists but requires manual approval. Now 356 commits behind — schedule maintenance window ASAP to run `hermes update`.
 
 ### 2. OPENROUTER_API_KEY Validation
 
@@ -59,20 +59,20 @@ Current 1-min load ~1.56 on an apparent 2-core VM. Increased since last review (
 ## Summary of Current State
 
 ```text
-| Hermes v0.16.0 (2026.6.5)  🔴 288 commits behind (increased from 208)
-Provider: OpenRouter → tencent/hy3-preview
-STT: ✅ faster-whisper local (base model)
-TTS: ✅ Edge TTS
-Memory: ✅ Enabled (Honcho)
-Skills: 99 (from nightly snapshot 2026-06-16)
-Cron: ✅ Daily briefing job running
-SaaS Playbook: ✅ Added 2026-06-07
-Gateway: ✅ Running (load improved)
-Disk: 27 GiB free / 49 GiB total (44%)
-RAM: 2.5Gi used / 11Gi total (~9.2Gi free)
-Load: 1.39 / 1.00 / 0.89 (✅ improved from 1.56)
-Sessions: 264 (from nightly snapshot)
-Uptime: ~24 days
+| Hermes v0.16.0 (2026.6.5)  🔴 356 commits behind (increased from 288)
+|Provider: OpenRouter → tencent/hy3-preview
+|STT: ✅ faster-whisper local (base model)
+|TTS: ✅ Edge TTS
+|Memory: ✅ Enabled (Honcho)
+|Skills: 99 (from nightly snapshot 2026-06-17)
+|Cron: ✅ Daily briefing job running
+|SaaS Playbook: ✅ Added 2026-06-07
+|Gateway: ✅ Running (load improved)
+|Disk: 27 GiB free / 49 GiB total (44%)
+|RAM: 2.3Gi used / 11Gi total (~9.4Gi free)
+|Load: TBD (check current)
+|Sessions: 264 (from nightly snapshot)
+|Uptime: ~25 days
 ```
 
 ## Action Items
