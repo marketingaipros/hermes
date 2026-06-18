@@ -1,15 +1,15 @@
 # Needs Assessment — What Hermes Needs
 
 > Generated: 2026-06-02 | Hermes v0.13.0 | Ubuntu 24.04 LTS
-> Last reviewed: 2026-06-17 13:00 UTC (daily cron)
+> Last reviewed: 2026-06-18 17:00 UTC (daily cron)
 
 ## 🔴 Critical Gaps
 
 ### 1. Hermes Update Backlog
 
-**Status:** 🔴 356 commits behind — INCREASED from 288 commits yesterday (+68). Update backlog continues to grow.
+**Status:** 🔴 459 commits behind — INCREASED from 356 commits yesterday (+103). Update backlog continues to grow.
 
-**Note:** Daily cron job `hermes update` exists but requires manual approval. Now 356 commits behind — schedule maintenance window ASAP to run `hermes update`.
+**Note:** Daily cron job `hermes update` exists but requires manual approval. Now 459 commits behind — schedule maintenance window ASAP to run `hermes update`.
 
 ### 2. OPENROUTER_API_KEY Validation
 
@@ -59,7 +59,7 @@ Current 1-min load ~1.56 on an apparent 2-core VM. Increased since last review (
 ## Summary of Current State
 
 ```text
-| Hermes v0.16.0 (2026.6.5)  🔴 356 commits behind (increased from 288)
+| Hermes v0.16.0 (2026.6.5)  🔴 459 commits behind (increased from 356)
 |Provider: OpenRouter → tencent/hy3-preview
 |STT: ✅ faster-whisper local (base model)
 |TTS: ✅ Edge TTS
@@ -77,7 +77,7 @@ Current 1-min load ~1.56 on an apparent 2-core VM. Increased since last review (
 
 ## Action Items
 
-1. **🔴 HIGH PRIORITY** — Schedule maintenance window to run `hermes update`. Now 208 commits behind, merge risk increasing.
+1. **🔴 HIGH PRIORITY** — Schedule maintenance window to run `hermes update`. Now 459 commits behind, merge risk increasing.
 2. Enable session auto-prune or confirm external cleanup mechanism (264 sessions growing).
 3. Perform STT end-to-end smoke test (voice note → transcript → agent).
 4. Consider adding missing tools (neovim) for ops convenience.
