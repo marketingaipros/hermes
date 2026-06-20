@@ -1,13 +1,13 @@
 # Needs Assessment — What Hermes Needs
 
 > Generated: 2026-06-02 | Hermes v0.13.0 | Ubuntu 24.04 LTS
-> Last reviewed: 2026-06-18 17:00 UTC (daily cron)
+> Last reviewed: 2026-06-20 17:01 UTC (daily cron)
 
 ## 🔴 Critical Gaps
 
 ### 1. Hermes Update Backlog
 
-**Status:** 🔴 459 commits behind — INCREASED from 356 commits yesterday (+103). Update backlog continues to grow.
+**Status:** 🔴 723 commits behind — INCREASED from 459 commits (+264). Update backlog continues to grow.
 
 **Note:** Daily cron job `hermes update` exists but requires manual approval. Now 459 commits behind — schedule maintenance window ASAP to run `hermes update`.
 
@@ -29,7 +29,7 @@
 
 ### 5. Memory Store (Honcho) Health
 
-**Status:** ⚠️ 264 sessions (from nightly snapshot; DB path pending verification). Dispose policy is retention_days: 90 with auto_prune: false on sessions. Session count stable but long-term storage growth is unmanaged. Consider enabling pruning or verifying Honcho handles cleanup at a different layer.
+**Status:** ⚠️ 267 sessions (3 new today). Dispose policy is retention_days: 90 with auto_prune: false on sessions. Session count growing, storage unmanaged. Consider enabling pruning or verifying Honcho cleanup.
 
 ### 6. Gateway Load & Errors
 **Status:** ✅ Gateway running, load average improved (1.39/1.00/0.89). Down from yesterday's 1.56. No errors in logs. Gateway RSS ~3.9GB.
