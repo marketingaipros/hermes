@@ -1,84 +1,89 @@
 # Needs Assessment — What Hermes Needs
 
 > Generated: 2026-06-02 | Hermes v0.13.0 | Ubuntu 24.04 LTS
-> Last reviewed: 2026-06-20 17:01 UTC (daily cron)
+> Last reviewed: 2026-06-21 17:01 UTC (daily cron)
 
 ## 🔴 Critical Gaps
 
 ### 1. Hermes Update Backlog
 
-**Status:** 🔴 723 commits behind — INCREASED from 459 commits (+264). Update backlog continues to grow.
+**Status:** 🔴 842 commits behind — INCREASED from 723 commits (+119) since the 2026-06-20 daily audit / 2026-06-21 nightly snapshot context.
 
-**Note:** Daily cron job `hermes update` exists but requires manual approval. Now 459 commits behind — schedule maintenance window ASAP to run `hermes update`.
+**Why it matters:** Backlog is still growing daily, raising merge/update risk. `hermes update` requires a Founder-approved maintenance window because cron approval mode denies interactive update work.
 
-### 2. OPENROUTER_API_KEY Validation
+### 2. Nginx Service Failed
 
-**Status:** ✅ Key is present in .env. Config confirms wired to `openrouter` credential pool with `fill_first` strategy. Model set to `tencent/hy3-preview` (confirmed in nightly snapshot 2026-06-15). With 208 commits of drift, credential injection path should be re-verified on next update.
+**Status:** 🔴 `nginx.service` is failed. Current failure reason: port 80/443 already bound by `docker-proxy`, so nginx cannot bind.
+
+**Impact:** Not blocking Hermes gateway/dashboard/workspace, but it leaves systemd reporting a failed service and could confuse future web routing/debugging.
 
 ## 🟡 Important Gaps
 
-### 3. STT Verification
+### 3. Metric Consistency: Sessions / Skills
 
-**Status:** ✅ HTTP observable: faster-whisper installed, ffmpeg present, config.yaml shows `stt.enabled: true` with `provider: local` → `model: base`.
+**Status:** ⚠️ Nightly snapshot reports 264 sessions and 100 skills. Current direct checks show default `state.db` has 179 sessions / 6,609 messages and `/root/.hermes/skills` has 108 `SKILL.md` files.
 
-**Open question:** Transcript delivery pipeline is unconfirmed. Voice notes hitting messaging platforms may transcribe locally but confirmation of delivery to the agent is not verified. Integration smoke test pending.
+**Need:** Confirm whether nightly snapshot counts all profiles / historical stores while direct checks count only the active default profile. Until then, session/skill trend numbers are not apples-to-apples.
 
-### 4. SKILL Count Sanity Check
+### 4. STT Verification
 
-**Status:** ⚠️ Skills count is 99 (from nightly snapshot 2026-06-16). Investigate if count is accurate and what changed.
+**Status:** ⚠️ Config still shows local STT enabled (`provider: local`, `model: base`) and ffmpeg is present, but end-to-end voice note → transcript → agent delivery remains unverified.
 
-### 5. Memory Store (Honcho) Health
+### 5. Session Retention / Pruning
 
-**Status:** ⚠️ 267 sessions (3 new today). Dispose policy is retention_days: 90 with auto_prune: false on sessions. Session count growing, storage unmanaged. Consider enabling pruning or verifying Honcho cleanup.
+**Status:** ⚠️ `sessions.auto_prune: false`; retention_days is configured but pruning is not automatic. Direct default DB count is 179 sessions; snapshot path previously showed 264.
 
-### 6. Gateway Load & Errors
-**Status:** ✅ Gateway running, load average improved (1.39/1.00/0.89). Down from yesterday's 1.56. No errors in logs. Gateway RSS ~3.9GB.
+### 6. Open Repo State Outside Hermes Research
 
-## 🟢 Nice-to-Have
+**Status:** ⚠️ `/root/honcho` has uncommitted changes and untracked files (`uv.lock`, bootstrap scripts, service files, tests). No commit was made there by this job.
 
-### 7. Tools Still Missing
+## 🟢 Improvements / Healthy Areas
 
-| Tool | Why | Command |
-|------|-----|---------|
-| neovim | In-terminal file editing | `apt-get install -y neovim` |
-| gh CLI | GitHub workflow CLIs (node-heavy, skip for now) | skip |
+### 7. Core Hermes Services
 
-### 8. Cron Jobs Worth Adding
+**Status:** ✅ `hermes-gateway` is active. Local workspace stack is listening on expected ports:
+- Gateway: `127.0.0.1:8642`
+- Dashboard: `127.0.0.1:9119`
+- Workspace: `127.0.0.1:4000`
+- Wiki: `0.0.0.0:9090`
 
-| Job | Schedule | Purpose |
-|-----|----------|---------|
-| Hermes update check | Daily | `hermes update` with fallback email on failure |
-| Disk > 80% alert | Hourly | `df -h /` alert |
-| Session prune | Weekly | `hermes sessions prune` |
-| Skill curator | Weekly | Auto-archive stale skills |
+### 8. System Resources
 
-### 9. Load Average Investigation
+**Status:** ✅ Disk and memory are healthy.
+- Disk: 24G used / 49G total (50%)
+- RAM: 3.2Gi used / 11Gi total, 8.5Gi available
+- Load: 0.66 / 0.92 / 1.00
+- Uptime: 29 days, 15 hours
 
-Current 1-min load ~1.56 on an apparent 2-core VM. Increased since last review (was 0.96). Monitor — load is trending up, possibly due to increased session activity or gateway memory growth.
+### 9. Notion Check
+
+**Status:** ✅ Notion API token works. Search found no pages updated today and no obvious active/open task database exposed to the integration.
 
 ## Summary of Current State
 
 ```text
-| Hermes v0.16.0 (2026.6.5)  🔴 459 commits behind (increased from 356)
-|Provider: OpenRouter → tencent/hy3-preview
-|STT: ✅ faster-whisper local (base model)
-|TTS: ✅ Edge TTS
-|Memory: ✅ Enabled (Honcho)
-|Skills: 99 (from nightly snapshot 2026-06-17)
-|Cron: ✅ Daily briefing job running
-|SaaS Playbook: ✅ Added 2026-06-07
-|Gateway: ✅ Running (load improved)
-|Disk: 27 GiB free / 49 GiB total (44%)
-|RAM: 2.3Gi used / 11Gi total (~9.4Gi free)
-|Load: TBD (check current)
-|Sessions: 264 (from nightly snapshot)
-|Uptime: ~25 days
+Hermes: v0.16.0 (2026.6.5)
+Provider: openai-codex / gpt-5.5 in default config
+Update backlog: 🔴 842 commits behind (+119)
+STT: ⚠️ configured, end-to-end smoke test still pending
+TTS: ✅ Edge TTS configured
+Memory: ✅ Honcho provider configured
+Skills: ⚠️ 108 direct SKILL.md files vs 100 nightly snapshot count
+Sessions: ⚠️ 179 direct default DB sessions vs 264 nightly snapshot count
+Cron: ✅ daily briefing / wiki jobs present
+Gateway: ✅ active
+Nginx: 🔴 failed, docker-proxy owns 80/443
+Disk: ✅ 50% used
+RAM: ✅ 8.5Gi available
+Load: ✅ 0.66 / 0.92 / 1.00
+Uptime: ✅ 29d 15h
 ```
 
 ## Action Items
 
-1. **🔴 HIGH PRIORITY** — Schedule maintenance window to run `hermes update`. Now 459 commits behind, merge risk increasing.
-2. Enable session auto-prune or confirm external cleanup mechanism (264 sessions growing).
-3. Perform STT end-to-end smoke test (voice note → transcript → agent).
-4. Consider adding missing tools (neovim) for ops convenience.
-5. Monitor load average trend — investigate if load stays above 1.5 consistently.
+1. **🔴 HIGH PRIORITY** — Schedule Hermes update maintenance window; backlog is now 842 commits behind.
+2. Decide whether nginx is needed. If not, disable it; if yes, resolve conflict with docker-proxy on ports 80/443.
+3. Normalize session/skill counting in nightly snapshot vs direct audit so trends are reliable.
+4. Enable session pruning or create a weekly prune job after confirming retention policy.
+5. Run STT smoke test: Telegram voice note → local transcription → agent receives transcript.
+6. Review `/root/honcho` uncommitted changes and either commit, stash, or remove stale test/bootstrap files.
