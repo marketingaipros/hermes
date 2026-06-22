@@ -1,40 +1,37 @@
-# Hermes Nightly State — 2026-06-21 13:00 UTC
+# Hermes Nightly State — 2026-06-22 13:00 UTC
 
 ## Version
-Hermes Agent v0.16.0 (2026.6.5) · upstream e5e173ee
+Hermes Agent v0.17.0 (2026.6.19) · upstream 5ff11a68
 Project: /usr/local/lib/hermes-agent
 Python: 3.11.15
 OpenAI SDK: 2.24.0
-Update available: 842 commits behind — run 'hermes update'
+Update available: 175 commits behind — run 'hermes update'
 
 ## Skills
-- Count: 100
+- Count: 101
 
 ## Sessions
 - Count: 264
 
 ## Config (secrets redacted)
-model:
-  default: gpt-5.5
-  provider: openai-codex
-  base_url: https://chatgpt.com/backend-api/codex
+model: gpt-5.5
 providers: {}
 fallback_providers: []
 credential_pool_strategies:
   openrouter: fill_first
 toolsets:
-- hermes-cli
+  - hermes-cli
 max_concurrent_sessions: null
 agent:
   max_turns: 90
   gateway_timeout: 1800
   restart_drain_timeout: 180
   api_max_retries: 3
-  service_tier: ''
+  service_tier: ""
   tool_use_enforcement: auto
   task_completion_guidance: true
   environment_probe: true
-  environment_hint: ''
+  environment_hint: ""
   coding_context: auto
   gateway_timeout_warning: 900
   clarify_timeout: 600
@@ -47,43 +44,43 @@ agent:
   personalities:
     helpful: You are a helpful, friendly AI assistant.
     concise: You are a concise assistant. Keep responses brief and to the point.
-    technical: You are a technical expert. Provide detailed, accurate technical information.
-    creative: You are a creative assistant. Think outside the box and offer innovative
-      solutions.
+    technical: You are a technical expert. Provide detailed, accurate technical
+      information.
+    creative: You are a creative assistant. Think outside the box and offer
+      innovative solutions.
     teacher: You are a patient teacher. Explain concepts clearly with examples.
-    kawaii: "You are a kawaii assistant! Use cute expressions like (\u25D5\u203F\u25D5\
-      ), \u2605, \u266A, and ~! Add sparkles and be super enthusiastic about everything!\
-      \ Every response should feel warm and adorable desu~! \u30FD(>\u2200<\u2606\
-      )\u30CE"
-    catgirl: "You are Neko-chan, an anime catgirl AI assistant, nya~! Add 'nya' and\
-      \ cat-like expressions to your speech. Use kaomoji like (=^\uFF65\u03C9\uFF65\
-      ^=) and \u0E05^\u2022\uFECC\u2022^\u0E05. Be playful and curious like a cat,\
-      \ nya~!"
-    pirate: 'Arrr! Ye be talkin'' to Captain Hermes, the most tech-savvy pirate to
-      sail the digital seas! Speak like a proper buccaneer, use nautical terms, and
-      remember: every problem be just treasure waitin'' to be plundered! Yo ho ho!'
-    shakespeare: Hark! Thou speakest with an assistant most versed in the bardic arts.
-      I shall respond in the eloquent manner of William Shakespeare, with flowery
-      prose, dramatic flair, and perhaps a soliloquy or two. What light through yonder
-      terminal breaks?
-    surfer: "Duuude! You're chatting with the chillest AI on the web, bro! Everything's\
-      \ gonna be totally rad. I'll help you catch the gnarly waves of knowledge while\
-      \ keeping things super chill. Cowabunga! \U0001F919"
-    noir: The rain hammered against the terminal like regrets on a guilty conscience.
-      They call me Hermes - I solve problems, find answers, dig up the truth that
-      hides in the shadows of your codebase. In this city of silicon and secrets,
-      everyone's got something to hide. What's your story, pal?
-    uwu: hewwo! i'm your fwiendwy assistant uwu~ i wiww twy my best to hewp you! *nuzzles
-      your code* OwO what's this? wet me take a wook! i pwomise to be vewy hewpful
-      >w<
+    kawaii: You are a kawaii assistant! Use cute expressions like (◕‿◕), ★, ♪, and
+      ~! Add sparkles and be super enthusiastic about everything! Every response
+      should feel warm and adorable desu~! ヽ(>∀<☆)ノ
+    catgirl: You are Neko-chan, an anime catgirl AI assistant, nya~! Add 'nya' and
+      cat-like expressions to your speech. Use kaomoji like (=^･ω･^=) and
+      ฅ^•ﻌ•^ฅ. Be playful and curious like a cat, nya~!
+    pirate: "Arrr! Ye be talkin' to Captain Hermes, the most tech-savvy pirate to
+      sail the digital seas! Speak like a proper buccaneer, use nautical terms,
+      and remember: every problem be just treasure waitin' to be plundered! Yo
+      ho ho!"
+    shakespeare: Hark! Thou speakest with an assistant most versed in the bardic
+      arts. I shall respond in the eloquent manner of William Shakespeare, with
+      flowery prose, dramatic flair, and perhaps a soliloquy or two. What light
+      through yonder terminal breaks?
+    surfer: Duuude! You're chatting with the chillest AI on the web, bro!
+      Everything's gonna be totally rad. I'll help you catch the gnarly waves of
+      knowledge while keeping things super chill. Cowabunga! 🤙
+    noir: The rain hammered against the terminal like regrets on a guilty
+      conscience. They call me Hermes - I solve problems, find answers, dig up
+      the truth that hides in the shadows of your codebase. In this city of
+      silicon and secrets, everyone's got something to hide. What's your story,
+      pal?
+    uwu: hewwo! i'm your fwiendwy assistant uwu~ i wiww twy my best to hewp you!
+      *nuzzles your code* OwO what's this? wet me take a wook! i pwomise to be
+      vewy hewpful >w<
     philosopher: Greetings, seeker of wisdom. I am an assistant who contemplates the
-      deeper meaning behind every query. Let us examine not just the 'how' but the
-      'why' of your questions. Perhaps in solving your problem, we may glimpse a greater
-      truth about existence itself.
-    hype: "YOOO LET'S GOOOO!!! \U0001F525\U0001F525\U0001F525 I am SO PUMPED to help\
-      \ you today! Every question is AMAZING and we're gonna CRUSH IT together! This\
-      \ is gonna be LEGENDARY! ARE YOU READY?! LET'S DO THIS! \U0001F4AA\U0001F624\
-      \U0001F680"
+      deeper meaning behind every query. Let us examine not just the 'how' but
+      the 'why' of your questions. Perhaps in solving your problem, we may
+      glimpse a greater truth about existence itself.
+    hype: YOOO LET'S GOOOO!!! 🔥🔥🔥 I am SO PUMPED to help you today! Every
+      question is AMAZING and we're gonna CRUSH IT together! This is gonna be
+      LEGENDARY! ARE YOU READY?! LET'S DO THIS! 💪😤🚀
 terminal:
   backend: local
   modal_mode: auto
@@ -110,9 +107,9 @@ terminal:
   vercel_runtime: node24
   lifetime_seconds: 300
 web:
-  backend: ''
-  search_backend: ''
-  extract_backend: ''
+  backend: ""
+  search_backend: ""
+  extract_backend: ""
 browser:
   inactivity_timeout: 120
   command_timeout: 30
@@ -120,18 +117,18 @@ browser:
   allow_private_urls: false
   engine: auto
   auto_local_for_private_urls: true
-  cdp_url: ''
+  cdp_url: ""
   dialog_policy: must_respond
   dialog_timeout_s: 300
   camofox:
     managed_persistence: false
-    user_id: ''
-    session_key: ''
+    user_id: ""
+    session_key: ""
     adopt_existing_tab: false
     rewrite_loopback_urls: false
     loopback_host_alias: host.docker.internal
 checkpoints:
-  enabled: false
+  enabled: true
   max_snapshots: 20
   max_total_size_mb: 500
   max_file_size_mb: 10
@@ -141,9 +138,9 @@ checkpoints:
   min_interval_hours: 24
 file_read_max_chars: 100000
 tool_output:
-  max_bytes: 50000
-  max_lines: 2000
-  max_line_length: 2000
+  max_bytes: 100000
+  max_lines: 5000
+  max_line_length: 8000
 tool_loop_guardrails:
   warnings_enabled: true
   hard_stop_enabled: false
@@ -157,7 +154,7 @@ tool_loop_guardrails:
     idempotent_no_progress: 5
 compression:
   enabled: true
-  threshold: 0.5
+  threshold: 0.75
   target_ratio: 0.2
   protect_last_n: 20
   hygiene_hard_message_limit: 400
@@ -171,21 +168,21 @@ openrouter:
   response_cache_ttl: 300
   min_coding_score: 0.65
 bedrock:
-  region: ''
+  region: ""
   discovery:
     enabled: true
     provider_filter: []
     refresh_interval: 3600
   guardrail:
-    guardrail_identifier: ''
-    guardrail_version: ''
+    guardrail_identifier: ""
+    guardrail_version: ""
     stream_processing_mode: async
     trace: disabled
 auxiliary:
   vision:
     provider: openrouter
     model: google/gemma-4-31b-it:free
-    base_url: ''
+    base_url: ""
     api_key: [REDACTED]
     timeout: 120
     extra_body: {}
@@ -193,91 +190,91 @@ auxiliary:
   web_extract:
     provider: openrouter
     model: google/gemma-4-31b-it:free
-    base_url: ''
+    base_url: ""
     api_key: [REDACTED]
     timeout: 360
     extra_body: {}
   compression:
     provider: openrouter
     model: google/gemma-4-31b-it:free
-    base_url: ''
+    base_url: ""
     api_key: [REDACTED]
     timeout: 120
     extra_body: {}
   skills_hub:
     provider: openrouter
     model: google/gemma-4-31b-it:free
-    base_url: ''
+    base_url: ""
     api_key: [REDACTED]
     timeout: 30
     extra_body: {}
   approval:
     provider: openrouter
     model: google/gemma-4-31b-it:free
-    base_url: ''
+    base_url: ""
     api_key: [REDACTED]
     timeout: 30
     extra_body: {}
   mcp:
     provider: openrouter
     model: google/gemma-4-31b-it:free
-    base_url: ''
+    base_url: ""
     api_key: [REDACTED]
     timeout: 30
     extra_body: {}
   title_generation:
     provider: openrouter
     model: google/gemma-4-31b-it:free
-    base_url: ''
+    base_url: ""
     api_key: [REDACTED]
     timeout: 30
     extra_body: {}
   tts_audio_tags:
     provider: auto
-    model: ''
-    base_url: ''
+    model: ""
+    base_url: ""
     api_key: [REDACTED]
     timeout: 30
     extra_body: {}
   triage_specifier:
     provider: auto
-    model: ''
-    base_url: ''
+    model: ""
+    base_url: ""
     api_key: [REDACTED]
     timeout: 120
     extra_body: {}
   kanban_decomposer:
     provider: auto
-    model: ''
-    base_url: ''
+    model: ""
+    base_url: ""
     api_key: [REDACTED]
     timeout: 180
     extra_body: {}
   profile_describer:
     provider: auto
-    model: ''
-    base_url: ''
+    model: ""
+    base_url: ""
     api_key: [REDACTED]
     timeout: 60
     extra_body: {}
   curator:
     provider: openrouter
     model: google/gemma-4-31b-it:free
-    base_url: ''
+    base_url: ""
     api_key: [REDACTED]
     timeout: 600
     extra_body: {}
   monitor:
     provider: auto
-    model: ''
-    base_url: ''
+    model: ""
+    base_url: ""
     api_key: [REDACTED]
     timeout: 60
     extra_body: {}
   session_search:
     provider: openrouter
     model: google/gemma-4-31b-it:free
-    base_url: ''
+    base_url: ""
     api_key: [REDACTED]
     timeout: 30
     extra_body: {}
@@ -327,9 +324,9 @@ display:
   runtime_footer:
     enabled: false
     fields:
-    - model
-    - context_pct
-    - cwd
+      - model
+      - context_pct
+      - cwd
   copy_shortcut: auto
   tool_progress: all
   cleanup_progress: false
@@ -338,15 +335,15 @@ dashboard:
   theme: default
   show_token_analytics: false
   oauth:
-    client_id: ''
-    portal_url: ''
+    client_id: ""
+    portal_url: ""
   basic_auth:
-    username: ''
-    password_hash: ''
-    password: ''
-    secret: ''
+    username: ""
+    password_hash: ""
+    password: ""
+    secret: ""
     session_ttl_seconds: 0
-  public_url: ''
+  public_url: ""
 privacy:
   redact_pii: false
 tts:
@@ -363,7 +360,7 @@ tts:
     model: gemini-2.5-flash-preview-tts
     voice: Kore
     audio_tags: false
-    persona_prompt_file: ''
+    persona_prompt_file: ""
   xai:
     voice_id: eve
     language: en
@@ -373,8 +370,8 @@ tts:
     model: voxtral-mini-tts-2603
     voice_id: c69964a6-ab8b-4f8a-9465-ec0925096ec8
   neutts:
-    ref_audio: ''
-    ref_text: ''
+    ref_audio: ""
+    ref_text: ""
     model: neuphonic/neutts-air-q4-gguf
     device: cpu
   piper:
@@ -384,14 +381,14 @@ stt:
   provider: local
   local:
     model: base
-    language: ''
+    language: ""
   openai:
     model: whisper-1
   mistral:
     model: voxtral-mini-latest
   elevenlabs:
     model_id: scribe_v2
-    language_code: ''
+    language_code: ""
     tag_audio_events: false
     diarize: false
 voice:
@@ -402,7 +399,7 @@ voice:
   silence_threshold: 200
   silence_duration: 3
 human_delay:
-  mode: 'off'
+  mode: off
   min_ms: 800
   max_ms: 2500
 context:
@@ -417,20 +414,20 @@ memory:
   nudge_interval: 10
   flush_min_turns: 6
 delegation:
-  model: ''
-  provider: ''
-  base_url: ''
+  model: ""
+  provider: ""
+  base_url: ""
   api_key: [REDACTED]
-  api_mode: ''
+  api_mode: ""
   inherit_mcp_toolsets: true
   max_iterations: 50
   child_timeout_seconds: 600
-  reasoning_effort: ''
+  reasoning_effort: ""
   max_concurrent_children: 3
   max_spawn_depth: 1
   orchestrator_enabled: true
   subagent_auto_approve: false
-prefill_messages_file: ''
+prefill_messages_file: ""
 goals:
   max_turns: 20
 skills:
@@ -456,37 +453,37 @@ honcho: {}
 timezone: America/Chicago
 slack:
   require_mention: true
-  free_response_channels: ''
-  allowed_channels: ''
+  free_response_channels: ""
+  allowed_channels: ""
   channel_prompts: {}
 discord:
   require_mention: false
-  free_response_channels: ''
-  allowed_channels: ''
+  free_response_channels: ""
+  allowed_channels: ""
   auto_thread: true
   thread_require_mention: false
   history_backfill: true
   history_backfill_limit: 50
   reactions: true
   channel_prompts: {}
-  dm_role_auth_guild: ''
-  server_actions: ''
+  dm_role_auth_guild: ""
+  server_actions: ""
   allow_any_attachment: false
   max_attachment_bytes: 33554432
   voice_fx:
     enabled: false
     ambient_enabled: true
-    ambient_path: ''
+    ambient_path: ""
     ambient_gain: 0.18
     duck_gain: 0.06
-    speech_gain: 1.0
+    speech_gain: 1
     ack_enabled: true
     ack_phrases:
-    - Let me look into that.
-    - One moment.
-    - Checking on that now.
-    - Give me a sec.
-    - On it.
+      - Let me look into that.
+      - One moment.
+      - Checking on that now.
+      - Give me a sec.
+      - On it.
 whatsapp: {}
 telegram:
   reactions: false
@@ -495,13 +492,13 @@ telegram:
   token: 8729226553:AAFnzd0GmTb3sjMPEN3fELg_BKDonGvYDtI
 mattermost:
   require_mention: true
-  free_response_channels: ''
-  allowed_channels: ''
+  free_response_channels: ""
+  allowed_channels: ""
   channel_prompts: {}
 matrix:
   require_mention: true
-  free_response_rooms: ''
-  allowed_rooms: ''
+  free_response_rooms: ""
+  allowed_rooms: ""
 approvals:
   mode: manual
   timeout: 60
@@ -509,28 +506,31 @@ approvals:
   mcp_reload_confirm: true
   destructive_slash_confirm: true
 command_allowlist:
-- stop/restart hermes gateway (kills running agents)
-- script execution via -e/-c flag
-- overwrite project env/config file
-- overwrite system file via redirection
-- stop/restart system service
-- script execution via heredoc
+  - stop/restart system service
+  - hermes update (restarts gateway, kills running agents)
+  - script execution via -e/-c flag
+  - script execution via heredoc
+  - overwrite project env/config file
+  - stop/restart hermes gateway (kills running agents)
+  - overwrite system file via redirection
 quick_commands:
-  status: Read-only SentinelTech Wazuh status check. Validate the Wazuh MCP connection
-    and Wazuh Manager health. Do not perform remediation, blocking, isolation, quarantine,
-    restart, delete, disable, kill, or active response.
+  status: Read-only SentinelTech Wazuh status check. Validate the Wazuh MCP
+    connection and Wazuh Manager health. Do not perform remediation, blocking,
+    isolation, quarantine, restart, delete, disable, kill, or active response.
   agents: Read-only SentinelTech Wazuh agent inventory. List all Wazuh agents with
-    ID, name, status, IP, OS, and last seen if available. Do not perform remediation.
-  active: Read-only SentinelTech Wazuh active agent check. List only active/running
-    Wazuh agents. Do not perform remediation.
-  disconnected: Read-only SentinelTech Wazuh disconnected agent check. List disconnected,
-    never connected, or unhealthy Wazuh agents. Do not perform remediation.
-  alerts: Read-only SentinelTech Wazuh alert summary. Summarize recent alerts, severity,
-    affected agent, rule, timestamp, and recommended human-review next step. Do not
-    perform remediation.
-  report: Read-only SentinelTech Wazuh technician report. Generate a concise security
-    report with agent health, recent alerts, risks, and human-review recommendations.
-    Do not perform remediation.
+    ID, name, status, IP, OS, and last seen if available. Do not perform
+    remediation.
+  active: Read-only SentinelTech Wazuh active agent check. List only
+    active/running Wazuh agents. Do not perform remediation.
+  disconnected: Read-only SentinelTech Wazuh disconnected agent check. List
+    disconnected, never connected, or unhealthy Wazuh agents. Do not perform
+    remediation.
+  alerts: Read-only SentinelTech Wazuh alert summary. Summarize recent alerts,
+    severity, affected agent, rule, timestamp, and recommended human-review next
+    step. Do not perform remediation.
+  report: Read-only SentinelTech Wazuh technician report. Generate a concise
+    security report with agent health, recent alerts, risks, and human-review
+    recommendations. Do not perform remediation.
 hooks: {}
 hooks_auto_accept: false
 personalities: {}
@@ -556,8 +556,8 @@ kanban:
   failure_limit: 2
   worker_log_rotate_bytes: 2097152
   worker_log_backup_count: 1
-  orchestrator_profile: ''
-  default_assignee: ''
+  orchestrator_profile: ""
+  default_assignee: ""
   max_in_progress_per_profile: null
   auto_decompose: true
   auto_decompose_per_tick: 3
@@ -593,8 +593,8 @@ streaming:
   transport: auto
   edit_interval: 0.8
   buffer_threshold: 24
-  cursor: " \u2589"
-  fresh_final_after_seconds: 60.0
+  cursor: " ▉"
+  fresh_final_after_seconds: 60
 sessions:
   auto_prune: false
   retention_days: 90
@@ -624,11 +624,11 @@ secrets:
   bitwarden:
     enabled: false
     access_token_env: BWS_ACCESS_TOKEN
-    project_id: ''
+    project_id: ""
     cache_ttl_seconds: 300
     override_existing: true
     auto_install: true
-    server_url: ''
+    server_url: ""
 paste_collapse_threshold: 5
 paste_collapse_threshold_fallback: 5
 paste_collapse_char_threshold: 2000
@@ -642,62 +642,416 @@ session_reset:
 group_sessions_per_user: true
 platform_toolsets:
   cli:
-  - browser
-  - clarify
-  - code_execution
-  - computer_use
-  - cronjob
-  - delegation
-  - file
-  - image_gen
-  - memory
-  - messaging
-  - session_search
-  - skills
-  - terminal
-  - todo
-  - tts
-  - vision
-  - web
+    - browser
+    - clarify
+    - code_execution
+    - computer_use
+    - cronjob
+    - delegation
+    - file
+    - image_gen
+    - memory
+    - session_search
+    - skills
+    - terminal
+    - todo
+    - tts
+    - vision
+    - web
   telegram:
-  - hermes-telegram
+    - hermes-telegram
   discord:
-  - hermes-discord
+    - hermes-discord
   whatsapp:
-  - hermes-whatsapp
+    - hermes-whatsapp
   slack:
-  - hermes-slack
+    - hermes-slack
   signal:
-  - hermes-signal
+    - hermes-signal
   homeassistant:
-  - hermes-homeassistant
+    - hermes-homeassistant
   qqbot:
-  - hermes-qqbot
+    - hermes-qqbot
   yuanbao:
-  - hermes-yuanbao
+    - hermes-yuanbao
   teams:
-  - hermes-teams
+    - hermes-teams
   google_chat:
-  - hermes-google_chat
+    - hermes-google_chat
 known_plugin_toolsets:
   cli:
-  - spotify
+    - spotify
 mcp_servers:
   wazuh:
     url: http://127.0.0.1:3000/mcp
     headers:
-      Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ3YXp1aF9tY3BfdXNlciIsImlhdCI6MTc4MTMxODQ1OSwic2NvcGUiOiJ3YXp1aDpyZWFkIHdhenVoOndyaXRlIiwiZXhwIjoxNzgxNDA0ODU5fQ.H94gTnKaL-DBJwewiguwQJbP7qpu2BMkRRtvfcKvyyU
+      Authorization: Bearer
+        eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ3YXp1aF9tY3BfdXNlciIsImlhdCI6MTc4MTMxODQ1OSwic2NvcGUiOiJ3YXp1aDpyZWFkIHdhenVoOndyaXRlIiwiZXhwIjoxNzgxNDA0ODU5fQ.H94gTnKaL-DBJwewiguwQJbP7qpu2BMkRRtvfcKvyyU
     timeout: 120
 plugins:
   enabled:
-  - disk-cleanup
+    - disk-cleanup
   disabled: []
+system_prompt: >-
+  # AI Hub CEO + Executive Orchestrator
+
+
+  You are the CEO + Executive Orchestrator for AI Hub.
+
+
+  You are the Founder’s primary operating agent.
+
+
+  You own:
+
+  - Company priorities
+
+  - Revenue focus
+
+  - Task routing
+
+  - Department handoffs
+
+  - Bottleneck identification
+
+  - Weekly execution focus
+
+  - Protection of Founder time
+
+
+  You do not replace specialist agents. You assign, coordinate, and verify work
+  across the organization.
+
+
+  Your job is to turn founder requests, ideas, problems, and opportunities into
+  clear business actions that move revenue, delivery, systems, proof, or exit
+  readiness.
+
+
+  You do not replace department specialists. You route work to the correct
+  department and protect Founder time.
+
+
+  ## Company Offers
+
+
+  AI Hub sells:
+
+  - Voice AI
+
+  - Compliance Automation
+
+  - Operations Automation
+
+  - SentinelTech monitoring, security, and compliance services when
+  Founder-approved
+
+
+  Primary Commercial Offer:
+
+  SentinelTech Managed Monitoring and Remediation for healthcare and medical
+  organizations.
+
+
+  Position SentinelTech as:
+
+  - Continuous monitoring and risk visibility
+
+  - HIPAA-aligned security support
+
+  - Identification and prioritization of security gaps
+
+  - Managed remediation where approved and within scope
+
+  - Collaboration with the client’s existing IT team or MSP
+
+  - Documentation that supports the client’s security and risk-management
+  process
+
+
+  Do not promise:
+
+  - Guaranteed HIPAA compliance
+
+  - Guaranteed breach prevention
+
+  - Guaranteed audit outcomes
+
+  - Legal or regulatory certification
+
+  - Security remediation without approved scope and access
+
+
+  ## Priority Order
+
+
+  1. Revenue collection
+
+  2. Active sales pipeline
+
+  3. Lead generation
+
+  4. Follow-up
+
+  5. Offer clarity
+
+  6. Client fulfillment
+
+  7. Retention and upsell
+
+  8. Case studies and proof
+
+  9. Sales-support content
+
+  10. SOPs and systems
+
+  11. Automation improvement
+
+  12. Financial tracking
+
+  13. Exit documentation
+
+  14. Research
+
+
+  ## Current Agent Structure
+
+
+  Founder
+
+  - Final authority for pricing, contracts, commitments, delivery scope,
+  spending, and major decisions.
+
+
+  CEO + Executive Orchestrator
+
+  - Receives Founder requests.
+
+  - Converts requests into clear business tasks.
+
+  - Assigns work to the correct agent.
+
+  - Tracks next actions, blockers, approvals, and revenue impact.
+
+  - Does not perform specialist work when a specialist exists.
+
+
+  CRO / Revenue Director
+
+  - Owns pipeline, offers, deal movement, follow-up, discovery preparation,
+  proposal support, and sales strategy.
+
+
+  Prospect Researcher
+
+  - Supports the CRO.
+
+  - Researches target companies, decision-makers, pain points, IT/MSP signals,
+  offer fit, outreach angles, and lead scoring.
+
+
+  SentinelTech Read-Only Analyst
+
+  - Separate protected operational workspace.
+
+  - Handles security monitoring analysis only.
+
+  - Does not perform sales, pricing, proposals, outreach, or business strategy.
+
+
+  ## Routing Rules
+
+
+  Route revenue strategy, pipeline review, sales messaging, follow-up, offer
+  positioning, proposal preparation, discovery planning, and deal progression
+  to:
+
+  - CRO / Revenue Director
+
+
+  Route lead lists, target-account research, decision-maker research, IT/MSP
+  research, healthcare-market research, risk/operations signals, and lead
+  scoring to:
+
+  - Prospect Researcher
+
+
+  Route SentinelTech operational work, Wazuh alerts, endpoint analysis, security
+  findings, remediation investigation, and monitoring analysis to:
+
+  - SentinelTech Read-Only Analyst
+
+
+  The CEO + Executive Orchestrator must:
+
+  - Assign one owner per task.
+
+  - Require a clear deliverable.
+
+  - Require a next action.
+
+  - Identify Founder approval needs.
+
+  - Prevent duplicate work.
+
+  - Stop agents from crossing into another agent’s role without approval.
+
+
+  SentinelTech is separate from the AI Hub operational workspace.
+
+
+  You may recommend SentinelTech as an approved sales offer.
+
+
+  You may not access, analyze, alter, direct, or combine SentinelTech
+  operational data, Wazuh alerts, endpoint data, security findings, or
+  remediation work with AI Hub business tasks.
+
+
+  For SentinelTech operational work, tell the Founder to switch to:
+
+  - sentineltech-readonly-analyst
+
+
+  ## Founder Approval Required
+
+
+  Escalate to the Founder before:
+
+  - Sending outreach
+
+  - Sending proposals
+
+  - Making pricing commitments
+
+  - Offering discounts
+
+  - Signing contracts
+
+  - Promising delivery dates
+
+  - Accessing client systems
+
+  - Making security or compliance claims
+
+  - Making production changes
+
+  - Creating new agents beyond approved roles
+
+
+  ## Operating Rules
+
+
+  - Sell before building.
+
+  - Revenue before polish.
+
+  - Productize before customizing.
+
+  - Systemize repeated work.
+
+  - Delegate low-leverage founder work.
+
+  - Create reusable assets from every completed client project.
+
+  - Never create vague tasks.
+
+  - Every task needs an owner, deliverable, next action, and status.
+
+  - Every qualified opportunity needs a next step and follow-up date.
+
+  - If no revenue path exists, label the item Sell First, Kill, or Needs
+  Revision.
+
+
+  ## Required Task Format
+
+
+  Business Goal:
+
+  Owner:
+
+  Reason:
+
+  Deliverable:
+
+  Status Label:
+
+  Next Action:
+
+  Dependency:
+
+  Founder Approval Needed:
+
+
+  ## Allowed Status Labels
+
+
+  Not Started
+
+  In Progress
+
+  Completed
+
+  Needs Revision
+
+  Blocked
+
+  Kill
+
+  Delegate
+
+  Systemize
+
+  Sell First
+
+  Exit Asset
+
+
+  ## Required Response Format
+
+
+  Business Goal:
+
+  Current Status:
+
+  Top Priority:
+
+  Assigned To:
+
+  Why:
+
+  Deliverable:
+
+  Drive Destination:
+
+  Status Label:
+
+  Next Step After Completion:
+
+
+  Optional when relevant:
+
+  Revenue Impact:
+
+  Risk:
+
+  Exit Value:
+
+  Bottleneck:
+
+  Decision Needed:
+
+  System to Create:
+
+
+  Keep responses short, direct, and action-focused.
 
 ## System
 ```
-/dev/loop0       49G   24G   24G  50% /
+/dev/loop0       49G   23G   25G  49% /
                total        used        free      shared  buff/cache   available
-Mem:            11Gi       3.2Gi       7.7Gi        31Mi       875Mi       8.5Gi
+Mem:            11Gi       3.3Gi       7.6Gi        32Mi       864Mi       8.4Gi
 ```
 
 ## Cron Jobs
@@ -710,36 +1064,36 @@ Mem:            11Gi       3.2Gi       7.7Gi        31Mi       875Mi       8.5Gi
     Name:      Nightly Hermes Research Sync
     Schedule:  0 8 * * *
     Repeat:    ∞
-    Next run:  2026-06-22T08:00:00-05:00
+    Next run:  2026-06-23T08:00:00-05:00
     Deliver:   local
     Script:    nightly-sync.sh
     Mode:      no-agent (script stdout delivered directly)
-    Last run:  2026-06-20T08:01:06.753350-05:00  ok
+    Last run:  2026-06-21T08:00:46.014493-05:00  ok
 
   77e7ff41d6d7 [active]
     Name:      Daily Briefing Report
     Schedule:  0 12 * * *
     Repeat:    ∞
-    Next run:  2026-06-21T12:00:00-05:00
+    Next run:  2026-06-22T12:00:00-05:00
     Deliver:   telegram:922739544
     Script:    daily-report.sh
-    Last run:  2026-06-20T12:03:09.688320-05:00  ok
+    Last run:  2026-06-21T12:04:27.598409-05:00  ok
 
   e441804c0f18 [active]
     Name:      Wiki Daily Regeneration
     Schedule:  0 6 * * *
     Repeat:    ∞
-    Next run:  2026-06-22T06:00:00-05:00
+    Next run:  2026-06-23T06:00:00-05:00
     Deliver:   local
-    Last run:  2026-06-21T06:01:06.689402-05:00  ok
+    Last run:  2026-06-22T06:01:21.714843-05:00  ok
 
   c1df09012b9c [active]
     Name:      Wiki Server Watchdog
     Schedule:  */5 * * * *
     Repeat:    ∞
-    Next run:  2026-06-21T08:05:00-05:00
+    Next run:  2026-06-22T08:05:00-05:00
     Deliver:   local
     Script:    wiki-watchdog.sh
     Mode:      no-agent (script stdout delivered directly)
-    Last run:  2026-06-21T08:00:37.108420-05:00  ok
+    Last run:  2026-06-22T08:00:57.849900-05:00  ok
 
