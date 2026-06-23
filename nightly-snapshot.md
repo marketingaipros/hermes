@@ -1,17 +1,17 @@
-# Hermes Nightly State — 2026-06-22 13:00 UTC
+# Hermes Nightly State — 2026-06-23 13:00 UTC
 
 ## Version
-Hermes Agent v0.17.0 (2026.6.19) · upstream 5ff11a68
+Hermes Agent v0.17.0 (2026.6.19) · upstream bb7ff7dc
 Project: /usr/local/lib/hermes-agent
 Python: 3.11.15
 OpenAI SDK: 2.24.0
-Update available: 175 commits behind — run 'hermes update'
+Update available: 249 commits behind — run 'hermes update'
 
 ## Skills
 - Count: 101
 
 ## Sessions
-- Count: 264
+- Count: 268
 
 ## Config (secrets redacted)
 model: gpt-5.5
@@ -1049,9 +1049,9 @@ system_prompt: >-
 
 ## System
 ```
-/dev/loop0       49G   23G   25G  49% /
+/dev/loop0       49G   25G   23G  53% /
                total        used        free      shared  buff/cache   available
-Mem:            11Gi       3.3Gi       7.6Gi        32Mi       864Mi       8.4Gi
+Mem:            11Gi       3.5Gi       7.4Gi        30Mi       843Mi       8.2Gi
 ```
 
 ## Cron Jobs
@@ -1064,36 +1064,36 @@ Mem:            11Gi       3.3Gi       7.6Gi        32Mi       864Mi       8.4Gi
     Name:      Nightly Hermes Research Sync
     Schedule:  0 8 * * *
     Repeat:    ∞
-    Next run:  2026-06-23T08:00:00-05:00
+    Next run:  2026-06-24T08:00:00-05:00
     Deliver:   local
     Script:    nightly-sync.sh
     Mode:      no-agent (script stdout delivered directly)
-    Last run:  2026-06-21T08:00:46.014493-05:00  ok
+    Last run:  2026-06-22T08:01:08.362455-05:00  ok
 
   77e7ff41d6d7 [active]
     Name:      Daily Briefing Report
     Schedule:  0 12 * * *
     Repeat:    ∞
-    Next run:  2026-06-22T12:00:00-05:00
+    Next run:  2026-06-23T12:00:00-05:00
     Deliver:   telegram:922739544
     Script:    daily-report.sh
-    Last run:  2026-06-21T12:04:27.598409-05:00  ok
+    Last run:  2026-06-22T12:03:26.110937-05:00  ok
 
   e441804c0f18 [active]
     Name:      Wiki Daily Regeneration
     Schedule:  0 6 * * *
     Repeat:    ∞
-    Next run:  2026-06-23T06:00:00-05:00
+    Next run:  2026-06-24T06:00:00-05:00
     Deliver:   local
-    Last run:  2026-06-22T06:01:21.714843-05:00  ok
+    Last run:  2026-06-23T06:00:35.445283-05:00  error: RuntimeError: HTTP 429: The usage limit has been reached
 
   c1df09012b9c [active]
     Name:      Wiki Server Watchdog
     Schedule:  */5 * * * *
     Repeat:    ∞
-    Next run:  2026-06-22T08:05:00-05:00
+    Next run:  2026-06-23T08:05:00-05:00
     Deliver:   local
     Script:    wiki-watchdog.sh
     Mode:      no-agent (script stdout delivered directly)
-    Last run:  2026-06-22T08:00:57.849900-05:00  ok
+    Last run:  2026-06-23T08:00:19.772428-05:00  ok
 
