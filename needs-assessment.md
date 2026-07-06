@@ -1,21 +1,39 @@
 # Needs Assessment — What Hermes Needs
 
 > Generated: 2026-06-02 | Hermes v0.13.0 | Ubuntu 24.04 LTS
-> Last reviewed: 2026-06-22 17:00 UTC (daily cron)
+> Last reviewed: 2026-07-06 17:01 UTC (daily cron)
 
 ## 🔴 Critical Gaps
 
-### 1. Hermes Update Backlog
+### 1. Hermes Update Backlog Regressed
 
-**Status:** 🟡 Improved but still behind. Hermes is now `v0.17.0 (2026.6.19)` and reports **175 commits behind**, down from **842 commits behind** in the 2026-06-21 daily audit / 2026-06-22 13:00 nightly snapshot.
+**Status:** 🔴 Hermes is still `v0.17.0 (2026.6.19)` but now reports **2,282 commits behind**. The prior daily audit recorded **175 commits behind**; the 2026-07-06 nightly snapshot also reported 2,282 behind, so this is confirmed current drift rather than a one-off check.
 
-**Why it matters:** The update reduced a large amount of drift, but a maintenance window is still needed to finish catching up. Do not run `hermes update` from cron because approval mode denies interactive maintenance work.
+**Why it matters:** The local install is materially behind upstream and may be missing fixes/features. Do not run `hermes update` from cron because approval mode denies interactive maintenance work; schedule an interactive maintenance window.
 
 ## 🟡 Important Gaps
 
-### 2. Display / Background Noise Setting Still Open
+### 2. Gateway Integrations Have Active Warnings
 
-**Status:** ⚠️ Founder approved reducing noise for `display.tool_progress` and `display.background_process_notifications`, but the prior session hit Hermes' safety guard when trying to edit `~/.hermes/config.yaml` directly. Current config still shows:
+**Status:** ⚠️ `hermes-gateway` is running and `/health` returns 200, but recent service logs show:
+- Discord login failure: `Improper token has been passed`.
+- Wazuh MCP initial connection failed after 3 attempts.
+
+**Need:** Validate Discord token/config only if Discord support is still desired. Route any Wazuh operational troubleshooting to the SentinelTech read-only analyst profile; do not mix protected SentinelTech data into general business reporting.
+
+### 3. Dashboard / Workspace Availability Drift
+
+**Status:** ⚠️ Expected local ports changed since the last audit:
+- Gateway `127.0.0.1:8642`: ✅ healthy.
+- Wiki `0.0.0.0:9090`: ✅ healthy.
+- Dashboard `127.0.0.1:9119`: ❌ not listening during this audit.
+- Workspace `127.0.0.1:4000`: listening, but HTTP check timed out after 5s.
+
+**Need:** Restart/check dashboard and workspace when UI access is needed.
+
+### 4. Display / Background Noise Setting Still Open
+
+**Status:** ⚠️ Founder approved reducing noise for `display.tool_progress` and `display.background_process_notifications`, but current config still shows:
 - `display.tool_progress: all`
 - `display.background_process_notifications: all`
 
@@ -23,97 +41,95 @@
 - `hermes config set display.tool_progress off`
 - `hermes config set display.background_process_notifications error`
 
-### 3. Metric Consistency: Sessions / Skills
+### 5. Metric Consistency: Sessions / Skills
 
-**Status:** ⚠️ Nightly snapshot reports 264 sessions and 101 skills. Current direct checks show default `state.db` has **189 sessions / 6,810 messages** and `/root/.hermes/skills` has **109 `SKILL.md` files**.
+**Status:** ⚠️ Count sources still disagree:
+- Nightly snapshot: **274 sessions / 101 skills**.
+- Direct default DB check: **203 sessions / 7,030 messages**.
+- Direct local skills scan: **109 `SKILL.md` files**.
+- Memory wiki generator: **222 sessions / 13,801 messages / 17 topics**.
 
-**Need:** Confirm whether nightly snapshot counts all profiles / historical stores while direct checks count only the active default profile. Until then, session/skill trend numbers are not apples-to-apples.
+**Need:** Confirm whether nightly snapshot counts all profiles, JSON sessions, or a different store while direct checks count only the active default profile. Until then, session/skill trend numbers are not apples-to-apples.
 
-### 4. STT Verification
+### 6. STT Verification
 
 **Status:** ⚠️ Config still shows local STT enabled (`provider: local`, `model: base`) and ffmpeg is present, but end-to-end voice note → transcript → agent delivery remains unverified.
 
-### 5. Session Retention / Pruning
+### 7. Session Retention / Pruning
 
-**Status:** ⚠️ `sessions.auto_prune: false`; retention_days is configured but pruning is not automatic. Direct default DB count is now 189 sessions.
+**Status:** ⚠️ `sessions.auto_prune: false`; retention_days is configured but pruning is not automatic. Direct default DB count is now 203 sessions.
 
-### 6. Open Repo State Outside Hermes Research
+### 8. Open Repo State Outside Hermes Research
 
-**Status:** ⚠️ Two non-`hermes-research` repos have uncommitted work:
-- `/root/hermes-workspace`: operations direct chat/profile files and generated route tree changes.
-- `/root/honcho`: `uv.lock`, bootstrap scripts, service files, and test files.
+**Status:** ⚠️ Two non-`hermes-research` repos still have uncommitted work:
+- `/root/hermes-workspace`: operations direct chat/profile files, generated route tree changes, backups, and tests.
+- `/root/honcho`: `uv.lock`, bootstrap scripts, service files, compose backups, and tests.
 
 **Need:** Review and either commit, stash, or remove stale test/bootstrap files.
 
-### 7. Notion Task Visibility
+### 9. Notion Task Visibility
 
-**Status:** ⚠️ Notion API token works, but search found no pages updated today and no obvious active/open task database exposed to the integration.
+**Status:** ⚠️ Notion API works. No pages were updated today. Visible open/active task data is limited:
+- Task List has `Untitled` = To Do and `Take Fig on a walk` = In progress, both last edited 2023-10-27.
+- Projects Database has `Sales Team Agents` and `YouTube Upload Automation` = In Progress, plus several July 4 research/project pages without populated status.
 
-**Need:** Share the real active tasks database with the Notion integration if daily reports should track Notion tasks reliably.
+**Need:** Share/maintain the real active task database with the Notion integration if daily reports should track open tasks reliably.
 
 ## 🟢 Improvements / Healthy Areas
 
-### 8. Hermes Upgrade / Config Improvements
+### 10. Memory Wiki Regeneration Healthy
 
-**Status:** ✅ Major improvement since the last daily audit.
-- Hermes: `v0.17.0 (2026.6.19)`
-- Backlog: 842 → 175 commits behind
-- Config now shows safer long-session settings already applied:
-  - `checkpoints.enabled: true`
-  - `tool_output.max_bytes: 100000`
-  - `tool_output.max_lines: 5000`
-  - `tool_output.max_line_length: 8000`
-  - `compression.threshold: 0.75`
+**Status:** ✅ Wiki Daily Regeneration ran today and verified `/root/hermes-wiki/site/index.html` at 26,523 bytes.
 
-### 9. Core Hermes Services
+Generated totals:
+- Sessions: 222
+- Messages: 13,801
+- Topics: 17
 
-**Status:** ✅ `hermes-gateway` is active. No failed systemd units are currently reported.
+### 11. Core System Health
 
-Local ports are listening as expected:
-- Gateway: `127.0.0.1:8642`
-- Dashboard: `127.0.0.1:9119`
-- Workspace: `127.0.0.1:4000`
-- Wiki: `0.0.0.0:9090`
-- Docker proxy owns public `80/443`
-
-### 10. System Resources
-
-**Status:** ✅ Disk and memory are healthy.
-- Disk: 23G used / 49G total (50%)
-- RAM: 3.1Gi used / 11Gi total, 8.6Gi available
-- Swap: 518Mi used / 8.0Gi total
-- Load: 1.18 / 1.08 / 1.27
-- Uptime: 30 days, 15 hours
+**Status:** ✅ Base system resources are healthy.
+- Disk: 25G used / 49G total (54%)
+- RAM: 4.0Gi used / 11Gi total, 7.6Gi available
+- Swap: 4.0Ki used / 8.0Gi total
+- Load: 1.72 / 1.42 / 1.38
+- Uptime: 23 hours
+- Failed systemd units: none
 
 ## Summary of Current State
 
 ```text
 Hermes: v0.17.0 (2026.6.19)
 Provider: openai-codex / gpt-5.5 in default config
-Update backlog: 🟡 175 commits behind (improved from 842)
+Update backlog: 🔴 2,282 commits behind
 STT: ⚠️ configured, end-to-end smoke test still pending
 TTS: ✅ Edge TTS configured
 Memory: ✅ Honcho provider configured
 Skills: ⚠️ 109 direct SKILL.md files vs 101 nightly snapshot count
-Sessions: ⚠️ 189 direct default DB sessions vs 264 nightly snapshot count
-Messages: 6,810 in default state.db
+Sessions: ⚠️ 203 direct default DB sessions vs 274 nightly snapshot count
+Messages: 7,030 in default state.db
+Wiki: ✅ regenerated today, 222 sessions / 13,801 messages / 17 topics
 Cron: ✅ daily briefing / wiki jobs present
-Gateway: ✅ active
+Gateway: ✅ active; Discord token and Wazuh MCP warnings present
+Dashboard: ⚠️ not listening on 9119
+Workspace: ⚠️ port 4000 listening but HTTP check timed out
 Systemd failed units: ✅ none
-Disk: ✅ 50% used
-RAM: ✅ 8.6Gi available
-Load: ✅ 1.18 / 1.08 / 1.27
-Uptime: ✅ 30d 15h
-Notion: ⚠️ API works; no current active task DB visible
+Disk: ✅ 54% used
+RAM: ✅ 7.6Gi available
+Load: ✅ 1.72 / 1.42 / 1.38
+Uptime: ✅ 23h
+Notion: ⚠️ API works; no pages updated today; visible active tasks appear stale/limited
 ```
 
 ## Action Items
 
-1. **HIGH** — Finish Hermes update maintenance window; backlog is improved but still 175 commits behind.
-2. Apply the Founder-approved low-noise display settings with `hermes config set` during an interactive/admin-safe window.
-3. Review `/root/hermes-workspace` uncommitted operations-direct work and decide whether to commit or clean it.
-4. Review `/root/honcho` uncommitted bootstrap/service/test files and decide whether to commit, stash, or remove them.
-5. Normalize session/skill counting in nightly snapshot vs direct audit so trends are reliable.
-6. Enable session pruning or create a weekly prune job after confirming retention policy.
-7. Run STT smoke test: Telegram voice note → local transcription → agent receives transcript.
-8. Share the active Notion tasks database with the integration if daily reports should include Notion task status.
+1. **HIGH** — Schedule an interactive Hermes update maintenance window; backlog is now 2,282 commits behind.
+2. Check `hermes-gateway` integration warnings: Discord token invalid and Wazuh MCP unavailable. Keep Wazuh/SentinelTech ops separate from general business reporting.
+3. Restart/check dashboard on `127.0.0.1:9119` and workspace responsiveness on `127.0.0.1:4000` if UI access is needed.
+4. Apply the Founder-approved low-noise display settings with `hermes config set` during an interactive/admin-safe window.
+5. Review `/root/hermes-workspace` uncommitted operations-direct work and decide whether to commit or clean it.
+6. Review `/root/honcho` uncommitted bootstrap/service/test files and decide whether to commit, stash, or remove them.
+7. Normalize session/skill counting in nightly snapshot vs direct audit/wiki generator so trends are reliable.
+8. Enable session pruning or create a weekly prune job after confirming retention policy.
+9. Run STT smoke test: Telegram voice note → local transcription → agent receives transcript.
+10. Share/maintain the real active Notion task database with the integration if daily reports should include trustworthy task status.
