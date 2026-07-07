@@ -1,35 +1,33 @@
 # Needs Assessment — What Hermes Needs
 
 > Generated: 2026-06-02 | Hermes v0.13.0 | Ubuntu 24.04 LTS
-> Last reviewed: 2026-07-06 17:01 UTC (daily cron)
+> Last reviewed: 2026-07-07 17:08 UTC (daily cron)
 
 ## 🔴 Critical Gaps
 
-### 1. Hermes Update Backlog Regressed
+### 1. Hermes Update Backlog Regressed Again
 
-**Status:** 🔴 Hermes is still `v0.17.0 (2026.6.19)` but now reports **2,282 commits behind**. The prior daily audit recorded **175 commits behind**; the 2026-07-06 nightly snapshot also reported 2,282 behind, so this is confirmed current drift rather than a one-off check.
+**Status:** 🔴 Hermes is still `v0.17.0 (2026.6.19)` and now reports **2,391 commits behind**. Yesterday's direct audit and nightly snapshot showed **2,282** behind, so upstream drift increased by roughly **+109 commits** in 24 hours.
 
 **Why it matters:** The local install is materially behind upstream and may be missing fixes/features. Do not run `hermes update` from cron because approval mode denies interactive maintenance work; schedule an interactive maintenance window.
 
 ## 🟡 Important Gaps
 
-### 2. Gateway Integrations Have Active Warnings
+### 2. Gateway / Integration Warnings Need Verification
 
-**Status:** ⚠️ `hermes-gateway` is running and `/health` returns 200, but recent service logs show:
-- Discord login failure: `Improper token has been passed`.
-- Wazuh MCP initial connection failed after 3 attempts.
+**Status:** ⚠️ `hermes-gateway` is active and `/health` returns 200. Current-day `journalctl -p warning..alert` showed **no warning entries**, which is an improvement from yesterday's Discord/Wazuh MCP warnings.
 
-**Need:** Validate Discord token/config only if Discord support is still desired. Route any Wazuh operational troubleshooting to the SentinelTech read-only analyst profile; do not mix protected SentinelTech data into general business reporting.
+**Need:** Still verify Discord and Wazuh MCP only if those integrations are needed. Route any Wazuh operational troubleshooting to the SentinelTech read-only analyst profile; do not mix protected SentinelTech data into general business reporting.
 
 ### 3. Dashboard / Workspace Availability Drift
 
-**Status:** ⚠️ Expected local ports changed since the last audit:
+**Status:** ⚠️ Workspace improved, dashboard still needs attention:
 - Gateway `127.0.0.1:8642`: ✅ healthy.
 - Wiki `0.0.0.0:9090`: ✅ healthy.
-- Dashboard `127.0.0.1:9119`: ❌ not listening during this audit.
-- Workspace `127.0.0.1:4000`: listening, but HTTP check timed out after 5s.
+- Workspace `127.0.0.1:4000`: ✅ HTTP 200 in 0.70s (improved from timeout).
+- Dashboard `127.0.0.1:9119`: ❌ not listening; `socat` is listening on `127.0.0.1:19119`.
 
-**Need:** Restart/check dashboard and workspace when UI access is needed.
+**Need:** Restart/check dashboard when UI access is needed.
 
 ### 4. Display / Background Noise Setting Still Open
 
@@ -45,8 +43,9 @@
 
 **Status:** ⚠️ Count sources still disagree:
 - Nightly snapshot: **274 sessions / 101 skills**.
-- Direct default DB check: **203 sessions / 7,030 messages**.
+- Direct default `state.db`: **206 sessions / 7,094 messages**.
 - Direct local skills scan: **109 `SKILL.md` files**.
+- Profile skills scan: **1,727 profile `SKILL.md` files**.
 - Memory wiki generator: **222 sessions / 13,801 messages / 17 topics**.
 
 **Need:** Confirm whether nightly snapshot counts all profiles, JSON sessions, or a different store while direct checks count only the active default profile. Until then, session/skill trend numbers are not apples-to-apples.
@@ -57,7 +56,7 @@
 
 ### 7. Session Retention / Pruning
 
-**Status:** ⚠️ `sessions.auto_prune: false`; retention_days is configured but pruning is not automatic. Direct default DB count is now 203 sessions.
+**Status:** ⚠️ `sessions.auto_prune: false`; retention_days is configured but pruning is not automatic. Direct default DB count is now **206 sessions**.
 
 ### 8. Open Repo State Outside Hermes Research
 
@@ -69,15 +68,25 @@
 
 ### 9. Notion Task Visibility
 
-**Status:** ⚠️ Notion API works. No pages were updated today. Visible open/active task data is limited:
+**Status:** ⚠️ Notion API works and one visible page was updated today:
+- `Brain Dump` edited 2026-07-07 16:29 UTC.
+
+Visible open/active task data remains limited/stale:
 - Task List has `Untitled` = To Do and `Take Fig on a walk` = In progress, both last edited 2023-10-27.
-- Projects Database has `Sales Team Agents` and `YouTube Upload Automation` = In Progress, plus several July 4 research/project pages without populated status.
+- Integrations Database has active rows including AgentMail, Notion, VAPI, and OpenRouter; `Sales Team Architecture` is Pending.
+- Projects Database contains recent July 4/7 project pages, but visible rows have no populated status field.
 
 **Need:** Share/maintain the real active task database with the Notion integration if daily reports should track open tasks reliably.
 
+### 10. New Business Strategy Item Needs Owner
+
+**Status:** 🟡 A new marketing/channel strategy was discussed: use local medical and dental associations as warm-market partners/member-discount channels for SentinelTech.
+
+**Need:** Route to `cro_revenue_director` for outreach sequence, target list criteria, discount structure, and partnership positioning. Founder approval is required before sending external outreach or making discount/pricing commitments.
+
 ## 🟢 Improvements / Healthy Areas
 
-### 10. Memory Wiki Regeneration Healthy
+### 11. Memory Wiki Regeneration Healthy
 
 **Status:** ✅ Wiki Daily Regeneration ran today and verified `/root/hermes-wiki/site/index.html` at 26,523 bytes.
 
@@ -86,14 +95,14 @@ Generated totals:
 - Messages: 13,801
 - Topics: 17
 
-### 11. Core System Health
+### 12. Core System Health
 
 **Status:** ✅ Base system resources are healthy.
-- Disk: 25G used / 49G total (54%)
-- RAM: 4.0Gi used / 11Gi total, 7.6Gi available
+- Disk: 26G used / 49G total (54%)
+- RAM: 4.6Gi used / 11Gi total, 7.1Gi available
 - Swap: 4.0Ki used / 8.0Gi total
-- Load: 1.72 / 1.42 / 1.38
-- Uptime: 23 hours
+- Load: 1.42 / 1.19 / 1.29
+- Uptime: 1 day, 23 hours
 - Failed systemd units: none
 
 ## Summary of Current State
@@ -101,31 +110,32 @@ Generated totals:
 ```text
 Hermes: v0.17.0 (2026.6.19)
 Provider: openai-codex / gpt-5.5 in default config
-Update backlog: 🔴 2,282 commits behind
+Update backlog: 🔴 2,391 commits behind
 STT: ⚠️ configured, end-to-end smoke test still pending
 TTS: ✅ Edge TTS configured
 Memory: ✅ Honcho provider configured
 Skills: ⚠️ 109 direct SKILL.md files vs 101 nightly snapshot count
-Sessions: ⚠️ 203 direct default DB sessions vs 274 nightly snapshot count
-Messages: 7,030 in default state.db
+Profile skills: 1,727 SKILL.md files across profiles
+Sessions: ⚠️ 206 direct default state.db sessions vs 274 nightly snapshot count
+Messages: 7,094 in default state.db
 Wiki: ✅ regenerated today, 222 sessions / 13,801 messages / 17 topics
 Cron: ✅ daily briefing / wiki jobs present
-Gateway: ✅ active; Discord token and Wazuh MCP warnings present
+Gateway: ✅ active; no warning+ logs today
 Dashboard: ⚠️ not listening on 9119
-Workspace: ⚠️ port 4000 listening but HTTP check timed out
+Workspace: ✅ port 4000 HTTP 200
 Systemd failed units: ✅ none
 Disk: ✅ 54% used
-RAM: ✅ 7.6Gi available
-Load: ✅ 1.72 / 1.42 / 1.38
-Uptime: ✅ 23h
-Notion: ⚠️ API works; no pages updated today; visible active tasks appear stale/limited
+RAM: ✅ 7.1Gi available
+Load: ✅ 1.42 / 1.19 / 1.29
+Uptime: ✅ 1d 23h
+Notion: ⚠️ API works; Brain Dump updated today; visible active tasks still stale/limited
 ```
 
 ## Action Items
 
-1. **HIGH** — Schedule an interactive Hermes update maintenance window; backlog is now 2,282 commits behind.
-2. Check `hermes-gateway` integration warnings: Discord token invalid and Wazuh MCP unavailable. Keep Wazuh/SentinelTech ops separate from general business reporting.
-3. Restart/check dashboard on `127.0.0.1:9119` and workspace responsiveness on `127.0.0.1:4000` if UI access is needed.
+1. **HIGH** — Schedule an interactive Hermes update maintenance window; backlog is now 2,391 commits behind.
+2. Verify Discord/Wazuh MCP integration health only if needed; keep SentinelTech operational troubleshooting separate.
+3. Restart/check dashboard on `127.0.0.1:9119` if UI access is needed.
 4. Apply the Founder-approved low-noise display settings with `hermes config set` during an interactive/admin-safe window.
 5. Review `/root/hermes-workspace` uncommitted operations-direct work and decide whether to commit or clean it.
 6. Review `/root/honcho` uncommitted bootstrap/service/test files and decide whether to commit, stash, or remove them.
@@ -133,3 +143,4 @@ Notion: ⚠️ API works; no pages updated today; visible active tasks appear st
 8. Enable session pruning or create a weekly prune job after confirming retention policy.
 9. Run STT smoke test: Telegram voice note → local transcription → agent receives transcript.
 10. Share/maintain the real active Notion task database with the integration if daily reports should include trustworthy task status.
+11. Send the association partnership idea to `cro_revenue_director` for sales-channel packaging before external outreach.
