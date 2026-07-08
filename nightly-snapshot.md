@@ -1,11 +1,11 @@
-# Hermes Nightly State — 2026-07-07 13:00 UTC
+# Hermes Nightly State — 2026-07-08 13:00 UTC
 
 ## Version
-Hermes Agent v0.17.0 (2026.6.19) · upstream 7426c09b
+Hermes Agent v0.17.0 (2026.6.19) · upstream 3c63ed3a
 Project: /usr/local/lib/hermes-agent
 Python: 3.11.15
 OpenAI SDK: 2.24.0
-Update available: 2391 commits behind — run 'hermes update'
+Update available: 2495 commits behind — run 'hermes update'
 
 ## Skills
 - Count: 101
@@ -1051,7 +1051,7 @@ system_prompt: >-
 ```
 /dev/loop0       49G   26G   22G  54% /
                total        used        free      shared  buff/cache   available
-Mem:            11Gi       4.6Gi       5.9Gi        32Mi       1.2Gi       7.1Gi
+Mem:            11Gi       4.7Gi       5.8Gi        32Mi       1.3Gi       7.0Gi
 ```
 
 ## Cron Jobs
@@ -1064,36 +1064,36 @@ Mem:            11Gi       4.6Gi       5.9Gi        32Mi       1.2Gi       7.1Gi
     Name:      Nightly Hermes Research Sync
     Schedule:  0 8 * * *
     Repeat:    ∞
-    Next run:  2026-07-08T08:00:00-05:00
+    Next run:  2026-07-09T08:00:00-05:00
     Deliver:   local
     Script:    nightly-sync.sh
     Mode:      no-agent (script stdout delivered directly)
-    Last run:  2026-07-06T08:00:55.702392-05:00  ok
+    Last run:  2026-07-07T08:00:39.940791-05:00  ok
 
   77e7ff41d6d7 [active]
     Name:      Daily Briefing Report
     Schedule:  0 12 * * *
     Repeat:    ∞
-    Next run:  2026-07-07T12:00:00-05:00
+    Next run:  2026-07-08T12:00:00-05:00
     Deliver:   telegram:922739544
     Script:    daily-report.sh
-    Last run:  2026-07-06T12:04:46.603623-05:00  ok
+    Last run:  2026-07-07T12:04:38.257709-05:00  ok
 
   e441804c0f18 [active]
     Name:      Wiki Daily Regeneration
     Schedule:  0 6 * * *
     Repeat:    ∞
-    Next run:  2026-07-08T06:00:00-05:00
+    Next run:  2026-07-09T06:00:00-05:00
     Deliver:   local
-    Last run:  2026-07-07T06:00:49.981523-05:00  ok
+    Last run:  2026-07-08T06:00:34.078356-05:00  ok
 
   c1df09012b9c [active]
     Name:      Wiki Server Watchdog
     Schedule:  */5 * * * *
     Repeat:    ∞
-    Next run:  2026-07-07T08:05:00-05:00
+    Next run:  2026-07-08T08:05:00-05:00
     Deliver:   local
     Script:    wiki-watchdog.sh
     Mode:      no-agent (script stdout delivered directly)
-    Last run:  2026-07-07T08:00:29.804303-05:00  ok
+    Last run:  2026-07-08T08:00:10.597301-05:00  ok
 
