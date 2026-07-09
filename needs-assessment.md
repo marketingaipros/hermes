@@ -1,13 +1,13 @@
 # Needs Assessment — What Hermes Needs
 
 > Generated: 2026-06-02 | Hermes v0.13.0 | Ubuntu 24.04 LTS
-> Last reviewed: 2026-07-08 17:00 UTC (daily cron)
+> Last reviewed: 2026-07-09 17:00 UTC (daily cron)
 
 ## 🔴 Critical Gaps
 
 ### 1. Hermes Update Backlog Regressed Again
 
-**Status:** 🔴 Hermes is still `v0.17.0 (2026.6.19)` and now reports **2,495 commits behind**. Previous nightly snapshot reported **2,391 commits behind**, so upstream drift increased by **+104 commits** since the last check.
+**Status:** 🔴 Hermes is still `v0.17.0 (2026.6.19)` and now reports **2,601 commits behind**. Yesterday's daily audit recorded **2,495 commits behind**, so upstream drift increased by **+106 commits** since the last check.
 
 **Why it matters:** The local install is materially behind upstream and may be missing fixes/features. Do not run `hermes update` from cron because approval mode denies interactive maintenance work; schedule an interactive maintenance window.
 
@@ -15,17 +15,17 @@
 
 ### 2. Gateway / Integration Warnings Need Verification
 
-**Status:** ⚠️ `hermes-gateway` is active and `/health` returns 200. Current-day `journalctl -p warning..alert` showed **no warning entries**, continuing yesterday's improvement from earlier Discord/Wazuh MCP warnings.
+**Status:** ⚠️ `hermes-gateway` is active and `/health` returns 200. Current-day `journalctl -p warning..alert` showed **no warning entries**, continuing the improvement from earlier Discord/Wazuh MCP warnings.
 
-**Need:** Still verify Discord and Wazuh MCP only if those integrations are needed. Route any Wazuh operational troubleshooting to the SentinelTech read-only analyst profile; do not mix protected SentinelTech data into general business reporting.
+**Need:** Verify Discord and Wazuh MCP only if those integrations are needed. Route any Wazuh operational troubleshooting to the SentinelTech read-only analyst profile; do not mix protected SentinelTech data into general business reporting.
 
 ### 3. Dashboard / Workspace Availability Drift
 
 **Status:** ⚠️ Workspace and wiki are healthy; dashboard still needs attention:
-- Gateway `127.0.0.1:8642`: ✅ healthy, HTTP 200 in 0.049s.
-- Wiki `0.0.0.0:9090`: ✅ healthy, HTTP 200 in 0.002s.
-- Workspace `127.0.0.1:4000`: ✅ HTTP 200 in 0.64s.
-- Dashboard `127.0.0.1:9119`: ❌ not listening; `socat` is listening on `127.0.0.1:19119` but returns an empty reply.
+- Gateway `127.0.0.1:8642`: ✅ healthy, HTTP 200 in 0.058s.
+- Wiki `0.0.0.0:9090`: ✅ healthy, HTTP 200 in 0.005s.
+- Workspace `127.0.0.1:4000`: ✅ HTTP 200 in 0.635s.
+- Dashboard `127.0.0.1:9119`: ❌ not listening; `socat` is still listening on `127.0.0.1:19119`.
 
 **Need:** Restart/check dashboard when UI access is needed.
 
@@ -43,7 +43,7 @@
 
 **Status:** ⚠️ Count sources still disagree:
 - Nightly snapshot: **274 sessions / 101 skills**.
-- Direct default `state.db`: **208 sessions / 7,134 messages**.
+- Direct default `state.db`: **211 sessions / 7,195 messages**.
 - Direct local skills scan: **109 `SKILL.md` files**.
 - Profile skills scan: **1,727 profile `SKILL.md` files**.
 - Memory wiki generator: **222 sessions / 13,801 messages / 17 topics**.
@@ -56,7 +56,7 @@
 
 ### 7. Session Retention / Pruning
 
-**Status:** ⚠️ `sessions.auto_prune: false`; retention_days is configured but pruning is not automatic. Direct default DB count is now **208 sessions**.
+**Status:** ⚠️ `sessions.auto_prune: false`; retention_days is configured but pruning is not automatic. Direct default DB count is now **211 sessions**.
 
 ### 8. Open Repo State Outside Hermes Research
 
@@ -64,17 +64,16 @@
 - `/root/hermes-workspace`: operations direct chat/profile files, generated route tree changes, backups, and tests.
 - `/root/honcho`: `uv.lock`, bootstrap scripts, service files, compose backups, and tests.
 
-**Need:** Review and either commit, stash, or remove stale test/bootstrap files.
+**Need:** Review and either commit, stash, or remove stale test/bootstrap files. This audit intentionally did not modify those repos.
 
 ### 9. Notion Task Visibility
 
-**Status:** ⚠️ Notion API works and one visible page was updated today:
-- `Brain Dump` edited 2026-07-08 07:28 UTC.
+**Status:** ⚠️ Notion API works, but no visible pages were edited on 2026-07-09 UTC. Latest visible edit remains `Brain Dump`, edited 2026-07-08 18:46 UTC.
 
 Visible open/active task data remains limited/stale:
 - Task List has `(untitled)` = To Do and `Take Fig on a walk` = In progress, both last edited 2023-10-27.
-- Integrations Database has active rows including AgentMail, Notion, VAPI, and OpenRouter; `Sales Team Architecture` is Pending.
-- Projects Database contains recent July project pages including `Brain Dump`, but visible project rows still have no populated status field.
+- Projects Database has `Sales Team Agents` and `YouTube Upload Automation` marked In Progress, both last edited 2026-03-24.
+- Recent July project pages are visible (`Brain Dump`, `Healthcare SMB Security Market Report`, `Target Market`, `Wazuh Vs Crowdstrike`) but no populated status field was visible for those rows.
 
 **Need:** Share/maintain the real active task database with the Notion integration if daily reports should track open tasks reliably.
 
@@ -94,6 +93,7 @@ Generated totals:
 - Sessions: 222
 - Messages: 13,801
 - Topics: 17
+- HTML files: 42
 
 ### 12. Core System Health
 
@@ -101,27 +101,27 @@ Generated totals:
 - Disk: 25G used / 49G total (54%)
 - RAM: 4.5Gi used / 11Gi total, 7.2Gi available
 - Swap: 349Mi used / 8.0Gi total
-- Load: 1.96 / 1.05 / 1.00
-- Uptime: 2 days, 23 hours
+- Load: 1.84 / 1.88 / 1.90
+- Uptime: 3 days, 23 hours
 - Failed systemd units: none
 
 ### 13. Nightly Research Sync Healthy
 
-**Status:** ✅ Nightly Hermes Research Sync ran and committed `c68ee34` (`nightly: state snapshot 2026-07-08 13:00 UTC`). This daily audit has updated the follow-on assessment/audit docs.
+**Status:** ✅ Nightly Hermes Research Sync ran and committed `bc43e0e` (`nightly: state snapshot 2026-07-09 13:00 UTC`). This daily audit has updated the follow-on assessment/audit docs.
 
 ## Summary of Current State
 
 ```text
 Hermes: v0.17.0 (2026.6.19)
 Provider: openai-codex / gpt-5.5 in default config
-Update backlog: 🔴 2,495 commits behind
+Update backlog: 🔴 2,601 commits behind
 STT: ⚠️ configured, end-to-end smoke test still pending
 TTS: ✅ Edge TTS configured
 Memory: ✅ Honcho provider configured
 Skills: ⚠️ 109 direct SKILL.md files vs 101 nightly snapshot count
 Profile skills: 1,727 SKILL.md files across profiles
-Sessions: ⚠️ 208 direct default state.db sessions vs 274 nightly snapshot count
-Messages: 7,134 in default state.db
+Sessions: ⚠️ 211 direct default state.db sessions vs 274 nightly snapshot count
+Messages: 7,195 in default state.db
 Wiki: ✅ regenerated today, 222 sessions / 13,801 messages / 17 topics
 Cron: ✅ daily briefing / nightly sync / wiki jobs present
 Gateway: ✅ active; no warning+ logs today
@@ -130,14 +130,14 @@ Workspace: ✅ port 4000 HTTP 200
 Systemd failed units: ✅ none
 Disk: ✅ 54% used
 RAM: ✅ 7.2Gi available
-Load: ✅ 1.96 / 1.05 / 1.00
-Uptime: ✅ 2d 23h
-Notion: ⚠️ API works; Brain Dump updated today; visible active tasks still stale/limited
+Load: ✅ 1.84 / 1.88 / 1.90
+Uptime: ✅ 3d 23h
+Notion: ⚠️ API works; no visible pages edited today; visible active tasks limited/stale
 ```
 
 ## Action Items
 
-1. **HIGH** — Schedule an interactive Hermes update maintenance window; backlog is now 2,495 commits behind.
+1. **HIGH** — Schedule an interactive Hermes update maintenance window; backlog is now 2,601 commits behind.
 2. Verify Discord/Wazuh MCP integration health only if needed; keep SentinelTech operational troubleshooting separate.
 3. Restart/check dashboard on `127.0.0.1:9119` if UI access is needed.
 4. Apply the Founder-approved low-noise display settings with `hermes config set` during an interactive/admin-safe window.
