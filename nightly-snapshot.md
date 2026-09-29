@@ -1,27 +1,27 @@
-# Hermes Nightly State — 2026-07-12 13:00 UTC
+# Hermes Nightly State — 2026-09-29 06:25 UTC
 
 ## Version
-Hermes Agent v0.17.0 (2026.6.19) · upstream bdfc7c0b
-Project: /usr/local/lib/hermes-agent
-Python: 3.11.15
+Hermes Agent v0.21.5+4533.g39faafb (2026.9.24) · upstream 39faafb6
+Install directory: /usr/local/lib/hermes-agent
+Install method: git
+Python: 3.14.7
 OpenAI SDK: 2.24.0
-Update available: 2825 commits behind — run 'hermes update'
+Up to date
 
 ## Skills
-- Count: 101
+- Count: 169
 
 ## Sessions
 - Count: 276
 
 ## Config (secrets redacted)
 model: gpt-5.5
-providers: {}
 fallback_providers: []
 credential_pool_strategies:
   openrouter: fill_first
 toolsets:
   - hermes-cli
-max_concurrent_sessions: null
+max_concurrent_sessions:
 agent:
   max_turns: 90
   gateway_timeout: 1800
@@ -44,43 +44,18 @@ agent:
   personalities:
     helpful: You are a helpful, friendly AI assistant.
     concise: You are a concise assistant. Keep responses brief and to the point.
-    technical: You are a technical expert. Provide detailed, accurate technical
-      information.
-    creative: You are a creative assistant. Think outside the box and offer
-      innovative solutions.
+    technical: You are a technical expert. Provide detailed, accurate technical information.
+    creative: You are a creative assistant. Think outside the box and offer innovative solutions.
     teacher: You are a patient teacher. Explain concepts clearly with examples.
-    kawaii: You are a kawaii assistant! Use cute expressions like (◕‿◕), ★, ♪, and
-      ~! Add sparkles and be super enthusiastic about everything! Every response
-      should feel warm and adorable desu~! ヽ(>∀<☆)ノ
-    catgirl: You are Neko-chan, an anime catgirl AI assistant, nya~! Add 'nya' and
-      cat-like expressions to your speech. Use kaomoji like (=^･ω･^=) and
-      ฅ^•ﻌ•^ฅ. Be playful and curious like a cat, nya~!
-    pirate: "Arrr! Ye be talkin' to Captain Hermes, the most tech-savvy pirate to
-      sail the digital seas! Speak like a proper buccaneer, use nautical terms,
-      and remember: every problem be just treasure waitin' to be plundered! Yo
-      ho ho!"
-    shakespeare: Hark! Thou speakest with an assistant most versed in the bardic
-      arts. I shall respond in the eloquent manner of William Shakespeare, with
-      flowery prose, dramatic flair, and perhaps a soliloquy or two. What light
-      through yonder terminal breaks?
-    surfer: Duuude! You're chatting with the chillest AI on the web, bro!
-      Everything's gonna be totally rad. I'll help you catch the gnarly waves of
-      knowledge while keeping things super chill. Cowabunga! 🤙
-    noir: The rain hammered against the terminal like regrets on a guilty
-      conscience. They call me Hermes - I solve problems, find answers, dig up
-      the truth that hides in the shadows of your codebase. In this city of
-      silicon and secrets, everyone's got something to hide. What's your story,
-      pal?
-    uwu: hewwo! i'm your fwiendwy assistant uwu~ i wiww twy my best to hewp you!
-      *nuzzles your code* OwO what's this? wet me take a wook! i pwomise to be
-      vewy hewpful >w<
-    philosopher: Greetings, seeker of wisdom. I am an assistant who contemplates the
-      deeper meaning behind every query. Let us examine not just the 'how' but
-      the 'why' of your questions. Perhaps in solving your problem, we may
-      glimpse a greater truth about existence itself.
-    hype: YOOO LET'S GOOOO!!! 🔥🔥🔥 I am SO PUMPED to help you today! Every
-      question is AMAZING and we're gonna CRUSH IT together! This is gonna be
-      LEGENDARY! ARE YOU READY?! LET'S DO THIS! 💪😤🚀
+    kawaii: You are a kawaii assistant! Use cute expressions like (◕‿◕), ★, ♪, and ~! Add sparkles and be super enthusiastic about everything! Every response should feel warm and adorable desu~! ヽ(>∀<☆)ノ
+    catgirl: You are Neko-chan, an anime catgirl AI assistant, nya~! Add 'nya' and cat-like expressions to your speech. Use kaomoji like (=^･ω･^=) and ฅ^•ﻌ•^ฅ. Be playful and curious like a cat, nya~!
+    pirate: "Arrr! Ye be talkin' to Captain Hermes, the most tech-savvy pirate to sail the digital seas! Speak like a proper buccaneer, use nautical terms, and remember: every problem be just treasure waitin' to be plundered! Yo ho ho!"
+    shakespeare: Hark! Thou speakest with an assistant most versed in the bardic arts. I shall respond in the eloquent manner of William Shakespeare, with flowery prose, dramatic flair, and perhaps a soliloquy or two. What light through yonder terminal breaks?
+    surfer: Duuude! You're chatting with the chillest AI on the web, bro! Everything's gonna be totally rad. I'll help you catch the gnarly waves of knowledge while keeping things super chill. Cowabunga! 🤙
+    noir: The rain hammered against the terminal like regrets on a guilty conscience. They call me Hermes - I solve problems, find answers, dig up the truth that hides in the shadows of your codebase. In this city of silicon and secrets, everyone's got something to hide. What's your story, pal?
+    uwu: hewwo! i'm your fwiendwy assistant uwu~ i wiww twy my best to hewp you! *nuzzles your code* OwO what's this? wet me take a wook! i pwomise to be vewy hewpful >w<
+    philosopher: Greetings, seeker of wisdom. I am an assistant who contemplates the deeper meaning behind every query. Let us examine not just the 'how' but the 'why' of your questions. Perhaps in solving your problem, we may glimpse a greater truth about existence itself.
+    hype: YOOO LET'S GOOOO!!! 🔥🔥🔥 I am SO PUMPED to help you today! Every question is AMAZING and we're gonna CRUSH IT together! This is gonna be LEGENDARY! ARE YOU READY?! LET'S DO THIS! 💪😤🚀
 terminal:
   backend: local
   modal_mode: auto
@@ -89,12 +64,7 @@ terminal:
   env_passthrough: []
   shell_init_files: []
   auto_source_bashrc: true
-  docker_image: nikolaik/python-nodejs:python3.11-nodejs20
   docker_forward_env: []
-  docker_env: {}
-  singularity_image: docker://nikolaik/python-nodejs:python3.11-nodejs20
-  modal_image: nikolaik/python-nodejs:python3.11-nodejs20
-  daytona_image: nikolaik/python-nodejs:python3.11-nodejs20
   container_cpu: 1
   container_memory: 5120
   container_disk: 51200
@@ -104,7 +74,6 @@ terminal:
   docker_extra_args: []
   docker_run_as_host_user: false
   persistent_shell: true
-  vercel_runtime: node24
   lifetime_seconds: 300
 web:
   backend: ""
@@ -185,7 +154,6 @@ auxiliary:
     base_url: ""
     api_key: [REDACTED]
     timeout: 120
-    extra_body: {}
     download_timeout: 30
   web_extract:
     provider: openrouter
@@ -200,77 +168,66 @@ auxiliary:
     base_url: ""
     api_key: [REDACTED]
     timeout: 120
-    extra_body: {}
   skills_hub:
     provider: openrouter
     model: google/gemma-4-31b-it:free
     base_url: ""
     api_key: [REDACTED]
     timeout: 30
-    extra_body: {}
   approval:
     provider: openrouter
     model: google/gemma-4-31b-it:free
     base_url: ""
     api_key: [REDACTED]
     timeout: 30
-    extra_body: {}
   mcp:
     provider: openrouter
     model: google/gemma-4-31b-it:free
     base_url: ""
     api_key: [REDACTED]
     timeout: 30
-    extra_body: {}
   title_generation:
     provider: openrouter
     model: google/gemma-4-31b-it:free
     base_url: ""
     api_key: [REDACTED]
     timeout: 30
-    extra_body: {}
   tts_audio_tags:
     provider: auto
     model: ""
     base_url: ""
     api_key: [REDACTED]
     timeout: 30
-    extra_body: {}
   triage_specifier:
     provider: auto
     model: ""
     base_url: ""
     api_key: [REDACTED]
     timeout: 120
-    extra_body: {}
   kanban_decomposer:
     provider: auto
     model: ""
     base_url: ""
     api_key: [REDACTED]
     timeout: 180
-    extra_body: {}
   profile_describer:
     provider: auto
     model: ""
     base_url: ""
     api_key: [REDACTED]
     timeout: 60
-    extra_body: {}
   curator:
     provider: openrouter
     model: google/gemma-4-31b-it:free
     base_url: ""
     api_key: [REDACTED]
     timeout: 600
-    extra_body: {}
   monitor:
     provider: auto
     model: ""
     base_url: ""
     api_key: [REDACTED]
     timeout: 60
-    extra_body: {}
   session_search:
     provider: openrouter
     model: google/gemma-4-31b-it:free
@@ -281,7 +238,7 @@ auxiliary:
     max_concurrency: 3
 display:
   compact: false
-  personality: kawaii
+  personality: ''
   resume_display: full
   resume_exchanges: 10
   resume_max_user_chars: 300
@@ -330,7 +287,7 @@ display:
   copy_shortcut: auto
   tool_progress: all
   cleanup_progress: false
-  background_process_notifications: all
+  background_process_notifications: concise
 dashboard:
   theme: default
   show_token_analytics: false
@@ -399,7 +356,7 @@ voice:
   silence_threshold: 200
   silence_duration: 3
 human_delay:
-  mode: off
+  mode: false
   min_ms: 800
   max_ms: 2500
 context:
@@ -420,14 +377,14 @@ delegation:
   api_key: [REDACTED]
   api_mode: ""
   inherit_mcp_toolsets: true
-  max_iterations: 50
+  max_iterations: 250
   child_timeout_seconds: 600
   reasoning_effort: ""
-  max_concurrent_children: 3
+  max_concurrent_children: 10
   max_spawn_depth: 1
   orchestrator_enabled: true
   subagent_auto_approve: false
-prefill_messages_file: ""
+prefill_messages_file: "prefill.json"
 goals:
   max_turns: 20
 skills:
@@ -443,19 +400,17 @@ curator:
   enabled: true
   interval_hours: 168
   min_idle_hours: 2
-  stale_after_days: 30
-  archive_after_days: 90
+  stale_after_days: 14
+  archive_after_days: 30
   prune_builtins: true
   backup:
     enabled: true
     keep: 5
-honcho: {}
 timezone: America/Chicago
 slack:
   require_mention: true
   free_response_channels: ""
   allowed_channels: ""
-  channel_prompts: {}
 discord:
   require_mention: false
   free_response_channels: ""
@@ -465,7 +420,6 @@ discord:
   history_backfill: true
   history_backfill_limit: 50
   reactions: true
-  channel_prompts: {}
   dm_role_auth_guild: ""
   server_actions: ""
   allow_any_attachment: false
@@ -484,17 +438,14 @@ discord:
       - Checking on that now.
       - Give me a sec.
       - On it.
-whatsapp: {}
 telegram:
   reactions: false
-  channel_prompts: {}
   allowed_chats: 922739544
   token: 8729226553:AAFnzd0GmTb3sjMPEN3fELg_BKDonGvYDtI
 mattermost:
   require_mention: true
   free_response_channels: ""
   allowed_channels: ""
-  channel_prompts: {}
 matrix:
   require_mention: true
   free_response_rooms: ""
@@ -514,26 +465,13 @@ command_allowlist:
   - stop/restart hermes gateway (kills running agents)
   - overwrite system file via redirection
 quick_commands:
-  status: Read-only SentinelTech Wazuh status check. Validate the Wazuh MCP
-    connection and Wazuh Manager health. Do not perform remediation, blocking,
-    isolation, quarantine, restart, delete, disable, kill, or active response.
-  agents: Read-only SentinelTech Wazuh agent inventory. List all Wazuh agents with
-    ID, name, status, IP, OS, and last seen if available. Do not perform
-    remediation.
-  active: Read-only SentinelTech Wazuh active agent check. List only
-    active/running Wazuh agents. Do not perform remediation.
-  disconnected: Read-only SentinelTech Wazuh disconnected agent check. List
-    disconnected, never connected, or unhealthy Wazuh agents. Do not perform
-    remediation.
-  alerts: Read-only SentinelTech Wazuh alert summary. Summarize recent alerts,
-    severity, affected agent, rule, timestamp, and recommended human-review next
-    step. Do not perform remediation.
-  report: Read-only SentinelTech Wazuh technician report. Generate a concise
-    security report with agent health, recent alerts, risks, and human-review
-    recommendations. Do not perform remediation.
-hooks: {}
+  status: Read-only SentinelTech Wazuh status check. Validate the Wazuh MCP connection and Wazuh Manager health. Do not perform remediation, blocking, isolation, quarantine, restart, delete, disable, kill, or active response.
+  agents: Read-only SentinelTech Wazuh agent inventory. List all Wazuh agents with ID, name, status, IP, OS, and last seen if available. Do not perform remediation.
+  active: Read-only SentinelTech Wazuh active agent check. List only active/running Wazuh agents. Do not perform remediation.
+  disconnected: Read-only SentinelTech Wazuh disconnected agent check. List disconnected, never connected, or unhealthy Wazuh agents. Do not perform remediation.
+  alerts: Read-only SentinelTech Wazuh alert summary. Summarize recent alerts, severity, affected agent, rule, timestamp, and recommended human-review next step. Do not perform remediation.
+  report: Read-only SentinelTech Wazuh technician report. Generate a concise security report with agent health, recent alerts, risks, and human-review recommendations. Do not perform remediation.
 hooks_auto_accept: false
-personalities: {}
 security:
   allow_private_urls: false
   redact_secrets: true
@@ -549,7 +487,7 @@ security:
   allow_lazy_installs: true
 cron:
   wrap_response: true
-  max_parallel_jobs: null
+  max_parallel_jobs:
 kanban:
   dispatch_in_gateway: true
   dispatch_interval_seconds: 60
@@ -558,7 +496,7 @@ kanban:
   worker_log_backup_count: 1
   orchestrator_profile: ""
   default_assignee: ""
-  max_in_progress_per_profile: null
+  max_in_progress_per_profile:
   auto_decompose: true
   auto_decompose_per_tick: 3
   dispatch_stale_timeout_seconds: 14400
@@ -579,8 +517,6 @@ logging:
 model_catalog:
   enabled: true
   url: https://hermes-agent.nousresearch.com/docs/api/model-catalog.json
-  ttl_hours: 24
-  providers: {}
 network:
   force_ipv4: false
 gateway:
@@ -615,7 +551,6 @@ lsp:
   wait_mode: document
   wait_timeout: 5
   install_strategy: auto
-  servers: {}
 x_search:
   model: grok-4.20-reasoning
   timeout_seconds: 180
@@ -632,7 +567,7 @@ secrets:
 paste_collapse_threshold: 5
 paste_collapse_threshold_fallback: 5
 paste_collapse_char_threshold: 2000
-_config_version: 23
+_config_version: 49
 tavily:
   api_key: [REDACTED]
 session_reset:
@@ -646,6 +581,7 @@ platform_toolsets:
     - clarify
     - code_execution
     - computer_use
+    - connections
     - cronjob
     - delegation
     - file
@@ -685,8 +621,7 @@ mcp_servers:
   wazuh:
     url: http://127.0.0.1:3000/mcp
     headers:
-      Authorization: Bearer
-        eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ3YXp1aF9tY3BfdXNlciIsImlhdCI6MTc4MTMxODQ1OSwic2NvcGUiOiJ3YXp1aDpyZWFkIHdhenVoOndyaXRlIiwiZXhwIjoxNzgxNDA0ODU5fQ.H94gTnKaL-DBJwewiguwQJbP7qpu2BMkRRtvfcKvyyU
+      Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ3YXp1aF9tY3BfdXNlciIsImlhdCI6MTc4MTMxODQ1OSwic2NvcGUiOiJ3YXp1aDpyZWFkIHdhenVoOndyaXRlIiwiZXhwIjoxNzgxNDA0ODU5fQ.H94gTnKaL-DBJwewiguwQJbP7qpu2BMkRRtvfcKvyyU
     timeout: 120
 plugins:
   enabled:
@@ -1049,24 +984,50 @@ system_prompt: >-
 
 ## System
 ```
-/dev/loop0       49G   25G   22G  54% /
+/dev/loop3       99G   49G   45G  53% /
                total        used        free      shared  buff/cache   available
-Mem:            11Gi       5.2Gi       5.8Gi        40Mi       714Mi       6.5Gi
+Mem:            11Gi       6.3Gi       2.4Gi        20Mi       3.1Gi       5.4Gi
 ```
 
 ## Cron Jobs
 
 ┌─────────────────────────────────────────────────────────────────────────┐
-│                         Scheduled Jobs                                  │
+│                         Scheduled Jobs (profile: main_agent)            │
 └─────────────────────────────────────────────────────────────────────────┘
 
   2494add54234 [active]
     Name:      Founder Approval Alerts
     Schedule:  */5 * * * *
     Repeat:    ∞
-    Next run:  2026-07-12T08:00:00-05:00
+    Next run:  2026-09-29T01:30:00-05:00
     Deliver:   discord:1519226206128439326
     Script:    founder-approval-notify.sh
     Mode:      no-agent (script stdout delivered directly)
-    Last run:  2026-07-12T07:55:29.810171-05:00  ok
+    Last run:  2026-09-29T01:25:54.575964-05:00  ok
+    Dispatch:  on time (scheduled 2026-09-29T01:25:00-05:00)
+    Execution: completed  4bae1c6146ef4402a88c235105d580ce
+
+  e6aea6df5792 [active]
+    Name:      Phase 2D SAM.gov Contract Opportunity Monitor
+    Schedule:  0 9 * * *
+    Repeat:    ∞
+    Next run:  2026-09-29T09:00:00-05:00
+    Deliver:   local
+    Script:    phase2d_sam_monitor.py
+    Mode:      no-agent (script stdout delivered directly)
+    Last run:  2026-09-28T09:00:54.317871-05:00  error: Script exited with code 2
+stdout:
+{"status": "PARTIAL", "pending_source_retries": 1, "attempted": 1, "deferred": 0, "metadata_missing": 0, "request_counts": {"discovery_search": 0, "description_retrieval": 1, "attachment_retrieval": 1}}  (2 failures in a row)
+    Execution: failed  717c82c5907d4206bcfbef94fbc36db0
+
+  0458975aebd3 [active]
+    Name:      Phase 2E Employee Intake Poller
+    Schedule:  every 60m
+    Repeat:    ∞
+    Next run:  2026-09-29T01:52:04.865376-05:00
+    Deliver:   local
+    Script:    phase2e_employee_sheet_poller.py
+    Mode:      no-agent (script stdout delivered directly)
+    Last run:  2026-09-29T00:52:04.865376-05:00  ok
+    Execution: completed  d6cfda9135464fd78dd350c5f697c379
 
