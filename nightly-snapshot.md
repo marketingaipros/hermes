@@ -1,4 +1,4 @@
-# Hermes Nightly State — 2026-09-29 06:25 UTC
+# Hermes Nightly State — 2026-09-29 13:00 UTC
 
 ## Version
 Hermes Agent v0.21.5+4533.g39faafb (2026.9.24) · upstream 39faafb6
@@ -12,7 +12,7 @@ Up to date
 - Count: 169
 
 ## Sessions
-- Count: 276
+- Count: 279
 
 ## Config (secrets redacted)
 model: gpt-5.5
@@ -986,7 +986,7 @@ system_prompt: >-
 ```
 /dev/loop3       99G   49G   45G  53% /
                total        used        free      shared  buff/cache   available
-Mem:            11Gi       6.3Gi       2.4Gi        20Mi       3.1Gi       5.4Gi
+Mem:            11Gi       5.1Gi       5.9Gi        17Mi       742Mi       6.6Gi
 ```
 
 ## Cron Jobs
@@ -999,13 +999,13 @@ Mem:            11Gi       6.3Gi       2.4Gi        20Mi       3.1Gi       5.4Gi
     Name:      Founder Approval Alerts
     Schedule:  */5 * * * *
     Repeat:    ∞
-    Next run:  2026-09-29T01:30:00-05:00
+    Next run:  2026-09-29T08:05:00-05:00
     Deliver:   discord:1519226206128439326
     Script:    founder-approval-notify.sh
     Mode:      no-agent (script stdout delivered directly)
-    Last run:  2026-09-29T01:25:54.575964-05:00  ok
-    Dispatch:  on time (scheduled 2026-09-29T01:25:00-05:00)
-    Execution: completed  4bae1c6146ef4402a88c235105d580ce
+    Last run:  2026-09-29T08:00:07.060861-05:00  ok
+    Dispatch:  on time (scheduled 2026-09-29T08:00:00-05:00)
+    Execution: completed  76a6bf71b82a47dcae604091056d6faf
 
   e6aea6df5792 [active]
     Name:      Phase 2D SAM.gov Contract Opportunity Monitor
@@ -1024,10 +1024,11 @@ stdout:
     Name:      Phase 2E Employee Intake Poller
     Schedule:  every 60m
     Repeat:    ∞
-    Next run:  2026-09-29T01:52:04.865376-05:00
+    Next run:  2026-09-29T08:54:40.565982-05:00
     Deliver:   local
     Script:    phase2e_employee_sheet_poller.py
     Mode:      no-agent (script stdout delivered directly)
-    Last run:  2026-09-29T00:52:04.865376-05:00  ok
-    Execution: completed  d6cfda9135464fd78dd350c5f697c379
+    Last run:  2026-09-29T07:54:40.565982-05:00  ok
+    Dispatch:  on time (scheduled 2026-09-29T07:54:05.352809-05:00)
+    Execution: completed  7af326dc92c148fea2f16b1adcfa188e
 
