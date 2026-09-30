@@ -1,4 +1,4 @@
-# Hermes Nightly State — 2026-09-29 13:00 UTC
+# Hermes Nightly State — 2026-09-30 13:00 UTC
 
 ## Version
 Hermes Agent v0.21.5+4533.g39faafb (2026.9.24) · upstream 39faafb6
@@ -6,13 +6,13 @@ Install directory: /usr/local/lib/hermes-agent
 Install method: git
 Python: 3.14.7
 OpenAI SDK: 2.24.0
-Up to date
+Update available: 372 commits behind — run 'hermes update'
 
 ## Skills
 - Count: 169
 
 ## Sessions
-- Count: 279
+- Count: 281
 
 ## Config (secrets redacted)
 model: gpt-5.5
@@ -984,51 +984,69 @@ system_prompt: >-
 
 ## System
 ```
-/dev/loop3       99G   49G   45G  53% /
+/dev/loop2       99G   49G   45G  53% /
                total        used        free      shared  buff/cache   available
-Mem:            11Gi       5.1Gi       5.9Gi        17Mi       742Mi       6.6Gi
+Mem:            11Gi       2.4Gi       8.1Gi        21Mi       1.2Gi       9.3Gi
 ```
 
 ## Cron Jobs
 
 ┌─────────────────────────────────────────────────────────────────────────┐
-│                         Scheduled Jobs (profile: main_agent)            │
+│                         Scheduled Jobs (profile: default)               │
 └─────────────────────────────────────────────────────────────────────────┘
 
-  2494add54234 [active]
-    Name:      Founder Approval Alerts
+  da88db09c058 [active]
+    Name:      Nightly Hermes Research Sync
+    Schedule:  0 8 * * *
+    Repeat:    ∞
+    Next run:  2026-10-01T08:00:00-05:00
+    Deliver:   local
+    Script:    nightly-sync.sh
+    Mode:      no-agent (script stdout delivered directly)
+    Last run:  2026-09-29T08:00:17.450152-05:00  ok
+    Dispatch:  on time (scheduled 2026-09-30T08:00:00-05:00)
+    Execution: running  395762522207425eba2e1eab0c5383a5
+
+  77e7ff41d6d7 [active]
+    Name:      Daily Briefing Report
+    Schedule:  0 12 * * *
+    Repeat:    ∞
+    Next run:  2026-09-30T12:00:00-05:00
+    Deliver:   telegram:922739544
+    Script:    daily-report.sh
+    Last run:  2026-09-29T12:05:28.627969-05:00  error: RuntimeError: HTTP 401: User not found.  (2 failures in a row)
+    Dispatch:  on time (scheduled 2026-09-29T12:00:00-05:00)
+    Execution: failed  77ca208cee7f4f0e9f4fa01d11c23713
+
+  e441804c0f18 [active]
+    Name:      Wiki Daily Regeneration
+    Schedule:  0 6 * * *
+    Repeat:    ∞
+    Next run:  2026-10-01T06:00:00-05:00
+    Deliver:   local
+    Last run:  2026-09-30T06:00:42.346028-05:00  error: RuntimeError: HTTP 401: User not found.  (3 failures in a row)
+    Dispatch:  on time (scheduled 2026-09-30T06:00:00-05:00)
+    Execution: failed  73eb578e472145ff83a512088de31e08
+
+  c1df09012b9c [active]
+    Name:      Wiki Server Watchdog
     Schedule:  */5 * * * *
     Repeat:    ∞
-    Next run:  2026-09-29T08:05:00-05:00
-    Deliver:   discord:1519226206128439326
-    Script:    founder-approval-notify.sh
-    Mode:      no-agent (script stdout delivered directly)
-    Last run:  2026-09-29T08:00:07.060861-05:00  ok
-    Dispatch:  on time (scheduled 2026-09-29T08:00:00-05:00)
-    Execution: completed  76a6bf71b82a47dcae604091056d6faf
-
-  e6aea6df5792 [active]
-    Name:      Phase 2D SAM.gov Contract Opportunity Monitor
-    Schedule:  0 9 * * *
-    Repeat:    ∞
-    Next run:  2026-09-29T09:00:00-05:00
+    Next run:  2026-09-30T08:05:00-05:00
     Deliver:   local
-    Script:    phase2d_sam_monitor.py
+    Script:    wiki-watchdog.sh
     Mode:      no-agent (script stdout delivered directly)
-    Last run:  2026-09-28T09:00:54.317871-05:00  error: Script exited with code 2
-stdout:
-{"status": "PARTIAL", "pending_source_retries": 1, "attempted": 1, "deferred": 0, "metadata_missing": 0, "request_counts": {"discovery_search": 0, "description_retrieval": 1, "attachment_retrieval": 1}}  (2 failures in a row)
-    Execution: failed  717c82c5907d4206bcfbef94fbc36db0
+    Last run:  2026-09-30T08:00:24.042660-05:00  ok
+    Dispatch:  on time (scheduled 2026-09-30T08:00:00-05:00)
+    Execution: completed  91d7b8f03f1445658d745b90cd181f6b
 
-  0458975aebd3 [active]
-    Name:      Phase 2E Employee Intake Poller
-    Schedule:  every 60m
+  74cc581c0903 [paused]
+    Name:      Email Triage Agent
+    Schedule:  30 * * *
     Repeat:    ∞
-    Next run:  2026-09-29T08:54:40.565982-05:00
-    Deliver:   local
-    Script:    phase2e_employee_sheet_poller.py
-    Mode:      no-agent (script stdout delivered directly)
-    Last run:  2026-09-29T07:54:40.565982-05:00  ok
-    Dispatch:  on time (scheduled 2026-09-29T07:54:05.352809-05:00)
-    Execution: completed  7af326dc92c148fea2f16b1adcfa188e
+    Next run:  2026-05-25T23:30:00+00:00
+    Deliver:   telegram:922739544
+    Skills:    himalaya
+    Script:    email-fetch.sh
+    Last run:  2026-05-25T22:30:15.497140+00:00  error: RuntimeError: HTTP 429: Provider returned error
 
