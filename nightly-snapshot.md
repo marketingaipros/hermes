@@ -1,4 +1,4 @@
-# Hermes Nightly State — 2026-10-01 13:00 UTC
+# Hermes Nightly State — 2026-10-02 13:00 UTC
 
 ## Version
 Hermes Agent v0.21.5+4533.g39faafb (2026.9.24) · upstream 39faafb6
@@ -6,13 +6,13 @@ Install directory: /usr/local/lib/hermes-agent
 Install method: git
 Python: 3.14.7
 OpenAI SDK: 2.24.0
-Update available: 372 commits behind — run 'hermes update'
+Update available: 1245 commits behind — run 'hermes update'
 
 ## Skills
 - Count: 169
 
 ## Sessions
-- Count: 283
+- Count: 285
 
 ## Config (secrets redacted)
 model: gpt-5.5
@@ -986,7 +986,7 @@ system_prompt: >-
 ```
 /dev/loop2       99G   49G   45G  53% /
                total        used        free      shared  buff/cache   available
-Mem:            11Gi       2.4Gi       8.3Gi        22Mi       1.0Gi       9.2Gi
+Mem:            11Gi       2.5Gi       8.2Gi        22Mi       1.0Gi       9.2Gi
 ```
 
 ## Cron Jobs
@@ -999,46 +999,46 @@ Mem:            11Gi       2.4Gi       8.3Gi        22Mi       1.0Gi       9.2Gi
     Name:      Nightly Hermes Research Sync
     Schedule:  0 8 * * *
     Repeat:    ∞
-    Next run:  2026-10-02T08:00:00-05:00
+    Next run:  2026-10-03T08:00:00-05:00
     Deliver:   local
     Script:    nightly-sync.sh
     Mode:      no-agent (script stdout delivered directly)
-    Last run:  2026-09-30T08:00:46.696424-05:00  ok
-    Dispatch:  on time (scheduled 2026-10-01T08:00:00-05:00)
-    Execution: running  c72154b189be411da4fd2cbb2c880c65
+    Last run:  2026-10-01T08:00:35.406668-05:00  ok
+    Dispatch:  on time (scheduled 2026-10-02T08:00:00-05:00)
+    Execution: running  badcde91e91341939eca63a0687f0048
 
   77e7ff41d6d7 [active]
     Name:      Daily Briefing Report
     Schedule:  0 12 * * *
     Repeat:    ∞
-    Next run:  2026-10-01T12:00:00-05:00
+    Next run:  2026-10-02T12:00:00-05:00
     Deliver:   telegram:922739544
     Script:    daily-report.sh
-    Last run:  2026-09-30T12:05:46.114063-05:00  error: RuntimeError: HTTP 401: User not found.  (3 failures in a row)
-    Dispatch:  on time (scheduled 2026-09-30T12:00:00-05:00)
-    Execution: failed  f40f912121e444bbaed6636d8b3a2075
+    Last run:  2026-10-01T12:05:45.971334-05:00  error: RuntimeError: HTTP 401: User not found.  (4 failures in a row)
+    Dispatch:  on time (scheduled 2026-10-01T12:00:00-05:00)
+    Execution: failed  9d7dc7e9c5af4ff680bfc2f348a3489e
 
   e441804c0f18 [active]
     Name:      Wiki Daily Regeneration
     Schedule:  0 6 * * *
     Repeat:    ∞
-    Next run:  2026-10-02T06:00:00-05:00
+    Next run:  2026-10-03T06:00:00-05:00
     Deliver:   local
-    Last run:  2026-10-01T06:00:41.027290-05:00  error: RuntimeError: HTTP 401: User not found.  (4 failures in a row)
-    Dispatch:  on time (scheduled 2026-10-01T06:00:00-05:00)
-    Execution: failed  6e47de4ea70a4312a52e3f1068bb2f75
+    Last run:  2026-10-02T06:00:41.167450-05:00  error: RuntimeError: HTTP 401: User not found.  (5 failures in a row)
+    Dispatch:  on time (scheduled 2026-10-02T06:00:00-05:00)
+    Execution: failed  4a2bf3e852a1435fa09a88d378e3ff6e
 
   c1df09012b9c [active]
     Name:      Wiki Server Watchdog
     Schedule:  */5 * * * *
     Repeat:    ∞
-    Next run:  2026-10-01T08:05:00-05:00
+    Next run:  2026-10-02T08:05:00-05:00
     Deliver:   local
     Script:    wiki-watchdog.sh
     Mode:      no-agent (script stdout delivered directly)
-    Last run:  2026-10-01T08:00:23.656473-05:00  ok
-    Dispatch:  on time (scheduled 2026-10-01T08:00:00-05:00)
-    Execution: completed  93041c9a7f0f4a8c875f44d00ca837e5
+    Last run:  2026-10-02T08:00:23.612503-05:00  ok
+    Dispatch:  on time (scheduled 2026-10-02T08:00:00-05:00)
+    Execution: completed  5a9b70b72e4e4fb5859102aaf6a343ed
 
   74cc581c0903 [paused]
     Name:      Email Triage Agent
