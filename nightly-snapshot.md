@@ -1,18 +1,18 @@
-# Hermes Nightly State — 2026-10-21 18:09 UTC
+# Hermes Nightly State — 2026-10-22 13:00 UTC
 
 ## Version
-Hermes Agent v0.21.5+4533.g39faafb (2026.9.24) · upstream 39faafb6
+Hermes Agent v0.22.3+14.g4d04303 (2026.9.24) · stable · local 4d04303818b6
 Install directory: /usr/local/lib/hermes-agent
 Install method: git
 Python: 3.14.7
 OpenAI SDK: 2.24.0
-Update available — run 'hermes update'
+Up to date
 
 ## Skills
 - Count: 169
 
 ## Sessions
-- Count: 319
+- Count: 321
 
 ## Config (secrets redacted)
 model: gpt-5.5
@@ -475,10 +475,6 @@ hooks_auto_accept: false
 security:
   allow_private_urls: false
   redact_secrets: true
-  tirith_enabled: true
-  tirith_path: tirith
-  tirith_timeout: 5
-  tirith_fail_open: true
   website_blocklist:
     enabled: false
     domains: []
@@ -567,7 +563,7 @@ secrets:
 paste_collapse_threshold: 5
 paste_collapse_threshold_fallback: 5
 paste_collapse_char_threshold: 2000
-_config_version: 49
+_config_version: 51
 tavily:
   api_key: [REDACTED]
 session_reset:
@@ -626,6 +622,7 @@ mcp_servers:
 plugins:
   enabled:
     - disk-cleanup
+    - honcho
   disabled: []
 system_prompt: >-
   # AI Hub CEO + Executive Orchestrator
@@ -984,69 +981,51 @@ system_prompt: >-
 
 ## System
 ```
-/dev/loop2       99G   50G   45G  53% /
+/dev/loop2       99G   56G   39G  59% /
                total        used        free      shared  buff/cache   available
-Mem:            11Gi       2.1Gi       5.5Gi        19Mi       4.0Gi       9.6Gi
+Mem:            11Gi       3.0Gi       8.0Gi        21Mi       698Mi       8.7Gi
 ```
 
 ## Cron Jobs
 
 ┌─────────────────────────────────────────────────────────────────────────┐
-│                         Scheduled Jobs (profile: default)               │
+│                         Scheduled Jobs (profile: main_agent)            │
 └─────────────────────────────────────────────────────────────────────────┘
 
-  da88db09c058 [active]
-    Name:      Nightly Hermes Research Sync
-    Schedule:  0 8 * * *
-    Repeat:    ∞
-    Next run:  2026-10-22T08:00:00-05:00
-    Deliver:   local
-    Script:    nightly-sync.sh
-    Mode:      no-agent (script stdout delivered directly)
-    Last run:  2026-10-18T08:00:31.160967-05:00  ok
-    Dispatch:  ⚠ catch-up after missed fire: scheduled 2026-10-19T08:00:00-05:00, ran 2026-10-21T13:09:30.280152-05:00 (2d 5h late)
-    Execution: running  8933c79474084c74b577d84f09cda92e
-
-  77e7ff41d6d7 [active]
-    Name:      Daily Briefing Report
-    Schedule:  0 12 * * *
-    Repeat:    ∞
-    Next run:  2026-10-22T12:00:00-05:00
-    Deliver:   telegram:922739544
-    Script:    daily-report.sh
-    Last run:  2026-10-18T12:05:41.286903-05:00  error: RuntimeError: HTTP 401: User not found.  (21 failures in a row)
-    Dispatch:  ⚠ catch-up after missed fire: scheduled 2026-10-19T12:00:00-05:00, ran 2026-10-21T13:09:30.280152-05:00 (2d 1h late)
-    Execution: running  cfd5c9547c9e42ff984ab16e1d3ea5d3
-
-  e441804c0f18 [active]
-    Name:      Wiki Daily Regeneration
-    Schedule:  0 6 * * *
-    Repeat:    ∞
-    Next run:  2026-10-22T06:00:00-05:00
-    Deliver:   local
-    Last run:  2026-10-19T06:00:34.533375-05:00  error: RuntimeError: HTTP 401: User not found.  (22 failures in a row)
-    Dispatch:  ⚠ catch-up after missed fire: scheduled 2026-10-20T06:00:00-05:00, ran 2026-10-21T13:09:30.280152-05:00 (1d 7h late)
-    Execution: running  2cabbeb9ef2a4f1ea6979519ff871cc0
-
-  c1df09012b9c [active]
-    Name:      Wiki Server Watchdog
+  2494add54234 [active]
+    Name:      Founder Approval Alerts
     Schedule:  */5 * * * *
     Repeat:    ∞
-    Next run:  2026-10-21T13:10:00-05:00
-    Deliver:   local
-    Script:    wiki-watchdog.sh
+    Next run:  2026-10-22T08:05:00-05:00
+    Deliver:   discord:1519226206128439326
+    Script:    founder-approval-notify.sh
     Mode:      no-agent (script stdout delivered directly)
-    Last run:  2026-10-19T06:05:16.164363-05:00  ok
-    Dispatch:  ⚠ catch-up after missed fire: scheduled 2026-10-19T06:10:00-05:00, ran 2026-10-21T13:09:30.280152-05:00 (2d 6h late)
-    Execution: running  1a47c10954e4418fa29b570d0e3ee07c
+    Last run:  2026-10-22T08:00:04.819930-05:00  ok
+    Dispatch:  on time (scheduled 2026-10-22T08:00:00-05:00)
+    Execution: completed  fd28b004b8c946c08f6f50c071f8e46c
 
-  74cc581c0903 [paused]
-    Name:      Email Triage Agent
-    Schedule:  30 * * *
+  e6aea6df5792 [active]
+    Name:      Production SAM.gov → Base44 Phase 1 Intake
+    Schedule:  0 9 * * *
     Repeat:    ∞
-    Next run:  2026-05-25T23:30:00+00:00
-    Deliver:   telegram:922739544
-    Skills:    himalaya
-    Script:    email-fetch.sh
-    Last run:  2026-05-25T22:30:15.497140+00:00  error: RuntimeError: HTTP 429: Provider returned error
+    Next run:  2026-10-22T09:00:00-05:00
+    Deliver:   local
+    Script:    phase2d_sam_monitor.py
+    Mode:      no-agent (script stdout delivered directly)
+    Last run:  2026-10-21T13:09:36.353384-05:00  error: Script exited with code 1
+stdout:
+{"status": "FAILED", "error_type": "RefreshError", "next_action": "Review protected Phase 2D monitor state"}  (9 failures in a row)
+    Dispatch:  ⚠ catch-up after missed fire: scheduled 2026-10-19T09:00:00-05:00, ran 2026-10-21T13:09:32.682284-05:00 (2d 4h late)
+    Execution: failed  e3984cadf1c948119c686ff416a0b48f
+
+  0458975aebd3 [paused]
+    Name:      Phase 2E Employee Intake Poller
+    Schedule:  every 60m
+    Repeat:    ∞
+    Next run:  2026-10-04T13:10:19.784120-05:00
+    Deliver:   local
+    Script:    phase2e_employee_sheet_poller.py
+    Mode:      no-agent (script stdout delivered directly)
+    Last run:  2026-10-04T12:10:19.784120-05:00  ok
+    Dispatch:  on time (scheduled 2026-10-04T12:09:20.231393-05:00)
 
