@@ -1,4 +1,4 @@
-# Hermes Nightly State — 2026-10-27 13:00 UTC
+# Hermes Nightly State — 2026-10-28 13:00 UTC
 
 ## Version
 Hermes Agent v0.22.3+14.g4d04303 (2026.9.24) · stable · local 4d04303818b6
@@ -12,7 +12,7 @@ Update available — run 'hermes update'
 - Count: 169
 
 ## Sessions
-- Count: 331
+- Count: 333
 
 ## Config (secrets redacted)
 model: gpt-5.5
@@ -983,7 +983,7 @@ system_prompt: >-
 ```
 /dev/loop2       99G   56G   39G  59% /
                total        used        free      shared  buff/cache   available
-Mem:            11Gi       3.0Gi       8.0Gi        21Mi       742Mi       8.7Gi
+Mem:            11Gi       3.0Gi       7.9Gi        21Mi       774Mi       8.7Gi
 ```
 
 ## Cron Jobs
@@ -996,28 +996,28 @@ Mem:            11Gi       3.0Gi       8.0Gi        21Mi       742Mi       8.7Gi
     Name:      Founder Approval Alerts
     Schedule:  */5 * * * *
     Repeat:    ∞
-    Next run:  2026-10-27T08:05:00-05:00
+    Next run:  2026-10-28T08:05:00-05:00
     Deliver:   discord:1519226206128439326
     Script:    founder-approval-notify.sh
     Mode:      no-agent (script stdout delivered directly)
-    Last run:  2026-10-27T08:00:04.833832-05:00  ok
-    Dispatch:  on time (scheduled 2026-10-27T08:00:00-05:00)
-    Execution: completed  6414c9c600b645b4afaec66a46bbab6a
+    Last run:  2026-10-28T08:00:04.597700-05:00  ok
+    Dispatch:  on time (scheduled 2026-10-28T08:00:00-05:00)
+    Execution: completed  c5598326966542fdb9692d367b34c72b
 
   e6aea6df5792 [active]
     Name:      Production SAM.gov → Base44 Phase 1 Intake
     Schedule:  0 9 * * *
     Repeat:    ∞
-    Next run:  2026-10-27T09:00:00-05:00
+    Next run:  2026-10-28T09:00:00-05:00
     Deliver:   local
     Script:    phase2d_sam_monitor.py
     Mode:      no-agent (script stdout delivered directly)
-    Last run:  2026-10-26T09:00:07.305926-05:00  error: Script exited with code 1
+    Last run:  2026-10-27T09:00:06.624963-05:00  error: Script exited with code 1
 stdout:
-{"status": "FAILED", "error_type": "RefreshError", "next_action": "Review protected Phase 2D monitor state"}  (14 failures in a row)
-    Dispatch:  on time (scheduled 2026-10-26T09:00:00-05:00)
-    Execution: failed  86aeae5c20cc4bd7ba13c5367f9b6b0a
-    ⚠ Last failure at 2026-10-26T09:00:07.305926-05:00: Script exited with code 1
+{"status": "FAILED", "error_type": "RefreshError", "next_action": "Review protected Phase 2D monitor state"}  (15 failures in a row)
+    Dispatch:  on time (scheduled 2026-10-27T09:00:00-05:00)
+    Execution: failed  5c78df1c83314013aefca7d2e2bb1eb8
+    ⚠ Last failure at 2026-10-27T09:00:06.624963-05:00: Script exited with code 1
 
   0458975aebd3 [paused]
     Name:      Phase 2E Employee Intake Poller
